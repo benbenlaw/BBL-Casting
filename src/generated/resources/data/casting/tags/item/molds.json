@@ -1,0 +1,14 @@
+{
+  "values": [
+    "casting:block_mold",
+    "casting:dust_mold",
+    "casting:gear_mold",
+    "casting:ingot_mold",
+    "casting:nugget_mold",
+    "casting:plate_mold",
+    "casting:gem_mold",
+    "casting:rod_mold",
+    "casting:ball_mold",
+    "casting:wire_mold"
+  ]
+}

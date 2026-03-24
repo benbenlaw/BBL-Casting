@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "front": "casting:block/solidifier_front_working",
+    "side": "casting:block/casting_side",
+    "top": "casting:block/casting_top"
+  }
+}
