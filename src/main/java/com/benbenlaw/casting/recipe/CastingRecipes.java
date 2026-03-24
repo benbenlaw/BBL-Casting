@@ -18,38 +18,33 @@ public class CastingRecipes {
 
     //Melting
     public static final Supplier<RecipeSerializer<MeltingRecipe>> MELTING_SERIALIZER =
-            SERIALIZER.register("melting", () -> MeltingRecipe.Serializer.INSTANCE);
+            SERIALIZER.register("melting", () -> MeltingRecipe.SERIALIZER);
     public static final Supplier<RecipeType<MeltingRecipe>> MELTING_TYPE =
-            TYPES.register("melting", () -> MeltingRecipe.Type.INSTANCE);
+            TYPES.register("melting", () -> MeltingRecipe.TYPE);
 
     //Fuel
     public static final Supplier<RecipeSerializer<FuelRecipe>> FUEL_SERIALIZER =
-            SERIALIZER.register("fuel", () -> FuelRecipe.Serializer.INSTANCE);
+            SERIALIZER.register("fuel", () -> FuelRecipe.SERIALIZER);
     public static final Supplier<RecipeType<FuelRecipe>> FUEL_TYPE =
-            TYPES.register("fuel", () -> FuelRecipe.Type.INSTANCE);
+            TYPES.register("fuel", () -> FuelRecipe.TYPE);
 
     //Coolant
     public static final Supplier<RecipeSerializer<CoolantRecipe>> COOLANT_SERIALIZER =
-            SERIALIZER.register("coolant", () -> CoolantRecipe.Serializer.INSTANCE);
+            SERIALIZER.register("coolant", () -> CoolantRecipe.SERIALIZER);
     public static final Supplier<RecipeType<CoolantRecipe>> COOLANT_TYPE =
-            TYPES.register("coolant", () -> CoolantRecipe.Type.INSTANCE);
+            TYPES.register("coolant", () -> CoolantRecipe.TYPE);
 
     //Solidifier
     public static final Supplier<RecipeSerializer<SolidifierRecipe>> SOLIDIFIER_SERIALIZER =
-            SERIALIZER.register("solidifier", () -> SolidifierRecipe.Serializer.INSTANCE);
+            SERIALIZER.register("solidifier", () -> SolidifierRecipe.SERIALIZER);
     public static final Supplier<RecipeType<SolidifierRecipe>> SOLIDIFIER_TYPE =
-            TYPES.register("solidifier", () -> SolidifierRecipe.Type.INSTANCE);
+            TYPES.register("solidifier", () -> SolidifierRecipe.TYPE);
 
     //Mixer
     public static final Supplier<RecipeSerializer<MixingRecipe>> MIXING_SERIALIZER =
-            SERIALIZER.register("mixing", () -> MixingRecipe.Serializer.INSTANCE);
+            SERIALIZER.register("mixing", () -> MixingRecipe.SERIALIZER);
     public static final Supplier<RecipeType<MixingRecipe>> MIXING_TYPE =
-            TYPES.register("mixing", () -> MixingRecipe.Type.INSTANCE);
+            TYPES.register("mixing", () -> MixingRecipe.TYPE);
 
-    //Equipment Modifier
-    public static final Supplier<RecipeSerializer<EquipmentModifierRecipe>> EQUIPMENT_MODIFIER_SERIALIZER =
-            SERIALIZER.register("equipment_modifier", () -> EquipmentModifierRecipe.Serializer.INSTANCE);
 
-    public static final Supplier<RecipeType<EquipmentModifierRecipe>> EQUIPMENT_MODIFIER_TYPE =
-            TYPES.register("equipment_modifier", () -> EquipmentModifierRecipe.Type.INSTANCE);
 }

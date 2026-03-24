@@ -1,5 +1,0 @@
-{
-  "parent": "neoforge:item/bucket",
-  "fluid": "casting:molten_vibrant_alloy",
-  "loader": "neoforge:fluid_container"
-}

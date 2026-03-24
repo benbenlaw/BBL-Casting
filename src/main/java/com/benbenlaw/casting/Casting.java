@@ -1,22 +1,22 @@
 package com.benbenlaw.casting;
 
+import com.benbenlaw.casting.block.CastingBlockEntities;
 import com.benbenlaw.casting.block.CastingBlocks;
-import com.benbenlaw.casting.block.entity.CastingBlockEntities;
-import com.benbenlaw.casting.block.entity.client.MultiblockCoolantTankBlockEntityRenderer;
-import com.benbenlaw.casting.block.entity.client.MultiblockFuelTankBlockEntityRenderer;
-import com.benbenlaw.casting.block.entity.client.TankBlockEntityRenderer;
+import com.benbenlaw.casting.block.CastingCapabilities;
 import com.benbenlaw.casting.config.BeheadingConfig;
 import com.benbenlaw.casting.config.CastingConfig;
 import com.benbenlaw.casting.config.EquipmentModifierConfig;
-import com.benbenlaw.casting.config.ModifierSetsConfig;
 import com.benbenlaw.casting.fluid.CastingFluids;
-import com.benbenlaw.casting.item.*;
-import com.benbenlaw.casting.network.CastingMessages;
+import com.benbenlaw.casting.item.CastingCreativeModeTab;
+import com.benbenlaw.casting.item.CastingDataComponents;
+import com.benbenlaw.casting.item.CastingItems;
 import com.benbenlaw.casting.recipe.CastingRecipes;
-import com.benbenlaw.casting.screen.*;
-import com.benbenlaw.casting.screen.multiblock.*;
+import com.benbenlaw.casting.screen.CastingMenuTypes;
+import com.benbenlaw.casting.screen.ControllerScreen;
+import com.benbenlaw.casting.screen.MixerScreen;
+import com.benbenlaw.casting.screen.SolidifierScreen;
 import com.benbenlaw.casting.util.CastingColorHandler;
-import com.benbenlaw.casting.util.KeyBinds;
+import net.minecraft.resources.Identifier;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -31,6 +31,7 @@ import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
+import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 
@@ -41,19 +42,17 @@ public class Casting {
     public Casting(IEventBus modEventBus, final ModContainer modContainer) {
 
         //Equipment Modifiers
-        EquipmentModifier.registerAllDataComponents();
-        EquipmentModifier.COMPONENTS.register(modEventBus);
-        EquipmentModifier.registerAllItemModifiers();
-        EquipmentModifier.ITEMS.register(modEventBus);
-
-
-        CastingItems.ITEMS.register(modEventBus);
-        CastingCreativeModeTab.CREATIVE_MODE_TABS.register(modEventBus);
-        //EquipmentModifierItems.ITEMS.register(modEventBus);
-        CastingDataComponents.COMPONENTS.register(modEventBus);
+        //EquipmentModifier.registerAllDataComponents();
+        //EquipmentModifier.COMPONENTS.register(modEventBus);
+        //EquipmentModifier.registerAllItemModifiers();
+        //EquipmentModifier.ITEMS.register(modEventBus);
 
         CastingBlocks.BLOCKS.register(modEventBus);
         CastingBlockEntities.BLOCK_ENTITIES.register(modEventBus);
+        CastingCreativeModeTab.CREATIVE_MODE_TABS.register(modEventBus);
+        CastingItems.ITEMS.register(modEventBus);
+        //EquipmentModifierItems.ITEMS.register(modEventBus);
+        CastingDataComponents.COMPONENTS.register(modEventBus);
 
         CastingFluids.FLUIDS.register(modEventBus);
 
@@ -68,9 +67,9 @@ public class Casting {
         modContainer.registerConfig(ModConfig.Type.STARTUP, EquipmentModifierConfig.SPEC, "bbl/casting/tool_modifiers.toml");
         modContainer.registerConfig(ModConfig.Type.COMMON, BeheadingConfig.SPEC, "bbl/casting/beheading.toml");
         modContainer.registerConfig(ModConfig.Type.COMMON, CastingConfig.SPEC, "bbl/casting/common.toml");
-        modContainer.registerConfig(ModConfig.Type.COMMON, ModifierSetsConfig.SPEC, "bbl/casting/custom_modifiers_sets.toml");
+       // modContainer.registerConfig(ModConfig.Type.COMMON, ModifierSetsConfig.SPEC, "bbl/casting/custom_modifiers_sets.toml");
 
-        if (FMLEnvironment.dist == Dist.CLIENT) {
+        if (FMLEnvironment.getDist() == Dist.CLIENT) {
             modEventBus.register(new CastingColorHandler());
 
         }
@@ -84,7 +83,7 @@ public class Casting {
     }
 
     public void registerCapabilities(RegisterCapabilitiesEvent event) {
-        CastingBlockEntities.registerCapabilities(event);
+        CastingCapabilities.registerCapabilities(event);
     }
 
     //enqueueWork is used to delay the registration of the networking until after the common setup
@@ -94,47 +93,31 @@ public class Casting {
     }
 
     public void commonSetup(RegisterPayloadHandlersEvent event) {
-        CastingMessages.registerNetworking(event);
+        //CastingMessages.registerNetworking(event);
 
     }
 
-    @EventBusSubscriber(modid = Casting.MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    @EventBusSubscriber(modid = Casting.MOD_ID, value = Dist.CLIENT)
     public static class ClientModEvents {
 
         @SubscribeEvent
         public static void registerRenderers(final EntityRenderersEvent.RegisterRenderers event) {
 
             //event.registerBlockEntityRenderer(CastingBlockEntities.CONTROLLER_BLOCK_ENTITY.get(), ControllerBlockEntityRenderer::new);
-            event.registerBlockEntityRenderer(CastingBlockEntities.MULTIBLOCK_FUEL_TANK_BLOCK_ENTITY.get(), MultiblockFuelTankBlockEntityRenderer::new);
-            event.registerBlockEntityRenderer(CastingBlockEntities.MULTIBLOCK_COOLANT_TANK_BLOCK_ENTITY.get(), MultiblockCoolantTankBlockEntityRenderer::new);
-            event.registerBlockEntityRenderer(CastingBlockEntities.TANK_BLOCK_ENTITY.get(), TankBlockEntityRenderer::new);
         }
 
         @SubscribeEvent
         public static void registerScreens(RegisterMenuScreensEvent event) {
-            event.register(CastingMenuTypes.MULTIBLOCK_CONTROLLER_MENU.get(), MultiblockControllerScreen::new);
-            event.register(CastingMenuTypes.MULTIBLOCK_FUEL_TANK_MENU.get(), MultiblockFuelTankScreen::new);
-            event.register(CastingMenuTypes.MULTIBLOCK_COOLANT_TANK_MENU.get(), MultiblockCoolantTankScreen::new);
-            event.register(CastingMenuTypes.MULTIBLOCK_SOLIDIFIER_MENU.get(), MultiblockSolidifierScreen::new);
-            event.register(CastingMenuTypes.MULTIBLOCK_VALVE_MENU.get(), MultiblockValveScreen::new);
-            event.register(CastingMenuTypes.MULTIBLOCK_MIXER_MENU.get(), MultiblockMixerScreen::new);
-
-            //OG Casting
-            event.register(CastingMenuTypes.SMELTER_MENU.get(), SmelterScreen::new);
+            event.register(CastingMenuTypes.CONTROLLER_MENU.get(), ControllerScreen::new);
             event.register(CastingMenuTypes.SOLIDIFIER_MENU.get(), SolidifierScreen::new);
             event.register(CastingMenuTypes.MIXER_MENU.get(), MixerScreen::new);
-            event.register(CastingMenuTypes.EQUIPMENT_MODIFIER_MENU.get(), EquipmentModifierScreen::new);
-
-            //event.register(ModMenuTypes.MIXER_MENU.get(), MixerScreen::new);
-            //event.register(ModMenuTypes.EQUIPMENT_MODIFIER_MENU.get(), EquipmentModifierScreen::new);
-
         }
 
         @SubscribeEvent
         public static void onClientExtensions(RegisterClientExtensionsEvent event) {
             CastingFluids.FLUIDS_MAP.values().forEach(fluid -> {
                 var fluidType = fluid.getFluidType();
-                var extensions = fluidType.getClientExtensions();
+                var extensions = IClientFluidTypeExtensions.of(fluidType);
                 event.registerFluidType(extensions, fluidType);
             });
         }
@@ -143,23 +126,23 @@ public class Casting {
         public static void onClientSetup(FMLClientSetupEvent event) {
 
             event.enqueueWork(() -> {
-
                 // Only Needed if i need a translucent fluid otherwise should be ok? //
-
-
-                //     ItemBlockRenderTypes.setRenderLayer(ModFluids.MOLTEN_URANIUM_SOURCE.get(), RenderType.translucent());
                 //     ItemBlockRenderTypes.setRenderLayer(ModFluids.MOLTEN_URANIUM_FLOWING.get(), RenderType.translucent());
-
 
             });
         }
 
         @SubscribeEvent
         public static void onKeyInput(RegisterKeyMappingsEvent event) {
-            event.register(KeyBinds.HELMET_HOTKEY);
-            event.register(KeyBinds.CHESTPLATE_HOTKEY);
-            event.register(KeyBinds.LEGGINGS_HOTKEY);
-            event.register(KeyBinds.BOOTS_HOTKEY);
+            //event.register(KeyBinds.HELMET_HOTKEY);
+            //event.register(KeyBinds.CHESTPLATE_HOTKEY);
+            //event.register(KeyBinds.LEGGINGS_HOTKEY);
+            //event.register(KeyBinds.BOOTS_HOTKEY);
         }
     }
+
+    public static Identifier identifier(String path) {
+        return Identifier.fromNamespaceAndPath(MOD_ID, path);
+    }
+
 }

@@ -1,7 +1,5 @@
 package com.benbenlaw.casting.fluid;
 
-import net.neoforged.fml.ModList;
-
 import java.util.ArrayList;
 import java.util.List;
 

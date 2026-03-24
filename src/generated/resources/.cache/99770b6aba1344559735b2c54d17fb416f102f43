@@ -1,18 +1,7 @@
-// 1.21.1	2025-10-28T09:03:51.7091117	Tags for minecraft:item mod id casting
-30fc97067c3b88099596b818f5fabb187f3560a9 data/casting/tags/item/can_be_disabled_with_shift.json
-b76591f05df85ab0dd45021e91311711f10beab7 data/casting/tags/item/can_be_toggled_with_keybind.json
-8ea9e44acecf92c95dca0fa3a81436e41f918c0b data/casting/tags/item/can_be_toggled_with_shift.json
-8e7c5beb2a472ddc8018ff39621cdf5c000a0b48 data/casting/tags/item/controller_extra_blocks.json
-2496cb4438ebf9069c618a9e27e0eb65f90323d1 data/casting/tags/item/controller_floors.json
-8dd160564f5faf1c1f7b6ae227d6a8b596094c75 data/casting/tags/item/controller_tanks.json
-61d00dfd62f773dedf60c71b94d5e4f8deca2969 data/casting/tags/item/controller_walls.json
-f5765c596cfecbb4446dd6c6dd414fd0480522b7 data/casting/tags/item/equipment_modifiers.json
-cb0ed6d8265c7f470717fe4bdb90595526d5a990 data/casting/tags/item/melting_output_amount_effected.json
-e4e683d100add4a3edd7733d5bebad68beb29508 data/casting/tags/item/melting_produces_experience.json
+// 26.1-pre-3	2026-03-23T16:00:20.1353906	Tags for minecraft:item mod id casting
 da92033666b77dcdcd2ecfd54b5fcf76989db3a0 data/casting/tags/item/molds.json
 523cf825e8643e793dc1a64cd6939e6cdd4adc88 data/c/tags/item/ball_items.json
 38236b67cf98b68238695adf5a39edf921a1998c data/c/tags/item/bricks.json
-0339134632f39172b39e88115c66edf74d4a8495 data/c/tags/item/buckets.json
 b5b443005446a7c462821af2bd14b03a5178a666 data/c/tags/item/molds/ball.json
 c5b03813e61f7b4ffd00ab3a09b1def2f4e7c5e3 data/c/tags/item/molds/block.json
 046ccfb1e090314dacdeaa4b1e6894cc1a20ebfa data/c/tags/item/molds/dust.json

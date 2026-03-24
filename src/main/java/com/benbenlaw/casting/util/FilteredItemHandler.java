@@ -4,7 +4,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.items.ItemStackHandler;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class FilteredItemHandler extends ItemStackHandler {

@@ -1,8 +1,0 @@
-{
-  "type": "casting:equipment_modifier",
-  "effect": "sharpness",
-  "upgrade_fluid": {
-    "amount": 1350,
-    "id": "casting:molten_quartz"
-  }
-}

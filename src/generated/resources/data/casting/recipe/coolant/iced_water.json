@@ -1,8 +1,0 @@
-{
-  "type": "casting:coolant",
-  "duration": 40,
-  "fluid": {
-    "amount": 25,
-    "id": "casting:iced_water"
-  }
-}

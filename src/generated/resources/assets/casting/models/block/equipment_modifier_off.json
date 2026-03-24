@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/orientable",
-  "textures": {
-    "front": "casting:block/equipment_modifier_front",
-    "side": "casting:block/equipment_modifier_side",
-    "top": "casting:block/equipment_modifier_top"
-  }
-}

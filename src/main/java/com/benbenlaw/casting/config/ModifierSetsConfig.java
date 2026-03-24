@@ -1,12 +1,11 @@
 package com.benbenlaw.casting.config;
 
-import com.benbenlaw.casting.item.EquipmentModifier;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-
+/*
 public class ModifierSetsConfig {
 
     public static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
@@ -46,7 +45,7 @@ public class ModifierSetsConfig {
     /**
      * Returns a map of groupKey -> list of EquipmentModifiers.
      * Also parses and stores display names and applicable items/tags.
-     */
+
     public static Map<String, List<EquipmentModifier>> getCustomModifierGroups() {
         Map<String, List<EquipmentModifier>> groups = new HashMap<>();
         GROUP_DISPLAY_NAMES.clear();
@@ -95,15 +94,12 @@ public class ModifierSetsConfig {
     /**
      * Get the display name for a group key.
      * Returns the key itself if no display name was defined.
-     */
+
     public static String getDisplayNameForGroup(String groupKey) {
         return GROUP_DISPLAY_NAMES.getOrDefault(groupKey, groupKey);
     }
 
-    /**
-     * Get the list of items or tags applicable for a group key.
-     * Returns empty list if none set.
-     */
+
     public static List<String> getItemsOrTagsForGroup(String groupKey) {
         return GROUP_ITEMS_OR_TAGS.getOrDefault(groupKey, Collections.emptyList());
     }
@@ -117,3 +113,6 @@ public class ModifierSetsConfig {
         }
     }
 }
+
+
+ */

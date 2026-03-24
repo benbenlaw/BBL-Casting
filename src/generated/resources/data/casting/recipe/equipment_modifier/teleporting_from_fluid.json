@@ -1,8 +1,0 @@
-{
-  "type": "casting:equipment_modifier",
-  "effect": "teleporting",
-  "upgrade_fluid": {
-    "amount": 640,
-    "id": "casting:molten_ender"
-  }
-}

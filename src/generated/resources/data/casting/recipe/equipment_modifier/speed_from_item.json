@@ -1,8 +1,0 @@
-{
-  "type": "casting:equipment_modifier",
-  "effect": "speed",
-  "upgrade_item": {
-    "count": 12,
-    "item": "minecraft:sugar"
-  }
-}

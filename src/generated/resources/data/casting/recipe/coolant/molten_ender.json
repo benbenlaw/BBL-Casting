@@ -1,8 +1,0 @@
-{
-  "type": "casting:coolant",
-  "duration": 100,
-  "fluid": {
-    "amount": 5,
-    "id": "casting:molten_ender"
-  }
-}

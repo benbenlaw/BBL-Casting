@@ -2,14 +2,13 @@ package com.benbenlaw.casting.data;
 
 import com.benbenlaw.casting.Casting;
 import net.minecraft.data.PackOutput;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 
 import static com.benbenlaw.casting.fluid.CastingFluids.FLUIDS_MAP;
 
 public class CastingLangProvider extends LanguageProvider {
 
-    public CastingLangProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
+    public CastingLangProvider(PackOutput output) {
         super(output, Casting.MOD_ID, "en_us");
     }
 
@@ -18,6 +17,14 @@ public class CastingLangProvider extends LanguageProvider {
 
         //Creative Tab
         add("itemGroup.casting", "Casting");
+
+        //Tooltip
+        add("tooltip.casting.fluids_header", "Fluids:");
+
+        //JEI
+        add("jei.casting.solidifier", "Solidifier");
+        add("jei.casting.mixing", "Mixing");
+        add("jei.casting.melting", "Melting");
 
         //Keys
         addKeyTranslation("category", "Casting");

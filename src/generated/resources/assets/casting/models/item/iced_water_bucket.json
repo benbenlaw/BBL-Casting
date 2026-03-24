@@ -1,5 +1,0 @@
-{
-  "parent": "neoforge:item/bucket",
-  "fluid": "casting:iced_water",
-  "loader": "neoforge:fluid_container"
-}

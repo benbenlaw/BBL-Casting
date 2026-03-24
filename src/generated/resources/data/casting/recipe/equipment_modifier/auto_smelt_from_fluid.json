@@ -1,8 +1,0 @@
-{
-  "type": "casting:equipment_modifier",
-  "effect": "auto_smelt",
-  "upgrade_fluid": {
-    "amount": 8000,
-    "id": "minecraft:lava"
-  }
-}

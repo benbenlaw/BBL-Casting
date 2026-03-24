@@ -1,204 +1,65 @@
 package com.benbenlaw.casting.block.entity;
 
-import com.benbenlaw.casting.item.CastingDataComponents;
-import com.benbenlaw.casting.item.util.FluidListComponent;
+import com.benbenlaw.casting.block.CastingBlockEntities;
+import com.benbenlaw.casting.block.custom.TankBlock;
+import com.benbenlaw.core.block.entity.SyncableBlockEntity;
+import com.benbenlaw.core.block.entity.handler.fluid.InputFluidHandler;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.core.component.DataComponentMap;
-import net.minecraft.core.component.DataComponentType;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.Connection;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientGamePacketListener;
-import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerChunkCache;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.InteractionHand;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.chunk.LevelChunk;
-import net.minecraft.world.level.material.Fluid;
-import net.neoforged.neoforge.fluids.FluidStack;
-import net.neoforged.neoforge.fluids.FluidUtil;
-import net.neoforged.neoforge.fluids.capability.IFluidHandler;
-import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
-import java.util.Objects;
+public class TankBlockEntity extends SyncableBlockEntity implements MenuProvider {
 
-public class TankBlockEntity extends BlockEntity {
-
-
-    public final FluidTank FLUID_TANK = new FluidTank(16000) {
-        @Override
-        protected void onContentsChanged() {
-            setChanged();
-            sync();
-        }
-    };
-
-
-    private final IFluidHandler fluidHandler = new IFluidHandler() {
-        @Override
-        public int getTanks() {
-            return 1;
-        }
-
-        @Override
-        public @NotNull FluidStack getFluidInTank(int tank) {
-            return FLUID_TANK.getFluid();
-        }
-
-        @Override
-        public int getTankCapacity(int tank) {
-            return FLUID_TANK.getCapacity();
-        }
-
-        @Override
-        public boolean isFluidValid(int tank, FluidStack stack) {
-            return FLUID_TANK.isFluidValid(stack);
-        }
-
-        @Override
-        public int fill(FluidStack resource, FluidAction action) {
-            if (resource.getFluid() == FLUID_TANK.getFluid().getFluid() || FLUID_TANK.isEmpty()) {
-                return FLUID_TANK.fill(resource, action);
-            }
-            return 0;
-        }
-
-
-
-        @Override
-        public FluidStack drain(FluidStack resource, FluidAction action) {
-            assert level != null;
-
-            if (resource.getFluid() == FLUID_TANK.getFluid().getFluid()) {
-                return FLUID_TANK.drain(resource.getAmount(), action);
-            }
-            return FluidStack.EMPTY;
-        }
-
-        @Override
-        public FluidStack drain(int maxDrain, FluidAction action) {
-            if (FLUID_TANK.getFluidAmount() > 0) {
-                return FLUID_TANK.drain(maxDrain, action);
-            }
-            return FluidStack.EMPTY;
-        }
-    };
-
-    public IFluidHandler getFluidHandlerCapability(Direction side) {
-        return fluidHandler;
-    }
-
-    public void setFluid(FluidStack stack) {
-        this.FLUID_TANK.setFluid(stack);
-    }
-
-    public void getFluid(FluidStack stack) {
-        FLUID_TANK.setFluid(stack);
-    }
-
-    public FluidStack getFluidStack() {
-        return this.FLUID_TANK.getFluid();
-    }
+    private final InputFluidHandler inputFluidHandler = new InputFluidHandler(this, 1, 16000, (i, stack) -> i == 0);
 
     public TankBlockEntity(BlockPos pos, BlockState state) {
-        super(CastingBlockEntities.TANK_BLOCK_ENTITY.get(), pos, state);
-
-    }
-
-    @Override
-    public void onLoad() {
-        super.onLoad();
-        this.setChanged();
-        sync();
-    }
-
-    @Override
-    public void handleUpdateTag(@NotNull CompoundTag compoundTag, HolderLookup.@NotNull Provider provider) {
-        super.loadAdditional(compoundTag, provider);
-    }
-
-    @Override
-    public @NotNull CompoundTag getUpdateTag(HolderLookup.@NotNull Provider provider) {
-        CompoundTag compoundTag = new CompoundTag();
-        saveAdditional(compoundTag, provider);
-        return compoundTag;
-    }
-
-    @Override
-    public void onDataPacket(@NotNull Connection connection, @NotNull ClientboundBlockEntityDataPacket clientboundBlockEntityDataPacket,
-                             HolderLookup.@NotNull Provider provider) {
-        super.onDataPacket(connection, clientboundBlockEntityDataPacket, provider);
-    }
-
-    @Nullable
-    public Packet<ClientGamePacketListener> getUpdatePacket() {
-        return ClientboundBlockEntityDataPacket.create(this);
-    }
-
-    public void sync() {
-        if (level instanceof ServerLevel serverLevel) {
-            LevelChunk chunk = serverLevel.getChunkAt(getBlockPos());
-            if (Objects.requireNonNull(chunk.getLevel()).getChunkSource() instanceof ServerChunkCache chunkCache) {
-                chunkCache.chunkMap.getPlayers(chunk.getPos(), false).forEach(this::syncContents);
-            }
-        }
-    }
-
-    public void syncContents(ServerPlayer player) {
-        player.connection.send(Objects.requireNonNull(getUpdatePacket()));
-    }
-
-    @Override
-    protected void saveAdditional(@NotNull CompoundTag compoundTag, HolderLookup.@NotNull Provider provider) {
-        super.saveAdditional(compoundTag, provider);
-        compoundTag.put("fluidTank", FLUID_TANK.writeToNBT(provider, new CompoundTag()));
-    }
-
-    @Override
-    protected void loadAdditional(CompoundTag compoundTag, HolderLookup.@NotNull Provider provider) {
-        FLUID_TANK.readFromNBT(provider, compoundTag.getCompound("fluidTank"));
-        super.loadAdditional(compoundTag, provider);
-
-    }
-
-    @Override
-    protected void collectImplicitComponents(DataComponentMap.Builder builder) {
-        super.collectImplicitComponents(builder);
-
-        FluidStack fluid = this.FLUID_TANK.getFluid();
-        if (!fluid.isEmpty()) {
-            builder.set(CastingDataComponents.FLUIDS, new FluidListComponent(List.of(fluid.copy())));
-        }
-    }
-
-    @Override
-    protected void applyImplicitComponents(DataComponentInput input) {
-        super.applyImplicitComponents(input);
-        FluidListComponent component = input.get(CastingDataComponents.FLUIDS);
-        if (component != null && !component.fluids().isEmpty()) {
-            this.FLUID_TANK.setFluid(component.fluids().get(0).copy());
-        }
-    }
-
-    public boolean onPlayerUse(Player player, InteractionHand hand) {
-        return FluidUtil.interactWithFluidHandler(player, hand, FLUID_TANK);
+        super(CastingBlockEntities.FUEL_TANK_BLOCK_ENTITY.get(), pos, state);
     }
 
     public void tick() {
         assert level != null;
-        if(level.getGameTime() % 20 == 0) {
-            sync();
+        if (!level.isClientSide()) {
+
+            if (!level.getBlockState(worldPosition).getValue(TankBlock.RUNNING)) return;
         }
+    }
+
+    @Override
+    public @Nullable AbstractContainerMenu createMenu(int container, Inventory inventory, Player player) {
+        return null; //new SolidifierMenu(container, inventory, this.worldPosition, data);
+    }
+
+    @Override
+    public Component getDisplayName() {
+        return Component.translatable("block.casting.tank");
+    }
+
+    @Override
+    protected void saveAdditional(ValueOutput output) {
+
+        inputFluidHandler.serialize(output);
+
+        super.saveAdditional(output);
+    }
+
+
+    @Override
+    protected void loadAdditional(ValueInput input) {
+
+        inputFluidHandler.deserialize(input);
+
+        super.loadAdditional(input);
+    }
+
+    @Override
+    public void preRemoveSideEffects(BlockPos pos, BlockState state) {
+
     }
 }

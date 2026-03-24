@@ -1,9 +1,0 @@
-{
-  "type": "casting:fuel",
-  "duration": 100,
-  "fluid": {
-    "amount": 20,
-    "id": "casting:molten_uranium"
-  },
-  "temp": 1400
-}

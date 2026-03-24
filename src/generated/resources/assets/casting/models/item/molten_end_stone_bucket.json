@@ -1,5 +1,0 @@
-{
-  "parent": "neoforge:item/bucket",
-  "fluid": "casting:molten_end_stone",
-  "loader": "neoforge:fluid_container"
-}

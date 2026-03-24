@@ -1,8 +1,0 @@
-{
-  "type": "casting:equipment_modifier",
-  "effect": "night_vision",
-  "upgrade_item": {
-    "count": 8,
-    "item": "minecraft:golden_carrot"
-  }
-}

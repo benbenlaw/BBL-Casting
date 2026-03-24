@@ -1,5 +1,0 @@
-{
-  "parent": "neoforge:item/bucket",
-  "fluid": "casting:molten_nickel",
-  "loader": "neoforge:fluid_container"
-}

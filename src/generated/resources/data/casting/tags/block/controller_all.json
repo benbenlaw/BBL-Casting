@@ -1,9 +1,0 @@
-{
-  "values": [
-    "#casting:controller_floors",
-    "#casting:controller_walls",
-    "#casting:controller_extra_blocks",
-    "#casting:controller_tanks",
-    "casting:multiblock_controller"
-  ]
-}

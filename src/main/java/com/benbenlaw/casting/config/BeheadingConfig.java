@@ -2,7 +2,7 @@ package com.benbenlaw.casting.config;
 
 import com.benbenlaw.casting.util.BeheadingHeadMap;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
@@ -43,10 +43,10 @@ public class BeheadingConfig {
         for (String entry : HEAD_MAPPINGS.get()) {
             String[] parts = entry.split("=");
             if (parts.length == 2) {
-                ResourceLocation entityId = ResourceLocation.parse(parts[0].trim());
-                ResourceLocation itemId = ResourceLocation.parse(parts[1].trim());
+                Identifier entityId = Identifier.parse(parts[0].trim());
+                Identifier itemId = Identifier.parse(parts[1].trim());
 
-                Item item = BuiltInRegistries.ITEM.get(itemId);
+                Item item = BuiltInRegistries.ITEM.getValue(itemId);
                 //Add the item to the head map
                 BeheadingHeadMap.register(entityId, () -> item);
             } else {

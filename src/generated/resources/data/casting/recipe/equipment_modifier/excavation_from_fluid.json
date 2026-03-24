@@ -1,8 +1,0 @@
-{
-  "type": "casting:equipment_modifier",
-  "effect": "excavation",
-  "upgrade_fluid": {
-    "amount": 360,
-    "id": "casting:molten_diamond"
-  }
-}

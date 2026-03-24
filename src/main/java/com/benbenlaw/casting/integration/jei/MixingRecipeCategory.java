@@ -2,177 +2,151 @@ package com.benbenlaw.casting.integration.jei;
 
 import com.benbenlaw.casting.Casting;
 import com.benbenlaw.casting.block.CastingBlocks;
-import com.benbenlaw.casting.recipe.MixingRecipe;
+import com.benbenlaw.casting.event.client.ClientRecipeCache;import com.benbenlaw.casting.recipe.MixingRecipe;
+import com.benbenlaw.casting.recipe.SolidifierRecipe;
 import com.benbenlaw.core.recipe.NoInventoryRecipe;
+import com.benbenlaw.core.util.MouseUtil;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
+import mezz.jei.api.gui.builder.ITooltipBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
+import mezz.jei.api.gui.ingredient.IRecipeSlotDrawable;
+import mezz.jei.api.gui.ingredient.IRecipeSlotDrawablesView;
+import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
+import mezz.jei.api.gui.widgets.IRecipeExtrasBuilder;
+import mezz.jei.api.gui.widgets.IScrollGridWidget;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
-import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import net.minecraft.ChatFormatting;
+import mezz.jei.api.recipe.types.IRecipeType;import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.resources.Identifier;import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Recipe;import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidStackTemplate;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Map;
 
 public class MixingRecipeCategory implements IRecipeCategory<MixingRecipe> {
-    public final static ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(Casting.MOD_ID, "mixing");
-    public final static ResourceLocation TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(Casting.MOD_ID, "textures/gui/jei_mixer.png");
 
-    public static final RecipeType<MixingRecipe> RECIPE_TYPE = RecipeType.create(Casting.MOD_ID, "mixing",
-            MixingRecipe.class);
+    public final static Identifier TEXTURE = Casting.identifier("textures/gui/mixing_jei.png");
+    public static final IRecipeType<MixingRecipe> RECIPE_TYPE = IRecipeType.create(Casting.identifier("mixing"), MixingRecipe.class);
 
-    private IDrawable background;
+    private final int width = 101;
+    private final int height = 38;
     private final IDrawable icon;
-    private final IGuiHelper helper;
-
-    public MixingRecipeCategory(IGuiHelper helper) {
-        this.helper = helper;
-        this.background = helper.createDrawable(TEXTURE, 0, 0, 159, 38);
-        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(CastingBlocks.MULTIBLOCK_MIXER.get()));
-    }
 
     @Override
-    public @NotNull RecipeType<MixingRecipe> getRecipeType() {
-        return JEICastingPlugin.MIXER_RECIPE;
+    public @Nullable Identifier getIdentifier(MixingRecipe recipe) {
+        return ClientRecipeCache.getCachedMixingRecipes().stream()
+                .filter(r -> r.equals(recipe))
+                .findFirst()
+                .map(r -> {
+                    // Find the corresponding ID in the cache map
+                    for (Map.Entry<Identifier, MixingRecipe> entry : ClientRecipeCache.cachedMixingRecipes.entrySet()) {
+                        if (entry.getValue().equals(recipe)) {
+                            return entry.getKey();
+                        }
+                    }
+                    return null;
+                })
+                .orElse(null);
+    }
+
+    public MixingRecipeCategory(IGuiHelper helper) {
+        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(CastingBlocks.MIXER.get()));
+    }
+
+
+    @Override
+    public @NotNull IRecipeType<MixingRecipe> getRecipeType() {
+        return RECIPE_TYPE;
     }
 
     @Override
     public @NotNull Component getTitle() {
-        return Component.translatable("gui.casting.jei.mixing");
+        return Component.translatable("jei.casting.mixing");
     }
 
     @Override
-    public @NotNull IDrawable getBackground() {
-        return this.background;
+    public int getWidth() {
+        return width;
     }
 
     @Override
-    public @NotNull IDrawable getIcon() {
-        return this.icon;
+    public int getHeight() {
+        return height;
     }
 
     @Override
-    public @Nullable ResourceLocation getRegistryName(MixingRecipe recipe) {
-        assert Minecraft.getInstance().level != null;
-        return Minecraft.getInstance().level.getRecipeManager().getAllRecipesFor(MixingRecipe.Type.INSTANCE).stream()
-                .filter(recipeHolder -> recipeHolder.value().equals(recipe))
-                .map(RecipeHolder::id)
-                .findFirst()
-                .orElse(null);
+    public @Nullable IDrawable getIcon() {
+        return icon;
     }
 
     @Override
     public void setRecipe(@NotNull IRecipeLayoutBuilder builder, MixingRecipe recipe, @NotNull IFocusGroup focusGroup) {
+        int centerX = 2;
+        int centerY = 11;
+        int slotWidth = 18;
 
-        Level level = Minecraft.getInstance().level;
-        List<RecipeHolder<MixingRecipe>> recipeHolder = level.getRecipeManager().getRecipesFor(MixingRecipe.Type.INSTANCE, NoInventoryRecipe.INSTANCE, level);
+        List<FluidStackTemplate> fluids = recipe.fluids();
+        int totalFluids = fluids.size();
 
-        int size = recipe.fluids().size();
-        int centerX = size > 0 ? 1 : 10;
-        int centerY = size > 6 ? 2 : 11;
-        int xOffset = 0;
-        int yOffset = 0;
-        int index = 0;
+        int visibleSlots = Math.min(totalFluids, 3);
+        int centeringOffset = (3 - visibleSlots) * (slotWidth / 2);
 
-        for (int i = 0; i < size; i++) {
-            xOffset = centerX + (i % 6) * 18;
-            yOffset = centerY + ((i / 6) * 18);
-            index = i;
+        for (int i = 0; i < totalFluids; i++) {
+            int displayIndex = Math.min(i, 2);
+            int xPos = centerX + centeringOffset + (displayIndex * slotWidth);
 
-            int finalIndex = index;
-            builder.addSlot(RecipeIngredientRole.INPUT, 3 + xOffset, yOffset)
-                    .addFluidStack(recipe.getAllFluids().get(i).getFluid(), recipe.getAllFluids().get(finalIndex).getAmount())
+            final int finalIndex = i;
+
+            builder.addSlot(RecipeIngredientRole.INPUT, xPos, centerY)
+                    .add(fluids.get(i).fluid().value(), fluids.get(i).amount())
                     .addRichTooltipCallback((slot, tooltip) ->
-                            tooltip.add(Component.literal(recipe.getAllFluids().get(finalIndex).getAmount() + " mB").withStyle(ChatFormatting.GOLD)))
+                            tooltip.add(Component.literal(fluids.get(finalIndex).amount() + " mB")
+                                    .withStyle(ChatFormatting.GOLD)))
                     .setBackground(JEICastingPlugin.slotDrawable, -1, -1);
-
-            builder.addSlot(RecipeIngredientRole.RENDER_ONLY, 3 + xOffset, yOffset).addFluidStack(recipe.getAllFluids().get(i).getFluid(), 1000);
         }
 
-        FluidStack output = recipe.outputFluid().copy();
-        if (!output.isEmpty()) {
-            builder.addSlot(RecipeIngredientRole.OUTPUT, 140, 11)
-                    .addFluidStack(output.getFluid(), output.getAmount())
-                    .addRichTooltipCallback((slot, tooltip) ->
-                            tooltip.add(Component.literal(output.getAmount() + " mB").withStyle(ChatFormatting.GOLD)));
-
-            builder.addSlot(RecipeIngredientRole.RENDER_ONLY, 140, 11).addFluidStack(output.getFluid(), 1000);
-        }
+        // Output Slot
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 83, 11)
+                .add(recipe.outputFluid().fluid().value(), recipe.outputFluid().amount())
+                .addRichTooltipCallback((slot, tooltip) ->
+                        tooltip.add(Component.literal(recipe.outputFluid().amount() + " mB")
+                                .withStyle(ChatFormatting.GOLD)))
+                .setBackground(JEICastingPlugin.slotDrawable, -1, -1);
     }
-
-    /*
 
     @Override
-    public void draw(MixingRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
-        final Minecraft minecraft = Minecraft.getInstance();
-
-        String amountText = null;
-
-        // Define the slot positions and sizes
-        int[][] slotAreas = {
-                {4, 20, 16, 16},
-                {23, 20, 16, 16},
-                {42, 20, 16, 16},
-                {61, 20, 16, 16},
-                {80, 20, 16, 16},
-                {99, 20, 16, 16},
-                {142, 20, 16, 16}
-        };
-
-        List<FluidStack> fluids = new ArrayList<>(recipe.fluids());
-        fluids.add(recipe.outputFluid());
-
-        // Determine which slot the mouse is over and set the amount text accordingly
-        for (int i = 0; i < slotAreas.length; i++) {
-            int[] area = slotAreas[i];
-            int slotX = area[0];
-            int slotY = area[1];
-            int slotWidth = area[2];
-            int slotHeight = area[3];
-
-            if (mouseX >= slotX && mouseX < slotX + slotWidth && mouseY >= slotY && mouseY < slotY + slotHeight) {
-                FluidStack fluid = fluids.get(i);
-                if (i == 6) { // Output fluid
-                    if (!fluid.isEmpty()) {
-                        int amount = fluid.getAmount();
-                        amountText = "Fluid Produced: " + amount + "mB";
-                    } else {
-                        amountText = "No Output Fluid";
-                    }
-                } else { // Input fluids
-                    if (!fluid.isEmpty()) {
-                        int amount = fluid.getAmount();
-                        amountText = "Fluid Required: " + amount + "mB";
-                    } else {
-                        amountText = "No Fluid Needed";
-                    }
-                }
-                break;
-            }
-        }
-
-        // Draw the text if there's something to display
-        if (amountText != null) {
-            int textX = 3; // X coordinate for the text
-            int textY = 2; // Y coordinate for the text
-
-            guiGraphics.drawString(minecraft.font.self(), Component.literal(amountText), textX, textY, Color.GRAY.getRGB(), false);
+    public void getTooltip(ITooltipBuilder tooltip, MixingRecipe recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
+        if (MouseUtil.isMouseAboveArea((int) mouseX, (int) mouseY, 57, 10, 0, 0, 28, 18)) {
+            tooltip.add(Component.translatable("tooltip.core.ticks", 200));
         }
     }
 
-     */
+    @Override
+    public void draw(MixingRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphicsExtractor guiGraphics, double mouseX, double mouseY) {
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, 0, 0, 0, 0, width, height, width, height);
 
+    }
 
+    public void createRecipeExtras(IRecipeExtrasBuilder builder, MixingRecipe recipe, IFocusGroup focuses) {
+        IRecipeSlotDrawablesView recipeSlots = builder.getRecipeSlots();
+        List<IRecipeSlotDrawable> inputFluids = recipeSlots.getSlots(RecipeIngredientRole.INPUT);
+
+        if (inputFluids.size() > 3) {
+            IScrollGridWidget triggersGrid = builder.addScrollGridWidget(inputFluids, 2, 2);
+            triggersGrid.setPosition(2, 1);
+        }
+        builder.addAnimatedRecipeArrow(200).setPosition(57, 10);
+    }
 }

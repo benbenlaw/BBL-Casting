@@ -1,8 +1,0 @@
-{
-  "type": "casting:coolant",
-  "duration": 160,
-  "fluid": {
-    "amount": 10,
-    "id": "minecraft:water"
-  }
-}

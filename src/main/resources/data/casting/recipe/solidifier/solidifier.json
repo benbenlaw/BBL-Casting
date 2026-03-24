@@ -1,0 +1,16 @@
+{
+  "type": "casting:solidifier",
+  "mold": {
+    "count": 1,
+    "ingredient": "casting:ingot_mold"
+  },
+  "output": {
+    "count": 1,
+    "ingredient": "#c:ores/iron"
+  },
+  "fluid": {
+    "id": "minecraft:lava",
+    "amount": 1000
+  },
+  "meltingTemp": 200
+}

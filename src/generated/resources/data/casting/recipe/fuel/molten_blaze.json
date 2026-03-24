@@ -1,9 +1,0 @@
-{
-  "type": "casting:fuel",
-  "duration": 60,
-  "fluid": {
-    "amount": 1,
-    "id": "casting:molten_blaze"
-  },
-  "temp": 1400
-}

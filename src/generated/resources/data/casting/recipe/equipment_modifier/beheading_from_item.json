@@ -1,8 +1,0 @@
-{
-  "type": "casting:equipment_modifier",
-  "effect": "beheading",
-  "upgrade_item": {
-    "count": 1,
-    "tag": "minecraft:skulls"
-  }
-}

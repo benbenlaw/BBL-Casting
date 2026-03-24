@@ -1,5 +1,5 @@
 package com.benbenlaw.casting.util;
-
+/*
 import com.benbenlaw.casting.config.EquipmentModifierConfig;
 import com.benbenlaw.casting.item.EquipmentModifier;
 import com.mojang.serialization.Codec;
@@ -88,3 +88,5 @@ public class EquipmentModifierUtils {
 
     }
 }
+
+ */

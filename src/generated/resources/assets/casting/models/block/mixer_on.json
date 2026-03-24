@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/orientable",
-  "textures": {
-    "front": "casting:block/mixer_front_lit",
-    "side": "casting:block/mixer_side",
-    "top": "casting:block/mixer_top"
-  }
-}

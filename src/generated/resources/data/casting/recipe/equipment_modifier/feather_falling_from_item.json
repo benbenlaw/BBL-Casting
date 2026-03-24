@@ -1,8 +1,0 @@
-{
-  "type": "casting:equipment_modifier",
-  "effect": "feather_falling",
-  "upgrade_item": {
-    "count": 4,
-    "item": "minecraft:feather"
-  }
-}

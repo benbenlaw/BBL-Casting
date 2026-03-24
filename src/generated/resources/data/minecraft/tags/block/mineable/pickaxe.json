@@ -1,19 +1,11 @@
 {
   "values": [
-    "casting:multiblock_controller",
     "casting:black_bricks",
     "casting:black_brick_glass",
-    "casting:multiblock_fuel_tank",
-    "casting:multiblock_coolant_tank",
-    "casting:multiblock_solidifier",
-    "casting:multiblock_valve",
-    "casting:multiblock_mixer",
-    "casting:multiblock_regulator",
-    "casting:tank",
     "casting:solidifier",
     "casting:mixer",
-    "casting:equipment_modifier",
+    "casting:fuel_tank",
     "casting:controller",
-    "casting:mixer_whisk"
+    "casting:coolant_tank"
   ]
 }

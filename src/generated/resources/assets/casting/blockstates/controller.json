@@ -1,33 +1,47 @@
 {
   "variants": {
-    "facing=east,powered=false": {
-      "model": "casting:block/controller_off",
+    "facing=down,working=false": {
+      "model": "casting:block/controller_vertical",
+      "x": 180
+    },
+    "facing=down,working=true": {
+      "model": "casting:block/controller_working_vertical",
+      "x": 180
+    },
+    "facing=east,working=false": {
+      "model": "casting:block/controller",
       "y": 90
     },
-    "facing=east,powered=true": {
-      "model": "casting:block/controller_on",
+    "facing=east,working=true": {
+      "model": "casting:block/controller_working",
       "y": 90
     },
-    "facing=north,powered=false": {
-      "model": "casting:block/controller_off"
+    "facing=north,working=false": {
+      "model": "casting:block/controller"
     },
-    "facing=north,powered=true": {
-      "model": "casting:block/controller_on"
+    "facing=north,working=true": {
+      "model": "casting:block/controller_working"
     },
-    "facing=south,powered=false": {
-      "model": "casting:block/controller_off",
+    "facing=south,working=false": {
+      "model": "casting:block/controller",
       "y": 180
     },
-    "facing=south,powered=true": {
-      "model": "casting:block/controller_on",
+    "facing=south,working=true": {
+      "model": "casting:block/controller_working",
       "y": 180
     },
-    "facing=west,powered=false": {
-      "model": "casting:block/controller_off",
+    "facing=up,working=false": {
+      "model": "casting:block/controller_vertical"
+    },
+    "facing=up,working=true": {
+      "model": "casting:block/controller_working_vertical"
+    },
+    "facing=west,working=false": {
+      "model": "casting:block/controller",
       "y": 270
     },
-    "facing=west,powered=true": {
-      "model": "casting:block/controller_on",
+    "facing=west,working=true": {
+      "model": "casting:block/controller_working",
       "y": 270
     }
   }

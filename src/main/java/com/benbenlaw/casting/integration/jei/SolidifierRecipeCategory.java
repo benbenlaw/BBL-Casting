@@ -2,21 +2,21 @@ package com.benbenlaw.casting.integration.jei;
 
 import com.benbenlaw.casting.Casting;
 import com.benbenlaw.casting.block.CastingBlocks;
-import com.benbenlaw.casting.recipe.SolidifierRecipe;
-import mezz.jei.api.constants.VanillaTypes;
+import com.benbenlaw.casting.event.client.ClientRecipeCache;import com.benbenlaw.casting.recipe.SolidifierRecipe;
+import com.benbenlaw.core.util.MouseUtil;import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
-import mezz.jei.api.gui.drawable.IDrawable;
+import mezz.jei.api.gui.builder.ITooltipBuilder;import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
-import mezz.jei.api.helpers.IGuiHelper;
+import mezz.jei.api.gui.widgets.IRecipeExtrasBuilder;import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
-import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import net.minecraft.ChatFormatting;
+import mezz.jei.api.recipe.types.IRecipeType;import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import org.jetbrains.annotations.NotNull;
@@ -25,48 +25,58 @@ import org.jetbrains.annotations.Nullable;
 import java.awt.*;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Stream;
 
 public class SolidifierRecipeCategory implements IRecipeCategory<SolidifierRecipe> {
-    public final static ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(Casting.MOD_ID, "solidifier");
-    public final static ResourceLocation TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(Casting.MOD_ID, "textures/gui/jei_solidifier.png");
 
-    public static final RecipeType<SolidifierRecipe> RECIPE_TYPE = RecipeType.create(Casting.MOD_ID, "solidifier",
-            SolidifierRecipe.class);
+    public final static Identifier TEXTURE = Casting.identifier("textures/gui/solidifier_jei.png");
 
-    private IDrawable background;
+    public static final IRecipeType<SolidifierRecipe> RECIPE_TYPE = IRecipeType.create(Casting.identifier("solidifier"), SolidifierRecipe.class);
+
+    private final int width = 101;
+    private final int height = 20;
     private final IDrawable icon;
-    private final IGuiHelper helper;
 
-    public @Nullable ResourceLocation getRegistryName(SolidifierRecipe recipe) {
-        assert Minecraft.getInstance().level != null;
-        return Minecraft.getInstance().level.getRecipeManager().getAllRecipesFor(SolidifierRecipe.Type.INSTANCE).stream()
-                .filter(recipeHolder -> recipeHolder.value().equals(recipe))
-                .map(RecipeHolder::id)
+    @Override
+    public @Nullable Identifier getIdentifier(SolidifierRecipe recipe) {
+        return ClientRecipeCache.getCachedSolidifierRecipes().stream()
+                .filter(r -> r.equals(recipe))
                 .findFirst()
+                .map(r -> {
+                    // Find the corresponding ID in the cache map
+                    for (Map.Entry<Identifier, SolidifierRecipe> entry : ClientRecipeCache.cachedSolidifierRecipes.entrySet()) {
+                        if (entry.getValue().equals(recipe)) {
+                            return entry.getKey();
+                        }
+                    }
+                    return null;
+                })
                 .orElse(null);
     }
 
     public SolidifierRecipeCategory(IGuiHelper helper) {
-        this.helper = helper;
-        this.background = helper.createDrawable(TEXTURE, 0, 0, 132, 19);
-        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(CastingBlocks.MULTIBLOCK_SOLIDIFIER.get()));
+        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(CastingBlocks.SOLIDIFIER.get()));
     }
 
     @Override
-    public @NotNull RecipeType<SolidifierRecipe> getRecipeType() {
-        return JEICastingPlugin.SOLIDIFIER_RECIPE;
+    public @NotNull IRecipeType<SolidifierRecipe> getRecipeType() {
+        return RECIPE_TYPE;
     }
 
     @Override
     public @NotNull Component getTitle() {
-        return Component.translatable("gui.casting.jei.solidifier");
+        return Component.translatable("jei.casting.solidifier");
     }
 
     @Override
-    public @NotNull IDrawable getBackground() {
-        return this.background;
+    public int getWidth() {
+        return width;
+    }
+
+    @Override
+    public int getHeight() {
+        return height;
     }
 
     @Override
@@ -76,28 +86,30 @@ public class SolidifierRecipeCategory implements IRecipeCategory<SolidifierRecip
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, SolidifierRecipe recipe, IFocusGroup focusGroup) {
-        int fluidAmount = recipe.fluid().getAmount();
 
-        List<Stream<ItemStack>> ingredients = List.of(Arrays.stream(recipe.output().getItems())).reversed();
-        List<ItemStack> items = ingredients.stream().flatMap(stream -> stream).toList();
+        builder.addSlot(RecipeIngredientRole.INPUT, 2, 2).add(recipe.mold().ingredient());
 
-        builder.addSlot(RecipeIngredientRole.INPUT, 40, 2).addFluidStack(recipe.fluid().getFluid(), recipe.fluid().getAmount())
+        builder.addSlot(RecipeIngredientRole.INPUT, 38, 2).add(recipe.fluid().fluid().value(), recipe.fluid().amount())
                 .addRichTooltipCallback((slot, tooltip) ->
-                        tooltip.add(Component.literal(recipe.fluid().getAmount() + " mB").withStyle(ChatFormatting.GOLD)));
+                        tooltip.add(Component.literal(recipe.fluid().amount() + " mB").withStyle(ChatFormatting.GOLD)));
 
-        builder.addSlot(RecipeIngredientRole.RENDER_ONLY, 40, 2).addFluidStack(recipe.fluid().getFluid(), 1000);
-
-
-        builder.addSlot(RecipeIngredientRole.CATALYST, 4, 2).addIngredients(VanillaTypes.ITEM_STACK, Arrays.asList(recipe.mold().getItems()));
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 113, 2).addItemStack(recipe.output().getItems()[0]);
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 83, 2).add(recipe.output().ingredient());
     }
 
-    public void draw(SolidifierRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
-        final Minecraft minecraft = Minecraft.getInstance();
-        int fluidAmount = recipe.fluid().getAmount();
-        String fluidText = fluidAmount + "mb";
-        int textWidth = minecraft.font.width(fluidText);
-        int xPosition = 76 - (textWidth / 2);
-        guiGraphics.drawString(minecraft.font.self(), Component.literal(fluidText), xPosition, 6, Color.GRAY.getRGB(), false);
+    @Override
+    public void draw(SolidifierRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphicsExtractor guiGraphics, double mouseX, double mouseY) {
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, 0, 0, 0, 0, width, height, width, height);
+
+    }
+
+    public void createRecipeExtras(IRecipeExtrasBuilder builder, SolidifierRecipe recipe, IFocusGroup focuses) {
+        builder.addAnimatedRecipeArrow(200).setPosition(57, 2);
+    }
+
+    @Override
+    public void getTooltip(ITooltipBuilder tooltip, SolidifierRecipe recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
+        if (MouseUtil.isMouseAboveArea((int) mouseX, (int) mouseY, 56, 10, 0, 0, 28, 18)) {
+            tooltip.add(Component.translatable("tooltip.core.ticks", 200));
+        }
     }
 }

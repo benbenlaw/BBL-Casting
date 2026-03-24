@@ -1,0 +1,27 @@
+{
+  "type": "casting:melting",
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:ores/iron"
+      }
+    }
+  ],
+  "input": {
+    "count": 1,
+    "ingredient": "#c:ores/diamond"
+  },
+  "output": [
+    {
+      "id": "minecraft:lava",
+      "amount": 1000
+    },
+    {
+      "id": "minecraft:water",
+      "amount": 1000
+    }
+  ],
+  "meltingTemp": 100
+}

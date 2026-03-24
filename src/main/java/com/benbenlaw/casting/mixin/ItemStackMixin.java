@@ -9,7 +9,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import static com.benbenlaw.casting.item.EquipmentModifier.UNBREAKING;
 
 @Mixin(ItemStack.class)
 public class ItemStackMixin {
@@ -29,15 +28,15 @@ public class ItemStackMixin {
 
         if (!self.isDamageableItem()) return;
 
-        if (self.getComponents().has(UNBREAKING.dataComponent.get())) {
-            int level = (int) self.getOrDefault(UNBREAKING.dataComponent.get(), 0);
-            float chance = level * 0.1f;
-
-            RandomSource random = (entity != null) ? entity.getRandom() : RandomSource.create();
-
-            if (random.nextFloat() < chance) {
-                ci.cancel(); // Cancel the durability loss
-            }
-        }
+        //if (self.getComponents().has(UNBREAKING.dataComponent.get())) {
+        //    int level = (int) self.getOrDefault(UNBREAKING.dataComponent.get(), 0);
+        //    float chance = level * 0.1f;
+//
+        //    RandomSource random = (entity != null) ? entity.getRandom() : RandomSource.create();
+//
+        //    if (random.nextFloat() < chance) {
+        //        ci.cancel(); // Cancel the durability loss
+        //    }
+        //}
     }
 }

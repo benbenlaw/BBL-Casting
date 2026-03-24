@@ -1,8 +1,0 @@
-{
-  "type": "casting:equipment_modifier",
-  "effect": "equipment_level",
-  "upgrade_fluid": {
-    "amount": 500,
-    "id": "casting:molten_experience"
-  }
-}

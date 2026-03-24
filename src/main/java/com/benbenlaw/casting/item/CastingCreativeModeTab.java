@@ -27,22 +27,17 @@ public class CastingCreativeModeTab {
                 });
 
                 //Buckets
-                CastingFluids.FLUIDS_MAP.values().forEach(fluid -> {
-                    output.accept(fluid.getBucket());
-                });
-
-                //Equipment Modifier Items
-                EquipmentModifier.ITEMS.getEntries().forEach(item -> {
-                    output.accept(item.get());
-                });
+                //CastingFluids.FLUIDS_MAP.values().forEach(fluid -> {
+                //    output.accept(fluid.getBucket());
+                //});
 
                 //OG Casting
                 output.accept(CastingBlocks.SOLIDIFIER.asItem());
                 output.accept(CastingBlocks.CONTROLLER.asItem());
                 output.accept(CastingBlocks.MIXER.asItem());
-                output.accept(CastingBlocks.MIXER_WHISK.asItem());
-                output.accept(CastingBlocks.TANK.asItem());
-                output.accept(CastingBlocks.EQUIPMENT_MODIFIER.asItem());
+                output.accept(CastingBlocks.COOLANT_TANK.asItem());
+                output.accept(CastingBlocks.FUEL_TANK.asItem());
+
 
 
             }).build());

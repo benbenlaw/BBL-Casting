@@ -1,8 +1,0 @@
-{
-  "type": "casting:equipment_modifier",
-  "effect": "repairing",
-  "upgrade_fluid": {
-    "amount": 8000,
-    "id": "casting:molten_glowstone"
-  }
-}

@@ -1,8 +1,0 @@
-{
-  "type": "casting:equipment_modifier",
-  "effect": "jets",
-  "upgrade_fluid": {
-    "amount": 720,
-    "id": "casting:molten_blaze"
-  }
-}

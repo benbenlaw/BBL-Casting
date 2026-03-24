@@ -1,9 +1,0 @@
-{
-  "type": "casting:fuel",
-  "duration": 200,
-  "fluid": {
-    "amount": 8,
-    "id": "casting:molten_obsidian"
-  },
-  "temp": 1200
-}

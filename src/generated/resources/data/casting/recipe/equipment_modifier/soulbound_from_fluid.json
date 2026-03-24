@@ -1,8 +1,0 @@
-{
-  "type": "casting:equipment_modifier",
-  "effect": "soulbound",
-  "upgrade_fluid": {
-    "amount": 3200,
-    "id": "casting:molten_soul"
-  }
-}

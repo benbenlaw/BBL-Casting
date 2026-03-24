@@ -1,18 +1,47 @@
 {
   "variants": {
-    "facing=east": {
-      "model": "casting:block/solidifier_off",
+    "facing=down,working=false": {
+      "model": "casting:block/solidifier_vertical",
+      "x": 180
+    },
+    "facing=down,working=true": {
+      "model": "casting:block/solidifier_working_vertical",
+      "x": 180
+    },
+    "facing=east,working=false": {
+      "model": "casting:block/solidifier",
       "y": 90
     },
-    "facing=north": {
-      "model": "casting:block/solidifier_off"
+    "facing=east,working=true": {
+      "model": "casting:block/solidifier_working",
+      "y": 90
     },
-    "facing=south": {
-      "model": "casting:block/solidifier_off",
+    "facing=north,working=false": {
+      "model": "casting:block/solidifier"
+    },
+    "facing=north,working=true": {
+      "model": "casting:block/solidifier_working"
+    },
+    "facing=south,working=false": {
+      "model": "casting:block/solidifier",
       "y": 180
     },
-    "facing=west": {
-      "model": "casting:block/solidifier_off",
+    "facing=south,working=true": {
+      "model": "casting:block/solidifier_working",
+      "y": 180
+    },
+    "facing=up,working=false": {
+      "model": "casting:block/solidifier_vertical"
+    },
+    "facing=up,working=true": {
+      "model": "casting:block/solidifier_working_vertical"
+    },
+    "facing=west,working=false": {
+      "model": "casting:block/solidifier",
+      "y": 270
+    },
+    "facing=west,working=true": {
+      "model": "casting:block/solidifier_working",
       "y": 270
     }
   }

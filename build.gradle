@@ -5,7 +5,7 @@ plugins {
     id 'eclipse'
     id 'idea'
     id 'maven-publish'
-    id 'net.neoforged.gradle.userdev' version '7.0.165'
+    id 'net.neoforged.moddev' version '2.0.140'
     id 'net.darkhax.curseforgegradle' version '1.1.24'
     id "com.modrinth.minotaur" version "2.+"
 }
@@ -23,138 +23,65 @@ repositories {
             includeGroup("curse.maven")
         }
     }
-}
 
+    maven {
+        name = "Jared's maven"
+        url = "https://maven.blamejared.com/"
+    }
+    maven {
+        name = "ModMaven"
+        url = "https://modmaven.dev"
+    }
+}
 base {
     archivesName = mod_id
 }
 
-// Mojang ships Java 21 to end users starting in 1.20.5, so mods should target Java 21.
-java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+java.toolchain.languageVersion = JavaLanguageVersion.of(25)
 
+neoForge {
+    version = project.neo_version
 
-runs {
-    configureEach {
-        systemProperty 'forge.logging.markers', 'REGISTRIES'
-        systemProperty 'forge.logging.console.level', 'debug'
-        modSource project.sourceSets.main
+    runs {
+        configureEach {
+            systemProperty 'forge.logging.markers', 'REGISTRIES'
+            systemProperty 'forge.logging.console.level', 'debug'
+        }
+
+        client {
+            client()
+            systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
+        }
+
+        server {
+            server()
+            systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
+            programArgument '--nogui'
+        }
+
+        clientData {
+            clientData()
+            programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+        }
     }
 
-    client {
-        systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
-    }
-
-    server {
-        systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
-        arguments.add('--nogui')
-    }
-
-    gameTestServer {
-        systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
-    }
-
-    data {
-        arguments.addAll('--mod', project.mod_id, '--all', '--output',
-                file('src/generated/resources/').getAbsolutePath(),
-                '--existing',
-                file('src/main/resources/').getAbsolutePath()
-        )
+    mods {
+        "${mod_id}" {
+            sourceSet sourceSets.main
+        }
     }
 }
-
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
-configurations {
-    runtimeClasspath.extendsFrom localRuntime
-}
 
 dependencies {
 
-    implementation "net.neoforged:neoforge:${neo_version}"
-
-    //BBL Core
-    compileOnly "curse.maven:bbl-core-1135181:6947750"
-    runtimeOnly "curse.maven:bbl-core-1135181:6947750"
-
-    //Construction Sticks
-    compileOnly "curse.maven:construction-sticks-1156098:6641229"
-    runtimeOnly "curse.maven:construction-sticks-1156098:6641229"
-
-    //Building Gadgets
-    compileOnly "curse.maven:building-gadgets-298187:5968587"
-    runtimeOnly "curse.maven:building-gadgets-298187:5968587"
-
-    //Ender IO (this is using an older version as the newest version data gen is broken, recipe are updated for the latest ender io version)
-    compileOnly "curse.maven:enderio-64578:5771156"
-    runtimeOnly "curse.maven:enderio-64578:5771156"
-
     //JEI
-    compileOnly "curse.maven:jei-238222:5846880"
-    runtimeOnly "curse.maven:jei-238222:5846880"
-
-    //Mekanism
-    compileOnly "curse.maven:mekanism-268560:6327955"
-    runtimeOnly "curse.maven:mekanism-268560:6327955"
-
-    //Mekanism Tools
-    compileOnly "curse.maven:mekanism-tools-268567:6327959"
-    runtimeOnly "curse.maven:mekanism-tools-268567:6327959"
-
-    //All The Ores
-    compileOnly "curse.maven:ato-405593:6118610"
-    runtimeOnly "curse.maven:ato-405593:6118610"
-
-    //mmmmmmmmmmmm
-    compileOnly "curse.maven:mmmmmmmmmmmm-225738:6237115"
-    runtimeOnly "curse.maven:mmmmmmmmmmmm-225738:6237115"
-
-    //selene
-    compileOnly "curse.maven:selene-499980:6391012"
-    runtimeOnly "curse.maven:selene-499980:6391012"
-
-    //observable
-    compileOnly "curse.maven:observable-509575:5733591"
-    runtimeOnly "curse.maven:observable-509575:5733591"
-
-    //spark
-    compileOnly "curse.maven:spark-361579:6225208"
-    runtimeOnly "curse.maven:spark-361579:6225208"
-
-    //arch
-    compileOnly "curse.maven:architectury-api-419699:5786327"
-    runtimeOnly "curse.maven:architectury-api-419699:5786327"
-
-    //Kotlin for Forge
-    compileOnly "curse.maven:kotlin-for-forge-351264:6497906"
-    runtimeOnly "curse.maven:kotlin-for-forge-351264:6497906"
-
-    //KubeJS
-    compileOnly "curse.maven:kubejs-238086:5631423"
-    runtimeOnly "curse.maven:kubejs-238086:5631423"
-
-    //Rhino
-    compileOnly "curse.maven:rhino-416294:5650008"
-    runtimeOnly "curse.maven:rhino-416294:5650008"
-
-    //RS
-    compileOnly "curse.maven:refinedstorage-243076:7039043"
-    runtimeOnly "curse.maven:refinedstorage-243076:7039043"
-
-    //Just Dire Things
-    compileOnly "curse.maven:just-dire-things-1002348:6369120"
-    runtimeOnly "curse.maven:just-dire-things-1002348:6369120"
-
-    //applied-energistics-2
-    compileOnly "curse.maven:applied-energistics-2-223794:7027323"
-    runtimeOnly "curse.maven:applied-energistics-2-223794:7027323"
-
-    //ae2-jei-integration
-    compileOnly "curse.maven:ae2-jei-integration-1074338:5748513"
-    runtimeOnly "curse.maven:ae2-jei-integration-1074338:5748513"
-
-    compileOnly "org.appliedenergistics:guideme:${project.guideme_version}:api"
-    runtimeOnly "org.appliedenergistics:guideme:${project.guideme_version}"
-
+    implementation("mezz.jei:jei-${jei_mc_version}-neoforge:${jei_version}")
+    //BBL Core
+    implementation("curse.maven:bblcore-1135181:${core_version}")
+    //Routers
+    implementation("curse.maven:bbl-routers-1334500:7711063")
 
 }
 
@@ -211,40 +138,41 @@ idea {
     }
 }
 
-
 tasks.register('publishCurseForge', TaskPublishCurseForge) {
     group "modpublishing"
 
     apiToken = System.getenv("curseforge_token").toString()
 
-    def projectId = 1052163
+    def projectId = curseforge_id
     def mainFile = upload(projectId, jar)
 
     mainFile.changelog = changelog
-    mainFile.addOptional("jei") // JEI
-    mainFile.addRequirement("bbl-core")
-    mainFile.releaseType = "release"
-    mainFile.gameVersions.addAll("1.21", "1.21.1")
+    mainFile.releaseType = "${release_type}"
+
+    "${release_versions}".split(',').each {
+        mainFile.addGameVersion("${it}")
+    }
+
+    mainFile.addModLoader("neoforge")
     mainFile.addEnvironment("server", "client")
 
 }
+
 
 tasks.getByName("modrinth").setGroup("modpublishing")
 
 modrinth {
     token = System.getenv("modrinth_token").toString()
-    projectId = "YadXQ97f"
-    versionType = "release"
-    versionName = "casting-" + "$minecraft_version" + "-" + "$mod_version"
+    projectId = "${modrinth_id}"
+    versionType = "${release_type}"
+    versionName = "${mod_id}" + "$minecraft_version" + "-" + "$mod_version"
     uploadFile = jar // With Loom, this MUST be set to `remapJar` instead of `jar`!
 
-    gameVersions.addAll("1.21", "1.21.1")
-
+    gameVersions = "${release_versions}".split(',').collect {e -> e}
     loaders = ["neoforge"]
     changelog = project.changelog
     dependencies {
         optional.project "jei"
-        required.project "bbl-core"
-
     }
 }
+

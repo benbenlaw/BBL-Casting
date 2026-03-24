@@ -1,9 +1,0 @@
-{
-  "type": "casting:fuel",
-  "duration": 260,
-  "fluid": {
-    "amount": 8,
-    "id": "casting:molten_coal"
-  },
-  "temp": 1200
-}

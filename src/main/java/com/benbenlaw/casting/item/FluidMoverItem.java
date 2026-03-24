@@ -1,19 +1,6 @@
 package com.benbenlaw.casting.item;
 
-import com.benbenlaw.casting.item.util.FluidListComponent;
-import net.minecraft.ChatFormatting;
-import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
-import net.neoforged.neoforge.fluids.FluidStack;
-import net.neoforged.neoforge.fluids.FluidType;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
 
 public class FluidMoverItem extends Item {
     public FluidMoverItem(Properties properties) {
@@ -21,6 +8,7 @@ public class FluidMoverItem extends Item {
     }
 
 
+    /*
     @Override
     public void appendHoverText(ItemStack itemStack, @NotNull TooltipContext context, @NotNull List<Component> components, @NotNull TooltipFlag flag) {
 
@@ -41,5 +29,7 @@ public class FluidMoverItem extends Item {
 
         super.appendHoverText(itemStack, context, components, flag);
     }
+
+     */
 
 }

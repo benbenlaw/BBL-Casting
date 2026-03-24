@@ -1,9 +1,12 @@
 package com.benbenlaw.casting.util;
-
+/*
 import com.benbenlaw.casting.config.ModifierSetsConfig;
 import com.benbenlaw.casting.item.EquipmentModifier;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static com.benbenlaw.casting.item.EquipmentModifier.*;
 
@@ -84,3 +87,5 @@ public class ValidToolTypesForToolModifiers {
 
 
 }
+
+ */

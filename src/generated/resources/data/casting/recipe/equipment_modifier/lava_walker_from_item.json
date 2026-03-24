@@ -1,8 +1,0 @@
-{
-  "type": "casting:equipment_modifier",
-  "effect": "lava_walker",
-  "upgrade_item": {
-    "count": 8,
-    "item": "minecraft:magma_block"
-  }
-}
