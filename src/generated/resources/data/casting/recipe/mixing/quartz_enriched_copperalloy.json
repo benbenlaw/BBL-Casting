@@ -1,0 +1,17 @@
+{
+  "type": "casting:mixing",
+  "inputs": [
+    {
+      "amount": 270,
+      "id": "casting:molten_copper"
+    },
+    {
+      "amount": 250,
+      "id": "casting:molten_quartz"
+    }
+  ],
+  "output": {
+    "amount": 360,
+    "id": "casting:molten_quartz_enriched_copper"
+  }
+}

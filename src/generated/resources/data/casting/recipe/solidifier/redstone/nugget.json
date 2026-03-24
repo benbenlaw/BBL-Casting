@@ -1,0 +1,24 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:nuggets/redstone"
+      }
+    }
+  ],
+  "type": "casting:solidifier",
+  "fluid": {
+    "amount": 11,
+    "id": "casting:molten_redstone"
+  },
+  "mold": {
+    "count": 1,
+    "ingredient": "casting:nugget_mold"
+  },
+  "output": {
+    "count": 1,
+    "ingredient": "#c:nuggets/redstone"
+  }
+}

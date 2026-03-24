@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "casting:block/molten_energetic_alloy"
+      "model": "minecraft:block/water"
     }
   }
 }

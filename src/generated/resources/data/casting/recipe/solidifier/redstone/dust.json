@@ -1,0 +1,24 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:dusts/redstone"
+      }
+    }
+  ],
+  "type": "casting:solidifier",
+  "fluid": {
+    "amount": 100,
+    "id": "casting:molten_redstone"
+  },
+  "mold": {
+    "count": 1,
+    "ingredient": "casting:dust_mold"
+  },
+  "output": {
+    "count": 1,
+    "ingredient": "#c:dusts/redstone"
+  }
+}

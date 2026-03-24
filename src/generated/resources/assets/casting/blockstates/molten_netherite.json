@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "casting:block/molten_netherite"
+      "model": "minecraft:block/water"
     }
   }
 }

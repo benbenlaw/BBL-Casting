@@ -1,0 +1,24 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:wires/copper"
+      }
+    }
+  ],
+  "type": "casting:solidifier",
+  "fluid": {
+    "amount": 45,
+    "id": "casting:molten_copper"
+  },
+  "mold": {
+    "count": 1,
+    "ingredient": "casting:wire_mold"
+  },
+  "output": {
+    "count": 1,
+    "ingredient": "#c:wires/copper"
+  }
+}

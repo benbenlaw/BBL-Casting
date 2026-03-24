@@ -1,0 +1,21 @@
+{
+  "type": "casting:mixing",
+  "inputs": [
+    {
+      "amount": 250,
+      "id": "casting:molten_ender"
+    },
+    {
+      "amount": 90,
+      "id": "casting:molten_energetic_alloy"
+    },
+    {
+      "amount": 250,
+      "id": "casting:molten_glowstone"
+    }
+  ],
+  "output": {
+    "amount": 90,
+    "id": "casting:molten_vibrant_alloy"
+  }
+}

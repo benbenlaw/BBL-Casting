@@ -1,0 +1,23 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:gears/conductive_alloy"
+      }
+    }
+  ],
+  "type": "casting:melting",
+  "input": {
+    "count": 1,
+    "ingredient": "#c:gears/conductive_alloy"
+  },
+  "meltingTemp": 1000,
+  "output": [
+    {
+      "amount": 360,
+      "id": "casting:molten_conductive_alloy"
+    }
+  ]
+}

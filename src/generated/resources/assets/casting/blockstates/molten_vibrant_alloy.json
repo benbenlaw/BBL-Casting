@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "casting:block/molten_vibrant_alloy"
+      "model": "minecraft:block/water"
     }
   }
 }

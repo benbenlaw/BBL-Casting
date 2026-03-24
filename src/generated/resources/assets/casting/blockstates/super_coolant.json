@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "casting:block/super_coolant"
+      "model": "minecraft:block/water"
     }
   }
 }

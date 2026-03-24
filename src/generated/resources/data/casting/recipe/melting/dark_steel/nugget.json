@@ -1,0 +1,23 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:nuggets/dark_steel"
+      }
+    }
+  ],
+  "type": "casting:melting",
+  "input": {
+    "count": 1,
+    "ingredient": "#c:nuggets/dark_steel"
+  },
+  "meltingTemp": 1000,
+  "output": [
+    {
+      "amount": 10,
+      "id": "casting:molten_dark_steel"
+    }
+  ]
+}

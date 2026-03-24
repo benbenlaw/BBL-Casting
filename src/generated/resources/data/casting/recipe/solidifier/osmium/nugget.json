@@ -1,0 +1,24 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:nuggets/osmium"
+      }
+    }
+  ],
+  "type": "casting:solidifier",
+  "fluid": {
+    "amount": 10,
+    "id": "casting:molten_osmium"
+  },
+  "mold": {
+    "count": 1,
+    "ingredient": "casting:nugget_mold"
+  },
+  "output": {
+    "count": 1,
+    "ingredient": "#c:nuggets/osmium"
+  }
+}

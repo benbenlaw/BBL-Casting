@@ -1,0 +1,27 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:raw_materials/charged_certus_quartz"
+      }
+    }
+  ],
+  "type": "casting:melting",
+  "input": {
+    "count": 1,
+    "ingredient": "#c:raw_materials/charged_certus_quartz"
+  },
+  "meltingTemp": 1000,
+  "output": [
+    {
+      "amount": 375,
+      "id": "casting:molten_charged_certus_quartz"
+    },
+    {
+      "amount": 10,
+      "id": "casting:molten_experience"
+    }
+  ]
+}

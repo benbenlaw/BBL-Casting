@@ -1,0 +1,23 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:wires/peridot"
+      }
+    }
+  ],
+  "type": "casting:melting",
+  "input": {
+    "count": 1,
+    "ingredient": "#c:wires/peridot"
+  },
+  "meltingTemp": 1000,
+  "output": [
+    {
+      "amount": 45,
+      "id": "casting:molten_peridot"
+    }
+  ]
+}

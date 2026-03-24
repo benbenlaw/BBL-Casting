@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "casting:block/molten_signalum"
+      "model": "minecraft:block/water"
     }
   }
 }

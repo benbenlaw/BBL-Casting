@@ -1,0 +1,41 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:nuggets/gold"
+      }
+    }
+  ],
+  "criteria": {
+    "has_mold": {
+      "conditions": {
+        "items": [
+          {
+            "items": "casting:nugget_mold"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "casting:solidifier/gold/nugget"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_mold"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "casting:solidifier/gold/nugget"
+    ]
+  },
+  "sends_telemetry_event": true
+}

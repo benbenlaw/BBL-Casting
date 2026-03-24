@@ -1,0 +1,23 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:gears/quartz_enriched_iron"
+      }
+    }
+  ],
+  "type": "casting:melting",
+  "input": {
+    "count": 1,
+    "ingredient": "#c:gears/quartz_enriched_iron"
+  },
+  "meltingTemp": 1000,
+  "output": [
+    {
+      "amount": 360,
+      "id": "casting:molten_quartz_enriched_iron"
+    }
+  ]
+}

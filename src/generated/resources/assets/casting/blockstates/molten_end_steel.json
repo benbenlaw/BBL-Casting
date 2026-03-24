@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "casting:block/molten_end_steel"
+      "model": "minecraft:block/water"
     }
   }
 }

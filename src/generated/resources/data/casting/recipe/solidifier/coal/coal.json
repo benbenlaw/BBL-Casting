@@ -1,0 +1,15 @@
+{
+  "type": "casting:solidifier",
+  "fluid": {
+    "amount": 80,
+    "id": "casting:molten_coal"
+  },
+  "mold": {
+    "count": 1,
+    "ingredient": "casting:gem_mold"
+  },
+  "output": {
+    "count": 1,
+    "ingredient": "minecraft:coal"
+  }
+}

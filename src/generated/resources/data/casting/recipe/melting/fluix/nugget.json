@@ -1,0 +1,23 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:nuggets/fluix"
+      }
+    }
+  ],
+  "type": "casting:melting",
+  "input": {
+    "count": 1,
+    "ingredient": "#c:nuggets/fluix"
+  },
+  "meltingTemp": 1000,
+  "output": [
+    {
+      "amount": 27,
+      "id": "casting:molten_fluix"
+    }
+  ]
+}

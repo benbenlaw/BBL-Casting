@@ -1,0 +1,24 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:storage_blocks/steel"
+      }
+    }
+  ],
+  "type": "casting:solidifier",
+  "fluid": {
+    "amount": 810,
+    "id": "casting:molten_steel"
+  },
+  "mold": {
+    "count": 1,
+    "ingredient": "casting:block_mold"
+  },
+  "output": {
+    "count": 1,
+    "ingredient": "#c:storage_blocks/steel"
+  }
+}

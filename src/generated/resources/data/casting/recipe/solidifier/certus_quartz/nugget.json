@@ -1,0 +1,24 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:nuggets/certus_quartz"
+      }
+    }
+  ],
+  "type": "casting:solidifier",
+  "fluid": {
+    "amount": 27,
+    "id": "casting:molten_certus_quartz"
+  },
+  "mold": {
+    "count": 1,
+    "ingredient": "casting:nugget_mold"
+  },
+  "output": {
+    "count": 1,
+    "ingredient": "#c:nuggets/certus_quartz"
+  }
+}

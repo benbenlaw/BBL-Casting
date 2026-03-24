@@ -2,7 +2,6 @@ package com.benbenlaw.casting.data;
 
 
 import com.benbenlaw.casting.Casting;
-import com.ibm.icu.impl.locale.AsciiUtil;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -11,7 +10,6 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
-import org.lwjgl.system.macosx.CGEventTapCallBack;
 
 import java.util.Collections;
 import java.util.List;
@@ -34,7 +32,10 @@ public class CastingDataGenerators {
         generator.addProvider(true, new LootTableProvider(packOutput, Collections.emptySet(),
                 List.of(new LootTableProvider.SubProviderEntry(CastingLootTableProvider::new, LootContextParamSets.BLOCK)), lookupProvider));
         generator.addProvider(true, new CastingModelProvider(packOutput));
+
+        //Recipes
         generator.addProvider(true, new CastingRecipeProvider.Runner(packOutput, lookupProvider));
+        generator.addProvider(true, new CastingProcessingRecipeProvider.Runner(packOutput, lookupProvider));
 
 
 

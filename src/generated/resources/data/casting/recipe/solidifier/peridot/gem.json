@@ -1,0 +1,24 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:gems/peridot"
+      }
+    }
+  ],
+  "type": "casting:solidifier",
+  "fluid": {
+    "amount": 90,
+    "id": "casting:molten_peridot"
+  },
+  "mold": {
+    "count": 1,
+    "ingredient": "casting:gem_mold"
+  },
+  "output": {
+    "count": 1,
+    "ingredient": "#c:gems/peridot"
+  }
+}

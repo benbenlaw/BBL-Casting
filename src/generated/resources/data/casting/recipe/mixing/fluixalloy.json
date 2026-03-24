@@ -1,0 +1,21 @@
+{
+  "type": "casting:mixing",
+  "inputs": [
+    {
+      "amount": 250,
+      "id": "casting:molten_certus_quartz"
+    },
+    {
+      "amount": 250,
+      "id": "casting:molten_charged_certus_quartz"
+    },
+    {
+      "amount": 90,
+      "id": "casting:molten_redstone"
+    }
+  ],
+  "output": {
+    "amount": 500,
+    "id": "casting:molten_fluix"
+  }
+}

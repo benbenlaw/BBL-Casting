@@ -1,0 +1,24 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:rods/glowstone"
+      }
+    }
+  ],
+  "type": "casting:solidifier",
+  "fluid": {
+    "amount": 125,
+    "id": "casting:molten_glowstone"
+  },
+  "mold": {
+    "count": 1,
+    "ingredient": "casting:rod_mold"
+  },
+  "output": {
+    "count": 1,
+    "ingredient": "#c:rods/glowstone"
+  }
+}

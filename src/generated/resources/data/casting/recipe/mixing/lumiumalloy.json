@@ -1,0 +1,21 @@
+{
+  "type": "casting:mixing",
+  "inputs": [
+    {
+      "amount": 270,
+      "id": "casting:molten_tin"
+    },
+    {
+      "amount": 90,
+      "id": "casting:molten_silver"
+    },
+    {
+      "amount": 500,
+      "id": "casting:molten_glowstone"
+    }
+  ],
+  "output": {
+    "amount": 360,
+    "id": "casting:molten_lumium"
+  }
+}

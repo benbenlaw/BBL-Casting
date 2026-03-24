@@ -1,0 +1,21 @@
+{
+  "type": "casting:mixing",
+  "inputs": [
+    {
+      "amount": 270,
+      "id": "casting:molten_copper"
+    },
+    {
+      "amount": 90,
+      "id": "casting:molten_silver"
+    },
+    {
+      "amount": 360,
+      "id": "casting:molten_redstone"
+    }
+  ],
+  "output": {
+    "amount": 360,
+    "id": "casting:molten_signalum"
+  }
+}

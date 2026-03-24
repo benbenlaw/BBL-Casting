@@ -41,7 +41,7 @@ public class MixingRecipeCategory implements IRecipeCategory<MixingRecipe> {
     public static final IRecipeType<MixingRecipe> RECIPE_TYPE = IRecipeType.create(Casting.identifier("mixing"), MixingRecipe.class);
 
     private final int width = 101;
-    private final int height = 38;
+    private final int height = 20;
     private final IDrawable icon;
 
     @Override
@@ -93,19 +93,16 @@ public class MixingRecipeCategory implements IRecipeCategory<MixingRecipe> {
 
     @Override
     public void setRecipe(@NotNull IRecipeLayoutBuilder builder, MixingRecipe recipe, @NotNull IFocusGroup focusGroup) {
-        int centerX = 2;
-        int centerY = 11;
+        int centerX = 38;
+        int centerY = 2;
         int slotWidth = 18;
 
         List<FluidStackTemplate> fluids = recipe.fluids();
         int totalFluids = fluids.size();
 
-        int visibleSlots = Math.min(totalFluids, 3);
-        int centeringOffset = (3 - visibleSlots) * (slotWidth / 2);
-
         for (int i = 0; i < totalFluids; i++) {
             int displayIndex = Math.min(i, 2);
-            int xPos = centerX + centeringOffset + (displayIndex * slotWidth);
+            int xPos = centerX - (displayIndex * slotWidth);
 
             final int finalIndex = i;
 
@@ -118,7 +115,7 @@ public class MixingRecipeCategory implements IRecipeCategory<MixingRecipe> {
         }
 
         // Output Slot
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 83, 11)
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 83, 2)
                 .add(recipe.outputFluid().fluid().value(), recipe.outputFluid().amount())
                 .addRichTooltipCallback((slot, tooltip) ->
                         tooltip.add(Component.literal(recipe.outputFluid().amount() + " mB")
@@ -128,7 +125,7 @@ public class MixingRecipeCategory implements IRecipeCategory<MixingRecipe> {
 
     @Override
     public void getTooltip(ITooltipBuilder tooltip, MixingRecipe recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
-        if (MouseUtil.isMouseAboveArea((int) mouseX, (int) mouseY, 57, 10, 0, 0, 28, 18)) {
+        if (MouseUtil.isMouseAboveArea((int) mouseX, (int) mouseY, 54, 1, 0, 0, 28, 18)) {
             tooltip.add(Component.translatable("tooltip.core.ticks", 200));
         }
     }
@@ -144,9 +141,9 @@ public class MixingRecipeCategory implements IRecipeCategory<MixingRecipe> {
         List<IRecipeSlotDrawable> inputFluids = recipeSlots.getSlots(RecipeIngredientRole.INPUT);
 
         if (inputFluids.size() > 3) {
-            IScrollGridWidget triggersGrid = builder.addScrollGridWidget(inputFluids, 2, 2);
-            triggersGrid.setPosition(2, 1);
+            IScrollGridWidget triggersGrid = builder.addScrollGridWidget(inputFluids, 2, 1);
+            triggersGrid.setPosition(1, 1);
         }
-        builder.addAnimatedRecipeArrow(200).setPosition(57, 10);
+        builder.addAnimatedRecipeArrow(200).setPosition(57, 2);
     }
 }

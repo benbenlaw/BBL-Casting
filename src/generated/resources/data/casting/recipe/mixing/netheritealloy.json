@@ -1,0 +1,17 @@
+{
+  "type": "casting:mixing",
+  "inputs": [
+    {
+      "amount": 360,
+      "id": "casting:molten_debris"
+    },
+    {
+      "amount": 360,
+      "id": "casting:molten_gold"
+    }
+  ],
+  "output": {
+    "amount": 90,
+    "id": "casting:molten_netherite"
+  }
+}

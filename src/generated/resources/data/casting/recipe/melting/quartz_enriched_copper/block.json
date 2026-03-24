@@ -1,0 +1,23 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:storage_blocks/quartz_enriched_copper"
+      }
+    }
+  ],
+  "type": "casting:melting",
+  "input": {
+    "count": 1,
+    "ingredient": "#c:storage_blocks/quartz_enriched_copper"
+  },
+  "meltingTemp": 1000,
+  "output": [
+    {
+      "amount": 810,
+      "id": "casting:molten_quartz_enriched_copper"
+    }
+  ]
+}

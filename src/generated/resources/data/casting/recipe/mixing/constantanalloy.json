@@ -1,0 +1,17 @@
+{
+  "type": "casting:mixing",
+  "inputs": [
+    {
+      "amount": 90,
+      "id": "casting:molten_copper"
+    },
+    {
+      "amount": 90,
+      "id": "casting:molten_nickel"
+    }
+  ],
+  "output": {
+    "amount": 180,
+    "id": "casting:molten_constantan"
+  }
+}

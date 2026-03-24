@@ -21,6 +21,14 @@ Modifiers should use a enchantment like feature to be completely data driven (26
 - All recipe types have had there JEI integration improved to scale better with more advanced melting and mixing recipes
 - Melting recipes now take a list of fluid outputs allowing for items to be melted into multiple fluids (Add XP)
 - Moved to BBL Core fluid API
+- Added more recipes for molds
+- Black Brick is now obtained from blasting Clay balls,
+- Black Bricks can now be created from blasting Clay Blocks
+- Solidifier can now fill buckets
+- Added Molten Titanium
+- Added Glowstone c tag for storage
+- Added Quartz c tag for storage
+- Removed Redstone Alloy (was in Ender IO no longer needed)
 
 - Added Simple Coolant Tank (WIP)
 

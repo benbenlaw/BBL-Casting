@@ -1,0 +1,23 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:rods/charged_certus_quartz"
+      }
+    }
+  ],
+  "type": "casting:melting",
+  "input": {
+    "count": 1,
+    "ingredient": "#c:rods/charged_certus_quartz"
+  },
+  "meltingTemp": 1000,
+  "output": [
+    {
+      "amount": 125,
+      "id": "casting:molten_charged_certus_quartz"
+    }
+  ]
+}

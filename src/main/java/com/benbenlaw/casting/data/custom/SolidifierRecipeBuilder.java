@@ -7,12 +7,16 @@ import net.minecraft.advancements.AdvancementRequirements;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.criterion.RecipeUnlockedTrigger;
+import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.neoforged.neoforge.common.crafting.SizedIngredient;
 import net.neoforged.neoforge.fluids.FluidStack;
@@ -41,7 +45,6 @@ public class SolidifierRecipeBuilder implements RecipeBuilder {
         return new SolidifierRecipeBuilder(mold, output, fluid);
     }
 
-
     @Override
     public @NotNull RecipeBuilder unlockedBy(String name, Criterion<?> criterion) {
         this.criteria.put(name, criterion);
@@ -56,10 +59,10 @@ public class SolidifierRecipeBuilder implements RecipeBuilder {
 
     @Override
     public ResourceKey<Recipe<?>> defaultId() {
-        ItemStack stack = getStackFromSized(output);
+        ItemStackTemplate stack = getStackFromSized(output);
         return ResourceKey.create(
                 Registries.RECIPE,
-                Casting.identifier("solidifier/" + stack.getItem().builtInRegistryHolder().key().identifier().getPath())
+                Casting.identifier("solidifier/" + stack.item().value().builtInRegistryHolder().key().identifier().getPath())
         );
     }
 
@@ -80,11 +83,11 @@ public class SolidifierRecipeBuilder implements RecipeBuilder {
 
     }
 
-    private ItemStack getStackFromSized(SizedIngredient sizedIngredient) {
+    private ItemStackTemplate getStackFromSized(SizedIngredient sizedIngredient) {
         return sizedIngredient.ingredient().items()
                 .findFirst()
-                .map(holder -> new ItemStack(holder.value(), sizedIngredient.count()))
-                .orElse(ItemStack.EMPTY);
+                .map(holder -> new ItemStackTemplate(holder.value(), sizedIngredient.count()))
+                .orElseThrow();
     }
 
 }

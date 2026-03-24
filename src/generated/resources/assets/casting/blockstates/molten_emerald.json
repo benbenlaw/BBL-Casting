@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "casting:block/molten_emerald"
+      "model": "minecraft:block/water"
     }
   }
 }

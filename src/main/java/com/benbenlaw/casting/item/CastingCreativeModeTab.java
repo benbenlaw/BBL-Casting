@@ -19,7 +19,12 @@ public class CastingCreativeModeTab {
             .withTabsBefore(CreativeModeTabs.COMBAT)
             .icon(() -> CastingItems.INGOT_MOLD.get().asItem().getDefaultInstance())
             .title(Component.translatable("itemGroup.casting"))
-            .displayItems(CastingItems.ITEMS.getEntries()).build());
+            .displayItems((featureFlagSet, output) -> {
+                CastingItems.ITEMS.getEntries().forEach((entry) -> output.accept(entry.get()));
+
+                CastingFluids.FLUIDS_MAP.values().forEach(fluid ->
+                        output.accept(fluid.getBucket()));
+            }).build());
 }
 
 

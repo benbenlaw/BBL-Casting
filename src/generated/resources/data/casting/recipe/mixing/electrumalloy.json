@@ -1,0 +1,17 @@
+{
+  "type": "casting:mixing",
+  "inputs": [
+    {
+      "amount": 90,
+      "id": "casting:molten_gold"
+    },
+    {
+      "amount": 90,
+      "id": "casting:molten_silver"
+    }
+  ],
+  "output": {
+    "amount": 180,
+    "id": "casting:molten_electrum"
+  }
+}

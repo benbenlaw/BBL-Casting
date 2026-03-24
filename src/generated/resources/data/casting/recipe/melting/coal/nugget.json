@@ -1,0 +1,23 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:nuggets/coal"
+      }
+    }
+  ],
+  "type": "casting:melting",
+  "input": {
+    "count": 1,
+    "ingredient": "#c:nuggets/coal"
+  },
+  "meltingTemp": 1000,
+  "output": [
+    {
+      "amount": 8,
+      "id": "casting:molten_coal"
+    }
+  ]
+}

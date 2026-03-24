@@ -1,0 +1,21 @@
+{
+  "type": "casting:mixing",
+  "inputs": [
+    {
+      "amount": 270,
+      "id": "casting:molten_lead"
+    },
+    {
+      "amount": 90,
+      "id": "casting:molten_platinum"
+    },
+    {
+      "amount": 500,
+      "id": "casting:molten_ender"
+    }
+  ],
+  "output": {
+    "amount": 360,
+    "id": "casting:molten_enderium"
+  }
+}

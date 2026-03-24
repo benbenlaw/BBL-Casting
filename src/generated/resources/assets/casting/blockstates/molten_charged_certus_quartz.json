@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "casting:block/molten_charged_certus_quartz"
+      "model": "minecraft:block/water"
     }
   }
 }

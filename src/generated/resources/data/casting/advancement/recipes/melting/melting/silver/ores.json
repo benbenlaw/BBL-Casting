@@ -1,0 +1,41 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:ores/silver"
+      }
+    }
+  ],
+  "criteria": {
+    "has_ores": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:ores/silver"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "casting:melting/silver/ores"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_ores"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "casting:melting/silver/ores"
+    ]
+  },
+  "sends_telemetry_event": true
+}

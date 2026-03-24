@@ -1,0 +1,15 @@
+{
+  "type": "casting:solidifier",
+  "fluid": {
+    "amount": 1000,
+    "id": "casting:iced_water"
+  },
+  "mold": {
+    "count": 1,
+    "ingredient": "minecraft:bucket"
+  },
+  "output": {
+    "count": 1,
+    "ingredient": "casting:iced_water_bucket"
+  }
+}

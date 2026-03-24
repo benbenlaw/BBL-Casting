@@ -1,0 +1,23 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:gears/coal"
+      }
+    }
+  ],
+  "type": "casting:melting",
+  "input": {
+    "count": 1,
+    "ingredient": "#c:gears/coal"
+  },
+  "meltingTemp": 1000,
+  "output": [
+    {
+      "amount": 320,
+      "id": "casting:molten_coal"
+    }
+  ]
+}

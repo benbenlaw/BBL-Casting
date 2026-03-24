@@ -1,0 +1,23 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:wires/sapphire"
+      }
+    }
+  ],
+  "type": "casting:melting",
+  "input": {
+    "count": 1,
+    "ingredient": "#c:wires/sapphire"
+  },
+  "meltingTemp": 1000,
+  "output": [
+    {
+      "amount": 45,
+      "id": "casting:molten_sapphire"
+    }
+  ]
+}

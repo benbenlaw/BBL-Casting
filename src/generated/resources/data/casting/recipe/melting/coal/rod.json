@@ -1,0 +1,23 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:rods/coal"
+      }
+    }
+  ],
+  "type": "casting:melting",
+  "input": {
+    "count": 1,
+    "ingredient": "#c:rods/coal"
+  },
+  "meltingTemp": 1000,
+  "output": [
+    {
+      "amount": 40,
+      "id": "casting:molten_coal"
+    }
+  ]
+}

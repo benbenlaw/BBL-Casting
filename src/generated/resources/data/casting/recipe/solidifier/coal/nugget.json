@@ -1,0 +1,24 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:nuggets/coal"
+      }
+    }
+  ],
+  "type": "casting:solidifier",
+  "fluid": {
+    "amount": 8,
+    "id": "casting:molten_coal"
+  },
+  "mold": {
+    "count": 1,
+    "ingredient": "casting:nugget_mold"
+  },
+  "output": {
+    "count": 1,
+    "ingredient": "#c:nuggets/coal"
+  }
+}

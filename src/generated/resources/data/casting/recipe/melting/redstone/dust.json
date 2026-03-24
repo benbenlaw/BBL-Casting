@@ -1,0 +1,23 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:dusts/redstone"
+      }
+    }
+  ],
+  "type": "casting:melting",
+  "input": {
+    "count": 1,
+    "ingredient": "#c:dusts/redstone"
+  },
+  "meltingTemp": 1000,
+  "output": [
+    {
+      "amount": 100,
+      "id": "casting:molten_redstone"
+    }
+  ]
+}

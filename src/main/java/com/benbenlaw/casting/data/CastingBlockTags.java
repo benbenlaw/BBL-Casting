@@ -4,8 +4,11 @@ import com.benbenlaw.casting.Casting;
 import com.benbenlaw.casting.block.CastingBlocks;
 import com.benbenlaw.casting.util.CastingTags;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
@@ -31,5 +34,10 @@ public class CastingBlockTags extends BlockTagsProvider {
                 .add(CastingBlocks.CONTROLLER.get())
                 .add(CastingBlocks.COOLANT_TANK.get())
         ;
+
+        //Processing Tags
+        tag(TagKey.create(Registries.BLOCK, Identifier.parse("c:storage_blocks/glowstone"))).add(Blocks.GLOWSTONE);
+        tag(TagKey.create(Registries.BLOCK, Identifier.parse("c:storage_blocks/quartz"))).add(Blocks.QUARTZ_BLOCK);
     }
+
 }

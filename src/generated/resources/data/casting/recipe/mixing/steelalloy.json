@@ -1,0 +1,17 @@
+{
+  "type": "casting:mixing",
+  "inputs": [
+    {
+      "amount": 90,
+      "id": "casting:molten_iron"
+    },
+    {
+      "amount": 160,
+      "id": "casting:molten_coal"
+    }
+  ],
+  "output": {
+    "amount": 90,
+    "id": "casting:molten_steel"
+  }
+}

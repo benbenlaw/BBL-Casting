@@ -1,0 +1,27 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:raw_materials/coal"
+      }
+    }
+  ],
+  "type": "casting:melting",
+  "input": {
+    "count": 1,
+    "ingredient": "#c:raw_materials/coal"
+  },
+  "meltingTemp": 1000,
+  "output": [
+    {
+      "amount": 120,
+      "id": "casting:molten_coal"
+    },
+    {
+      "amount": 10,
+      "id": "casting:molten_experience"
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "casting:block/molten_peridot"
+      "model": "minecraft:block/water"
     }
   }
 }

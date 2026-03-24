@@ -1,7 +1,6 @@
 package com.benbenlaw.casting.data;
 
 import com.benbenlaw.casting.Casting;
-import com.benbenlaw.casting.data.custom.FluidStackHelper;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.FluidTagsProvider;

@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "casting:block/molten_brass"
+      "model": "minecraft:block/water"
     }
   }
 }

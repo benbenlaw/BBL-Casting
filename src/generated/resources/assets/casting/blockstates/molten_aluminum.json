@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "casting:block/molten_aluminum"
+      "model": "minecraft:block/water"
     }
   }
 }

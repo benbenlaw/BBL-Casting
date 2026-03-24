@@ -1,0 +1,41 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:dusts/redstone"
+      }
+    }
+  ],
+  "criteria": {
+    "has_mold": {
+      "conditions": {
+        "items": [
+          {
+            "items": "casting:dust_mold"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "casting:solidifier/redstone/dust"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_mold"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "casting:solidifier/redstone/dust"
+    ]
+  },
+  "sends_telemetry_event": true
+}

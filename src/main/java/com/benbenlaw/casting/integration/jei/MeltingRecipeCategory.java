@@ -42,7 +42,7 @@ public class MeltingRecipeCategory implements IRecipeCategory<MeltingRecipe> {
     public static final IRecipeType<MeltingRecipe> RECIPE_TYPE = IRecipeType.create(Casting.identifier("melting"), MeltingRecipe.class);
 
     private final int width = 101;
-    private final int height = 38;
+    private final int height = 20;
     private final IDrawable icon;
 
     @Override
@@ -92,21 +92,19 @@ public class MeltingRecipeCategory implements IRecipeCategory<MeltingRecipe> {
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, MeltingRecipe recipe, IFocusGroup focusGroup) {
-        int centerX = 47;
-        int centerY = 11;
+        int centerX = 48;
+        int centerY = 2;
         int slotWidth = 18;
 
-        builder.addSlot(RecipeIngredientRole.INPUT, 2, 11).add(recipe.input().ingredient());
+        builder.addSlot(RecipeIngredientRole.INPUT, 1, 2).add(recipe.input().ingredient())
+                .setBackground(JEICastingPlugin.slotDrawable, -1, -1);
 
         List<FluidStackTemplate> fluids = recipe.output();
         int totalFluids = fluids.size();
 
-        int visibleSlots = Math.min(totalFluids, 3);
-        int centeringOffset = (3 - visibleSlots) * (slotWidth / 2);
-
         for (int i = 0; i < totalFluids; i++) {
             int displayIndex = Math.min(i, 2);
-            int xPos = centerX + centeringOffset + (displayIndex * slotWidth);
+            int xPos = centerX + (displayIndex * slotWidth);
 
             final int finalIndex = i;
 
@@ -122,7 +120,7 @@ public class MeltingRecipeCategory implements IRecipeCategory<MeltingRecipe> {
 
     @Override
     public void getTooltip(ITooltipBuilder tooltip, MeltingRecipe recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
-        if (MouseUtil.isMouseAboveArea((int) mouseX, (int) mouseY, 21, 10, 0, 0, 28, 18)) {
+        if (MouseUtil.isMouseAboveArea((int) mouseX, (int) mouseY, 19, 1, 0, 0, 28, 18)) {
             tooltip.add(Component.translatable("tooltip.core.ticks", 200));
         }
     }
@@ -133,10 +131,10 @@ public class MeltingRecipeCategory implements IRecipeCategory<MeltingRecipe> {
         List<IRecipeSlotDrawable> outputFluids = recipeSlots.getSlots(RecipeIngredientRole.OUTPUT);
 
         if (outputFluids.size() > 3) {
-            IScrollGridWidget triggersGrid = builder.addScrollGridWidget(outputFluids, 2, 2);
-            triggersGrid.setPosition(49, 1);
+            IScrollGridWidget triggersGrid = builder.addScrollGridWidget(outputFluids, 2, 1);
+            triggersGrid.setPosition(47, 1);
         }
-        builder.addAnimatedRecipeArrow(200).setPosition(21, 10);
+        builder.addAnimatedRecipeArrow(200).setPosition(21, 2);
     }
 
     @Override

@@ -1,0 +1,24 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:ingots/silver"
+      }
+    }
+  ],
+  "type": "casting:solidifier",
+  "fluid": {
+    "amount": 90,
+    "id": "casting:molten_silver"
+  },
+  "mold": {
+    "count": 1,
+    "ingredient": "casting:ingot_mold"
+  },
+  "output": {
+    "count": 1,
+    "ingredient": "#c:ingots/silver"
+  }
+}

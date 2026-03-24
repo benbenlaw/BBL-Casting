@@ -1,0 +1,24 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:gears/pulsating_alloy"
+      }
+    }
+  ],
+  "type": "casting:solidifier",
+  "fluid": {
+    "amount": 360,
+    "id": "casting:molten_pulsating_alloy"
+  },
+  "mold": {
+    "count": 1,
+    "ingredient": "casting:gear_mold"
+  },
+  "output": {
+    "count": 1,
+    "ingredient": "#c:gears/pulsating_alloy"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:plates/emerald"
+      }
+    }
+  ],
+  "type": "casting:melting",
+  "input": {
+    "count": 1,
+    "ingredient": "#c:plates/emerald"
+  },
+  "meltingTemp": 1000,
+  "output": [
+    {
+      "amount": 90,
+      "id": "casting:molten_emerald"
+    }
+  ]
+}

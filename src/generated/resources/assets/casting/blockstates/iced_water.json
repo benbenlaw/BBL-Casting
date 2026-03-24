@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "casting:block/iced_water"
+      "model": "minecraft:block/water"
     }
   }
 }

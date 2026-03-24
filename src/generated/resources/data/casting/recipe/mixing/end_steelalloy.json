@@ -1,0 +1,21 @@
+{
+  "type": "casting:mixing",
+  "inputs": [
+    {
+      "amount": 1000,
+      "id": "casting:molten_end_stone"
+    },
+    {
+      "amount": 90,
+      "id": "casting:molten_dark_steel"
+    },
+    {
+      "amount": 1000,
+      "id": "casting:molten_obsidian"
+    }
+  ],
+  "output": {
+    "amount": 90,
+    "id": "casting:molten_end_steel"
+  }
+}

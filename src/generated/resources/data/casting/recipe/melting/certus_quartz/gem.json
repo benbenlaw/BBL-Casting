@@ -1,0 +1,23 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:gems/certus_quartz"
+      }
+    }
+  ],
+  "type": "casting:melting",
+  "input": {
+    "count": 1,
+    "ingredient": "#c:gems/certus_quartz"
+  },
+  "meltingTemp": 1000,
+  "output": [
+    {
+      "amount": 250,
+      "id": "casting:molten_certus_quartz"
+    }
+  ]
+}

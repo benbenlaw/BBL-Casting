@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "casting:block/molten_gold"
+      "model": "minecraft:block/water"
     }
   }
 }

@@ -5,9 +5,13 @@ import com.benbenlaw.casting.block.CastingBlocks;
 import com.benbenlaw.casting.item.CastingItems;
 import com.benbenlaw.casting.util.CastingTags;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.Identifier;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.ItemTagsProvider;import net.neoforged.neoforge.registries.DeferredHolder;
@@ -66,9 +70,13 @@ public class CastingItemTags extends ItemTagsProvider {
         tag(CastingTags.Items.WIRE_MOLD).add(CastingItems.WIRE_MOLD.asItem());
 
         //Buckets
-        //for (var entry : FLUIDS_MAP.entrySet()) {
-        //    tag(Tags.Items.BUCKETS).add(entry.getValue().getBucket());
-        //}
+        for (var entry : FLUIDS_MAP.entrySet()) {
+            tag(Tags.Items.BUCKETS).add(entry.getValue().getBucket());
+        }
+
+        //Processing Tags
+        tag(TagKey.create(Registries.ITEM, Identifier.parse("c:storage_blocks/glowstone"))).add(Blocks.GLOWSTONE.asItem());
+        tag(TagKey.create(Registries.ITEM, Identifier.parse("c:storage_blocks/quartz"))).add(Blocks.QUARTZ_BLOCK.asItem());
 
     }
 }
