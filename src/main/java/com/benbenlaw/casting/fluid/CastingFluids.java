@@ -1,6 +1,7 @@
 package com.benbenlaw.casting.fluid;
 
 import com.benbenlaw.casting.Casting;
+import com.benbenlaw.core.Core;
 import com.benbenlaw.core.fluid.FluidDeferredRegister;
 import com.benbenlaw.core.fluid.FluidRegistryObject;
 import net.minecraft.resources.Identifier;
@@ -24,8 +25,8 @@ public class CastingFluids {
 
             var fluid = FLUIDS.register(data.name(), (renderProperties) ->
                     renderProperties.texture(
-                            Identifier.fromNamespaceAndPath(Casting.MOD_ID, data.stillTexture()),
-                            Identifier.fromNamespaceAndPath(Casting.MOD_ID, data.flowTexture())
+                            Core.identifier(data.stillTexture()),
+                            Core.identifier(data.flowTexture())
                     ).tint(data.tint())
             );
 

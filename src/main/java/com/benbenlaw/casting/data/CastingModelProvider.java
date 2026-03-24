@@ -86,8 +86,7 @@ public class CastingModelProvider extends ModelProvider {
         //Fluids?
         for (var entry : FLUIDS_MAP.entrySet()) {
             Block fluidBlock = entry.getValue().getBlock();
-
-            blockModels.createNonTemplateModelBlock(fluidBlock);
+            blockModels.createNonTemplateModelBlock(fluidBlock, Blocks.WATER);
         }
     }
 

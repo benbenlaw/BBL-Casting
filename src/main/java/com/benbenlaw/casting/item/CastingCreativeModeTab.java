@@ -19,28 +19,7 @@ public class CastingCreativeModeTab {
             .withTabsBefore(CreativeModeTabs.COMBAT)
             .icon(() -> CastingItems.INGOT_MOLD.get().asItem().getDefaultInstance())
             .title(Component.translatable("itemGroup.casting"))
-            .displayItems((parameters, output) -> {
-
-                //Items
-                CastingItems.ITEMS.getEntries().forEach(item -> {
-                    output.accept(item.get());
-                });
-
-                //Buckets
-                //CastingFluids.FLUIDS_MAP.values().forEach(fluid -> {
-                //    output.accept(fluid.getBucket());
-                //});
-
-                //OG Casting
-                output.accept(CastingBlocks.SOLIDIFIER.asItem());
-                output.accept(CastingBlocks.CONTROLLER.asItem());
-                output.accept(CastingBlocks.MIXER.asItem());
-                output.accept(CastingBlocks.COOLANT_TANK.asItem());
-                output.accept(CastingBlocks.FUEL_TANK.asItem());
-
-
-
-            }).build());
+            .displayItems(CastingItems.ITEMS.getEntries()).build());
 }
 
 

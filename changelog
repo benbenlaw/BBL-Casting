@@ -20,7 +20,7 @@ Modifiers should use a enchantment like feature to be completely data driven (26
 - Simple Mixer now has a tick speed in the top right of the GUI,
 - All recipe types have had there JEI integration improved to scale better with more advanced melting and mixing recipes
 - Melting recipes now take a list of fluid outputs allowing for items to be melted into multiple fluids (Add XP)
-
+- Moved to BBL Core fluid API
 
 - Added Simple Coolant Tank (WIP)
 
