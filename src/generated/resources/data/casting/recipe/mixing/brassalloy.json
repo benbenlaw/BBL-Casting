@@ -3,11 +3,11 @@
   "inputs": [
     {
       "amount": 270,
-      "id": "casting:molten_copper"
+      "ingredient": "casting:molten_copper"
     },
     {
       "amount": 90,
-      "id": "casting:molten_zinc"
+      "ingredient": "casting:molten_zinc"
     }
   ],
   "output": {

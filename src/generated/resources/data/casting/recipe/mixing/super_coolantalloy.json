@@ -3,11 +3,11 @@
   "inputs": [
     {
       "amount": 500,
-      "id": "casting:chilled_water"
+      "ingredient": "casting:chilled_water"
     },
     {
       "amount": 500,
-      "id": "casting:iced_water"
+      "ingredient": "casting:iced_water"
     }
   ],
   "output": {

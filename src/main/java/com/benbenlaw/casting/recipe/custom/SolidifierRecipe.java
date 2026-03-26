@@ -11,18 +11,19 @@ import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.common.crafting.SizedIngredient;
 import net.neoforged.neoforge.fluids.FluidStackTemplate;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 import org.jetbrains.annotations.NotNull;
 import org.jspecify.annotations.NonNull;
 
 import java.util.Optional;
 
-public record SolidifierRecipe(SizedIngredient mold, SizedIngredient output, FluidStackTemplate fluid, int meltingTemp, Optional<Double> durationModifier) implements Recipe<RecipeInput> {
+public record SolidifierRecipe(SizedIngredient mold, SizedIngredient output, SizedFluidIngredient fluid, int meltingTemp, Optional<Double> durationModifier) implements Recipe<RecipeInput> {
 
     public static final MapCodec<SolidifierRecipe> CODEC = RecordCodecBuilder.mapCodec(instance ->
             instance.group(
                     SizedIngredient.NESTED_CODEC.fieldOf("mold").forGetter(SolidifierRecipe::mold),
                     SizedIngredient.NESTED_CODEC.fieldOf("output").forGetter(SolidifierRecipe::output),
-                    FluidStackTemplate.CODEC.fieldOf("fluid").forGetter(SolidifierRecipe::fluid),
+                    SizedFluidIngredient.CODEC.fieldOf("fluid").forGetter(SolidifierRecipe::fluid),
                     Codec.INT.fieldOf("melting_temp").forGetter(SolidifierRecipe::meltingTemp),
                     Codec.DOUBLE.optionalFieldOf("duration_modifier").forGetter(SolidifierRecipe::durationModifier)
             ).apply(instance, SolidifierRecipe::new)
@@ -40,7 +41,7 @@ public record SolidifierRecipe(SizedIngredient mold, SizedIngredient output, Flu
     private static SolidifierRecipe read(RegistryFriendlyByteBuf buffer) {
         SizedIngredient mold = SizedIngredient.STREAM_CODEC.decode(buffer);
         SizedIngredient output = SizedIngredient.STREAM_CODEC.decode(buffer);
-        FluidStackTemplate fluid = FluidStackTemplate.STREAM_CODEC.decode(buffer);
+        SizedFluidIngredient fluid = SizedFluidIngredient.STREAM_CODEC.decode(buffer);
         int meltingTemp = buffer.readInt();
         Optional<Double> durationModifier = buffer.readBoolean() ? Optional.of(buffer.readDouble()) : Optional.empty();
         return new SolidifierRecipe(mold, output, fluid, meltingTemp, durationModifier);
@@ -49,7 +50,7 @@ public record SolidifierRecipe(SizedIngredient mold, SizedIngredient output, Flu
     private static void write(RegistryFriendlyByteBuf buffer, SolidifierRecipe recipe) {
         SizedIngredient.STREAM_CODEC.encode(buffer, recipe.mold);
         SizedIngredient.STREAM_CODEC.encode(buffer, recipe.output);
-        FluidStackTemplate.STREAM_CODEC.encode(buffer, recipe.fluid);
+        SizedFluidIngredient.STREAM_CODEC.encode(buffer, recipe.fluid);
         buffer.writeInt(recipe.meltingTemp);
         if (recipe.durationModifier.isPresent()) {
             buffer.writeBoolean(true);

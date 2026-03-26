@@ -3,15 +3,15 @@
   "inputs": [
     {
       "amount": 270,
-      "id": "casting:molten_lead"
+      "ingredient": "casting:molten_lead"
     },
     {
       "amount": 90,
-      "id": "casting:molten_platinum"
+      "ingredient": "casting:molten_platinum"
     },
     {
       "amount": 500,
-      "id": "casting:molten_ender"
+      "ingredient": "casting:molten_ender"
     }
   ],
   "output": {

@@ -3,15 +3,15 @@
   "inputs": [
     {
       "amount": 250,
-      "id": "casting:molten_certus_quartz"
+      "ingredient": "casting:molten_certus_quartz"
     },
     {
       "amount": 250,
-      "id": "casting:molten_charged_certus_quartz"
+      "ingredient": "casting:molten_charged_certus_quartz"
     },
     {
       "amount": 90,
-      "id": "casting:molten_redstone"
+      "ingredient": "casting:molten_redstone"
     }
   ],
   "output": {

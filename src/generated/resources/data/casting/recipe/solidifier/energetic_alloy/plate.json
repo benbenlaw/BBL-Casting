@@ -12,7 +12,7 @@
   "duration_modifier": 0.5,
   "fluid": {
     "amount": 90,
-    "id": "casting:molten_energetic_alloy"
+    "ingredient": "#c:molten_energetic_alloy"
   },
   "melting_temp": 1000,
   "mold": {

@@ -12,7 +12,7 @@
   "duration_modifier": 1.2,
   "fluid": {
     "amount": 360,
-    "id": "casting:molten_uranium"
+    "ingredient": "#c:molten_uranium"
   },
   "melting_temp": 1000,
   "mold": {

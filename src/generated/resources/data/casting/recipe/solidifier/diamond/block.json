@@ -12,7 +12,7 @@
   "duration_modifier": 2.5,
   "fluid": {
     "amount": 810,
-    "id": "casting:molten_diamond"
+    "ingredient": "#c:molten_diamond"
   },
   "melting_temp": 1000,
   "mold": {

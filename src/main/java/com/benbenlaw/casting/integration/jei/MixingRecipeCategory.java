@@ -23,6 +23,7 @@ import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.fluids.FluidStackTemplate;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -91,7 +92,7 @@ public class MixingRecipeCategory implements IRecipeCategory<MixingRecipe> {
         int centerY = 2;
         int slotWidth = 18;
 
-        List<FluidStackTemplate> fluids = recipe.fluids();
+        List<SizedFluidIngredient> fluids = recipe.fluids();
         int totalFluids = fluids.size();
 
         for (int i = 0; i < totalFluids; i++) {
@@ -101,7 +102,7 @@ public class MixingRecipeCategory implements IRecipeCategory<MixingRecipe> {
             final int finalIndex = i;
 
             builder.addSlot(RecipeIngredientRole.INPUT, xPos, centerY)
-                    .add(fluids.get(i).fluid().value(), fluids.get(i).amount())
+                    .add(fluids.get(i).ingredient().fluids().getFirst().value(), fluids.get(i).amount())
                     .addRichTooltipCallback((slot, tooltip) ->
                             tooltip.add(Component.literal(fluids.get(finalIndex).amount() + " mB")
                                     .withStyle(ChatFormatting.GOLD)))

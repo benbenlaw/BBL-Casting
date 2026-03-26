@@ -12,7 +12,7 @@
   "duration_modifier": 2.5,
   "fluid": {
     "amount": 810,
-    "id": "casting:molten_silicon"
+    "ingredient": "#c:molten_silicon"
   },
   "melting_temp": 1000,
   "mold": {

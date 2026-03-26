@@ -3,7 +3,7 @@
   "duration_modifier": 2.5,
   "fluid": {
     "amount": 1000,
-    "id": "casting:molten_obsidian"
+    "ingredient": "casting:molten_obsidian"
   },
   "melting_temp": 1200,
   "mold": {

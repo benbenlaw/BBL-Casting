@@ -83,7 +83,7 @@ public class SolidifierRecipeCategory implements IRecipeCategory<SolidifierRecip
 
         builder.addSlot(RecipeIngredientRole.INPUT, 2, 2).add(recipe.mold().ingredient());
 
-        builder.addSlot(RecipeIngredientRole.INPUT, 38, 2).add(recipe.fluid().fluid().value(), recipe.fluid().amount())
+        builder.addSlot(RecipeIngredientRole.INPUT, 38, 2).add(recipe.fluid().ingredient().fluids().getFirst().value(), recipe.fluid().amount())
                 .addRichTooltipCallback((slot, tooltip) ->
                         tooltip.add(Component.literal(recipe.fluid().amount() + " mB").withStyle(ChatFormatting.GOLD)));
 

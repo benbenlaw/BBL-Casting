@@ -12,7 +12,7 @@
   "duration_modifier": 0.4,
   "fluid": {
     "amount": 125,
-    "id": "casting:molten_charged_certus_quartz"
+    "ingredient": "#c:molten_charged_certus_quartz"
   },
   "melting_temp": 1000,
   "mold": {

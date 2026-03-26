@@ -12,7 +12,7 @@
   "duration_modifier": 0.2,
   "fluid": {
     "amount": 11,
-    "id": "casting:molten_redstone"
+    "ingredient": "#c:molten_redstone"
   },
   "melting_temp": 1000,
   "mold": {

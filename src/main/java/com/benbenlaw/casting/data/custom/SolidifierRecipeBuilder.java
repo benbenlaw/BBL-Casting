@@ -15,6 +15,7 @@ import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.crafting.Recipe;
 import net.neoforged.neoforge.common.crafting.SizedIngredient;
 import net.neoforged.neoforge.fluids.FluidStackTemplate;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -27,12 +28,12 @@ public class SolidifierRecipeBuilder implements RecipeBuilder {
     protected String group;
     protected SizedIngredient mold;
     protected SizedIngredient output;
-    protected FluidStackTemplate fluid;
+    protected SizedFluidIngredient fluid;
     protected int meltingTemp;
     protected Optional<Double> durationModifier;
     protected final Map<String, Criterion<?>> criteria = new LinkedHashMap<>();
 
-    public SolidifierRecipeBuilder(SizedIngredient mold, SizedIngredient output, FluidStackTemplate fluid, int meltingTemp, Optional<Double> durationModifier) {
+    public SolidifierRecipeBuilder(SizedIngredient mold, SizedIngredient output, SizedFluidIngredient fluid, int meltingTemp, Optional<Double> durationModifier) {
         this.mold = mold;
         this.output = output;
         this.fluid = fluid;
@@ -40,7 +41,7 @@ public class SolidifierRecipeBuilder implements RecipeBuilder {
         this.durationModifier = durationModifier;
     }
 
-    public static SolidifierRecipeBuilder solidifierRecipesBuilder(SizedIngredient mold, SizedIngredient output, FluidStackTemplate fluid, int meltingTemp, Optional<Double> durationModifier) {
+    public static SolidifierRecipeBuilder solidifierRecipesBuilder(SizedIngredient mold, SizedIngredient output, SizedFluidIngredient fluid, int meltingTemp, Optional<Double> durationModifier) {
         return new SolidifierRecipeBuilder(mold, output, fluid, meltingTemp, durationModifier);
     }
 

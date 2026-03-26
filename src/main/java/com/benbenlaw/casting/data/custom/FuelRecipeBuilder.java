@@ -14,6 +14,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.crafting.Recipe;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidStackTemplate;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -23,16 +24,16 @@ import java.util.Map;
 public class FuelRecipeBuilder implements RecipeBuilder {
 
     protected String group;
-    protected FluidStackTemplate fluid;
+    protected SizedFluidIngredient fluid;
     protected int temp;
     protected final Map<String, Criterion<?>> criteria = new LinkedHashMap<>();
 
-    public FuelRecipeBuilder(FluidStackTemplate fluid, int temp) {
+    public FuelRecipeBuilder(SizedFluidIngredient fluid, int temp) {
         this.fluid = fluid;
         this.temp = temp;
     }
 
-    public static FuelRecipeBuilder fuelRecipesBuilder(FluidStackTemplate fluid, int temp) {
+    public static FuelRecipeBuilder fuelRecipesBuilder(SizedFluidIngredient fluid, int temp) {
         return new FuelRecipeBuilder(fluid, temp);
     }
 
@@ -51,10 +52,10 @@ public class FuelRecipeBuilder implements RecipeBuilder {
 
     @Override
     public ResourceKey<Recipe<?>> defaultId() {
-        FluidStack stack = fluid.create();
+        SizedFluidIngredient stack = fluid;
         return ResourceKey.create(
                 Registries.RECIPE,
-                Casting.identifier("fuel/" + stack.getFluid().builtInRegistryHolder().key().identifier().getPath())
+                Casting.identifier("fuel/" + stack.ingredient().fluids().getFirst().value().builtInRegistryHolder().key().identifier().getPath())
         );
     }
 

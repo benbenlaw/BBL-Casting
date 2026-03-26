@@ -12,7 +12,7 @@
   "duration_modifier": 0.4,
   "fluid": {
     "amount": 45,
-    "id": "casting:molten_iron"
+    "ingredient": "#c:molten_iron"
   },
   "melting_temp": 1000,
   "mold": {

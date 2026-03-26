@@ -12,7 +12,7 @@
   "duration_modifier": 0.4,
   "fluid": {
     "amount": 45,
-    "id": "casting:molten_platinum"
+    "ingredient": "#c:molten_platinum"
   },
   "melting_temp": 1000,
   "mold": {

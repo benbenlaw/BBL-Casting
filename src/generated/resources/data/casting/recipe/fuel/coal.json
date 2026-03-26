@@ -2,7 +2,7 @@
   "type": "casting:fuel",
   "fluid": {
     "amount": 25,
-    "id": "casting:molten_coal"
+    "ingredient": "casting:molten_coal"
   },
   "temp": 1000
 }

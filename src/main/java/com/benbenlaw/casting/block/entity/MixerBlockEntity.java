@@ -26,6 +26,8 @@ import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidStackTemplate;
+import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 import net.neoforged.neoforge.transfer.CombinedResourceHandler;
 import net.neoforged.neoforge.transfer.ResourceHandler;
 import net.neoforged.neoforge.transfer.fluid.FluidResource;
@@ -140,20 +142,29 @@ public class MixerBlockEntity extends SyncableBlockEntity implements MenuProvide
 
     private void executeMixing(MixingRecipe recipe) {
         try (Transaction tx = Transaction.open(null)) {
-            // 1. Consume all input fluids
-            for (FluidStackTemplate required : recipe.fluids()) {
+            for (SizedFluidIngredient required : recipe.fluids()) {
                 int remainingToDrain = required.amount();
                 for (int i = 0; i < 4 && remainingToDrain > 0; i++) {
                     FluidStack inTank = FluidUtil.getStack(inputFluidHandler, i);
-                    if (FluidStack.isSameFluidSameComponents(inTank, required)) {
-                        int drained = inputFluidHandler.extractInternal(i, FluidResource.of(required), remainingToDrain, tx);
+
+                    if (required.ingredient().test(inTank)) {
+                        int drained = inputFluidHandler.extractInternal(i, FluidResource.of(inTank), remainingToDrain, tx);
                         remainingToDrain -= drained;
                     }
                 }
-            }
 
-            // 2. Produce output fluid
-            outputFluidHandler.insertInternal(0, FluidResource.of(recipe.outputFluid()), recipe.outputFluid().amount(), tx);
+                if (remainingToDrain > 0) return;
+            }
+            tx.commit();
+
+
+            FluidStack outputStack = recipe.outputFluid().create();
+            outputFluidHandler.insertInternal(
+                    0,
+                    FluidResource.of(outputStack),
+                    outputStack.getAmount(),
+                    tx
+            );
 
             tx.commit();
         }
@@ -170,9 +181,8 @@ public class MixerBlockEntity extends SyncableBlockEntity implements MenuProvide
                 .map(holder -> (RecipeHolder<MixingRecipe>) holder)
                 .filter(holder -> {
                     MixingRecipe recipe = holder.value();
-                    // Check if all fluids in the recipe are present in the input tanks
-                    for (FluidStackTemplate requiredFluid : recipe.fluids()) {
-                        if (!hasFluidInInputs(requiredFluid)) {
+                    for (SizedFluidIngredient required : recipe.fluids()) {
+                        if (!hasFluidSatisfyingIngredient(required)) {
                             return false;
                         }
                     }
@@ -182,15 +192,18 @@ public class MixerBlockEntity extends SyncableBlockEntity implements MenuProvide
                 .orElse(null);
     }
 
-    private boolean hasFluidInInputs(FluidStackTemplate required) {
-        int count = 0;
+    private boolean hasFluidSatisfyingIngredient(SizedFluidIngredient required) {
+        int totalFound = 0;
+
         for (int i = 0; i < 4; i++) {
-            FluidStack stack = FluidUtil.getStack(inputFluidHandler, i);
-            if (FluidStack.isSameFluidSameComponents(stack, required)) {
-                count += stack.getAmount();
+            FluidStack inTank = FluidUtil.getStack(inputFluidHandler, i);
+
+            if (required.ingredient().test(inTank)) {
+                totalFound += inTank.getAmount();
             }
         }
-        return count >= required.amount();
+
+        return totalFound >= required.amount();
     }
 
     public boolean onPlayerUse(Player player, InteractionHand hand) {

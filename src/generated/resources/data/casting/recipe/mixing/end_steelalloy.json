@@ -3,15 +3,15 @@
   "inputs": [
     {
       "amount": 1000,
-      "id": "casting:molten_end_stone"
+      "ingredient": "casting:molten_end_stone"
     },
     {
       "amount": 90,
-      "id": "casting:molten_dark_steel"
+      "ingredient": "casting:molten_dark_steel"
     },
     {
       "amount": 1000,
-      "id": "casting:molten_obsidian"
+      "ingredient": "casting:molten_obsidian"
     }
   ],
   "output": {

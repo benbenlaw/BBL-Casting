@@ -27,6 +27,8 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.material.Fluid;
 import net.neoforged.neoforge.common.crafting.SizedIngredient;
 import net.neoforged.neoforge.fluids.FluidStackTemplate;
+import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
@@ -85,7 +87,7 @@ public class JEICastingPlugin implements IModPlugin {
                     SolidifierRecipe bucketRecipe = new SolidifierRecipe(
                             SizedIngredient.of(Items.BUCKET, 1),
                             new SizedIngredient(Ingredient.of(bucketItem), 1),
-                            new FluidStackTemplate(fluid, 1000),
+                            new SizedFluidIngredient(FluidIngredient.of(fluid), 1000),
                             1000,
                             Optional.of(0.1)
                     );

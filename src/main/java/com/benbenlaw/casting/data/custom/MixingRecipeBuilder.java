@@ -14,6 +14,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.crafting.Recipe;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidStackTemplate;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -23,17 +24,17 @@ import java.util.Map;
 public class MixingRecipeBuilder implements RecipeBuilder {
 
     protected String group;
-    protected NonNullList<FluidStackTemplate> fluids;
+    protected NonNullList<SizedFluidIngredient> fluids;
     protected FluidStackTemplate outputFluid;
     protected final Map<String, Criterion<?>> criteria = new LinkedHashMap<>();
 
-    public MixingRecipeBuilder(NonNullList<FluidStackTemplate> fluids, FluidStackTemplate outputFluid) {
+    public MixingRecipeBuilder(NonNullList<SizedFluidIngredient> fluids, FluidStackTemplate outputFluid) {
         this.fluids = NonNullList.create();
         this.fluids.addAll(fluids);
         this.outputFluid = outputFluid;
     }
 
-    public static MixingRecipeBuilder mixingRecipesBuilder(NonNullList<FluidStackTemplate> fluids, FluidStackTemplate outputFluid) {
+    public static MixingRecipeBuilder mixingRecipesBuilder(NonNullList<SizedFluidIngredient> fluids, FluidStackTemplate outputFluid) {
         return new MixingRecipeBuilder(fluids, outputFluid);
     }
 

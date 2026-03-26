@@ -12,7 +12,7 @@
   "duration_modifier": 0.4,
   "fluid": {
     "amount": 45,
-    "id": "casting:molten_invar"
+    "ingredient": "#c:molten_invar"
   },
   "melting_temp": 1000,
   "mold": {

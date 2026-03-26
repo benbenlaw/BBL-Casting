@@ -12,7 +12,7 @@
   "duration_modifier": 1.2,
   "fluid": {
     "amount": 320,
-    "id": "casting:molten_coal"
+    "ingredient": "#c:molten_coal"
   },
   "melting_temp": 1000,
   "mold": {

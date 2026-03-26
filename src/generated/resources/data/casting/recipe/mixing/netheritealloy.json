@@ -3,11 +3,11 @@
   "inputs": [
     {
       "amount": 360,
-      "id": "casting:molten_debris"
+      "ingredient": "casting:molten_debris"
     },
     {
       "amount": 360,
-      "id": "casting:molten_gold"
+      "ingredient": "casting:molten_gold"
     }
   ],
   "output": {

@@ -2,7 +2,7 @@
   "type": "casting:fuel",
   "fluid": {
     "amount": 5,
-    "id": "casting:super_coolant"
+    "ingredient": "casting:super_coolant"
   },
   "temp": 0
 }

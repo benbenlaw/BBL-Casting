@@ -10,6 +10,10 @@ multiblock blocks not saving contents when broken
 Use SizedFluidIngredient for recipes that use fluids (26.1)
 Modifiers should use a enchantment like feature to be completely data driven (26.1)
 
+3.2.0
+- Recipe now use SizedFluidIngredient for any recipe that uses fluids eg solidifier, mixer inputs and fuel
+- This is theory should allow other modded fluids to be used in casting eg molten diamond from another mod can be used in the solidifier
+
 3.1.0
 - Updated to Core 12.1.2
 - Versioning updated

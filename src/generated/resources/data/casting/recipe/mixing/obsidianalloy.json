@@ -3,11 +3,11 @@
   "inputs": [
     {
       "amount": 1000,
-      "id": "minecraft:lava"
+      "ingredient": "minecraft:lava"
     },
     {
       "amount": 1000,
-      "id": "minecraft:water"
+      "ingredient": "minecraft:water"
     }
   ],
   "output": {

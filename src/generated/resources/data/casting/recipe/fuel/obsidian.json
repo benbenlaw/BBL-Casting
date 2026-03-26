@@ -2,7 +2,7 @@
   "type": "casting:fuel",
   "fluid": {
     "amount": 20,
-    "id": "casting:molten_obsidian"
+    "ingredient": "casting:molten_obsidian"
   },
   "temp": 1200
 }

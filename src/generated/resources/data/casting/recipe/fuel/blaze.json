@@ -2,7 +2,7 @@
   "type": "casting:fuel",
   "fluid": {
     "amount": 25,
-    "id": "casting:molten_blaze"
+    "ingredient": "casting:molten_blaze"
   },
   "temp": 1200
 }

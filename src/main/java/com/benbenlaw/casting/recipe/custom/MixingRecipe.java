@@ -12,15 +12,16 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.fluids.FluidStackTemplate;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 import org.jetbrains.annotations.NotNull;
 import org.jspecify.annotations.NonNull;
 
-public record MixingRecipe(NonNullList<FluidStackTemplate> fluids, FluidStackTemplate outputFluid) implements Recipe<NoInventoryRecipe> {
+public record MixingRecipe(NonNullList<SizedFluidIngredient> fluids, FluidStackTemplate outputFluid) implements Recipe<NoInventoryRecipe> {
 
     public static final MapCodec<MixingRecipe> CODEC = RecordCodecBuilder.mapCodec(instance ->
             instance.group(
-                    Codec.list(FluidStackTemplate.CODEC).fieldOf("inputs").flatXmap(inputFluids -> {
-                        NonNullList<FluidStackTemplate> nonNullList = NonNullList.create();
+                    Codec.list(SizedFluidIngredient.CODEC).fieldOf("inputs").flatXmap(inputFluids -> {
+                        NonNullList<SizedFluidIngredient> nonNullList = NonNullList.create();
                         nonNullList.addAll(inputFluids);
                         return DataResult.success(nonNullList);
                     }, DataResult::success).forGetter(MixingRecipe::fluids),
@@ -38,9 +39,9 @@ public record MixingRecipe(NonNullList<FluidStackTemplate> fluids, FluidStackTem
 
     private static MixingRecipe read(RegistryFriendlyByteBuf buffer) {
         int fluidCount = buffer.readInt();
-        NonNullList<FluidStackTemplate> fluids = NonNullList.create();
+        NonNullList<SizedFluidIngredient> fluids = NonNullList.create();
         for (int i = 0; i < fluidCount; i++) {
-            FluidStackTemplate fluid = FluidStackTemplate.STREAM_CODEC.decode(buffer);
+            SizedFluidIngredient fluid = SizedFluidIngredient.STREAM_CODEC.decode(buffer);
             fluids.add(fluid);
         }
 
@@ -50,8 +51,8 @@ public record MixingRecipe(NonNullList<FluidStackTemplate> fluids, FluidStackTem
 
     private static void write(RegistryFriendlyByteBuf buffer, MixingRecipe recipe) {
         buffer.writeInt(recipe.fluids.size());
-        for (FluidStackTemplate fluid : recipe.fluids) {
-            FluidStackTemplate.STREAM_CODEC.encode(buffer, fluid);
+        for (SizedFluidIngredient fluid : recipe.fluids) {
+            SizedFluidIngredient.STREAM_CODEC.encode(buffer, fluid);
         }
 
         FluidStackTemplate.STREAM_CODEC.encode(buffer, recipe.outputFluid);

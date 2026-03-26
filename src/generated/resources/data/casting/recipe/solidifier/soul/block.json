@@ -3,7 +3,7 @@
   "duration_modifier": 2.5,
   "fluid": {
     "amount": 1000,
-    "id": "casting:molten_soul"
+    "ingredient": "casting:molten_soul"
   },
   "melting_temp": 1000,
   "mold": {

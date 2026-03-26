@@ -2,7 +2,7 @@
   "type": "casting:fuel",
   "fluid": {
     "amount": 15,
-    "id": "casting:molten_uranium"
+    "ingredient": "casting:molten_uranium"
   },
   "temp": 1000
 }

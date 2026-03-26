@@ -12,7 +12,7 @@
   "duration_modifier": 2.5,
   "fluid": {
     "amount": 810,
-    "id": "casting:molten_osmium"
+    "ingredient": "#c:molten_osmium"
   },
   "melting_temp": 1000,
   "mold": {

@@ -3,15 +3,15 @@
   "inputs": [
     {
       "amount": 270,
-      "id": "casting:molten_copper"
+      "ingredient": "casting:molten_copper"
     },
     {
       "amount": 90,
-      "id": "casting:molten_silver"
+      "ingredient": "casting:molten_silver"
     },
     {
       "amount": 360,
-      "id": "casting:molten_redstone"
+      "ingredient": "casting:molten_redstone"
     }
   ],
   "output": {

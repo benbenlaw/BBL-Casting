@@ -9,14 +9,15 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.fluids.FluidStackTemplate;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 import org.jetbrains.annotations.NotNull;
 import org.jspecify.annotations.NonNull;
 
-public record FuelRecipe(FluidStackTemplate fluid, int temp) implements Recipe<RecipeInput> {
+public record FuelRecipe(SizedFluidIngredient fluid, int temp) implements Recipe<RecipeInput> {
 
     public static final MapCodec<FuelRecipe> CODEC = RecordCodecBuilder.mapCodec(instance ->
             instance.group(
-                    FluidStackTemplate.CODEC.fieldOf("fluid").forGetter(FuelRecipe::fluid),
+                    SizedFluidIngredient.CODEC.fieldOf("fluid").forGetter(FuelRecipe::fluid),
                     Codec.INT.fieldOf("temp").forGetter(FuelRecipe::temp)
             ).apply(instance, FuelRecipe::new)
     );
@@ -30,13 +31,13 @@ public record FuelRecipe(FluidStackTemplate fluid, int temp) implements Recipe<R
             new RecipeSerializer<>(CODEC, STREAM_CODEC);
 
     private static FuelRecipe read(RegistryFriendlyByteBuf buffer) {
-        FluidStackTemplate fluid = FluidStackTemplate.STREAM_CODEC.decode(buffer);
+        SizedFluidIngredient fluid = SizedFluidIngredient.STREAM_CODEC.decode(buffer);
         int temp = buffer.readInt();
         return new FuelRecipe(fluid, temp);
     }
 
     private static void write(RegistryFriendlyByteBuf buffer, FuelRecipe recipe) {
-        FluidStackTemplate.STREAM_CODEC.encode(buffer, recipe.fluid);
+        SizedFluidIngredient.STREAM_CODEC.encode(buffer, recipe.fluid);
         buffer.writeInt(recipe.temp);
     }
 

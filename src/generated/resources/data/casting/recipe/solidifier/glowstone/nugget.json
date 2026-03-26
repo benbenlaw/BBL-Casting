@@ -12,7 +12,7 @@
   "duration_modifier": 0.2,
   "fluid": {
     "amount": 27,
-    "id": "casting:molten_glowstone"
+    "ingredient": "#c:molten_glowstone"
   },
   "melting_temp": 1000,
   "mold": {

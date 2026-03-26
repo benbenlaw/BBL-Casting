@@ -2,7 +2,7 @@
   "type": "casting:fuel",
   "fluid": {
     "amount": 25,
-    "id": "minecraft:water"
+    "ingredient": "minecraft:water"
   },
   "temp": 600
 }

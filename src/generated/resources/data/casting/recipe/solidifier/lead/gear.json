@@ -12,7 +12,7 @@
   "duration_modifier": 1.2,
   "fluid": {
     "amount": 360,
-    "id": "casting:molten_lead"
+    "ingredient": "#c:molten_lead"
   },
   "melting_temp": 1000,
   "mold": {

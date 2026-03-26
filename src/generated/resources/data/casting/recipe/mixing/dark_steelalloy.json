@@ -3,15 +3,15 @@
   "inputs": [
     {
       "amount": 90,
-      "id": "casting:molten_iron"
+      "ingredient": "casting:molten_iron"
     },
     {
       "amount": 80,
-      "id": "casting:molten_coal"
+      "ingredient": "casting:molten_coal"
     },
     {
       "amount": 1000,
-      "id": "casting:molten_obsidian"
+      "ingredient": "casting:molten_obsidian"
     }
   ],
   "output": {

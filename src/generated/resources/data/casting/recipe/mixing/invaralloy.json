@@ -3,11 +3,11 @@
   "inputs": [
     {
       "amount": 180,
-      "id": "casting:molten_iron"
+      "ingredient": "casting:molten_iron"
     },
     {
       "amount": 90,
-      "id": "casting:molten_nickel"
+      "ingredient": "casting:molten_nickel"
     }
   ],
   "output": {

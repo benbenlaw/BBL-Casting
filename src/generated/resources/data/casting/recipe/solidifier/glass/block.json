@@ -3,7 +3,7 @@
   "duration_modifier": 2.5,
   "fluid": {
     "amount": 1000,
-    "id": "casting:molten_glass"
+    "ingredient": "casting:molten_glass"
   },
   "melting_temp": 1000,
   "mold": {

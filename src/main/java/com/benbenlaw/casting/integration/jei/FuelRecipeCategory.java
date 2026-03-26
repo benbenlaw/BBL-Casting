@@ -109,7 +109,7 @@ public class FuelRecipeCategory implements IRecipeCategory<FuelRecipe> {
 
             FuelRecipe fuel = mutableRecipes.get(i);
 
-            builder.addSlot(RecipeIngredientRole.INPUT, 2, 2).add(fuel.fluid().fluid().value())
+            builder.addSlot(RecipeIngredientRole.INPUT, 2, 2).add(fuel.fluid().ingredient().display())
                     .addRichTooltipCallback((slot, tooltip) ->
                             tooltip.add(Component.literal(fuel.fluid().amount() + "mB").withStyle(ChatFormatting.GOLD)))
                     .addRichTooltipCallback((slot, tooltip) ->

@@ -61,7 +61,9 @@ public class TankBlockEntity extends SyncableBlockEntity{
                 .stream()
                 .filter(holder -> holder.value().getType() == FuelRecipe.TYPE)
                 .map(holder -> (RecipeHolder<FuelRecipe>) holder)
-                .filter(holder -> FluidStack.isSameFluid(holder.value().fluid().create(), stack))
+                .filter(holder -> {
+                    return holder.value().fluid().ingredient().test(stack);
+                })
                 .findFirst()
                 .orElse(null);
     }

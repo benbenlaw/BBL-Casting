@@ -12,7 +12,7 @@
   "duration_modifier": 0.2,
   "fluid": {
     "amount": 10,
-    "id": "casting:molten_netherite"
+    "ingredient": "#c:molten_netherite"
   },
   "melting_temp": 1000,
   "mold": {

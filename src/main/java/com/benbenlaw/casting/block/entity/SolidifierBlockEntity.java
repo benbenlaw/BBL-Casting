@@ -5,6 +5,7 @@ import com.benbenlaw.casting.block.custom.CastingBlock;
 import com.benbenlaw.casting.block.custom.SolidifierBlock;
 import com.benbenlaw.casting.item.CastingDataComponents;
 import com.benbenlaw.casting.item.util.FluidListComponent;
+import com.benbenlaw.casting.recipe.custom.MixingRecipe;
 import com.benbenlaw.casting.recipe.custom.SolidifierRecipe;
 import com.benbenlaw.casting.screen.SolidifierMenu;
 import com.benbenlaw.core.block.entity.SyncableBlockEntity;
@@ -150,7 +151,7 @@ public class SolidifierBlockEntity extends SyncableBlockEntity implements MenuPr
                 changed = true;
 
                 if (progress >= maxProgress) {
-                    executeSolidifying(recipe, activeFuelTank);
+                    executeSolidifying(recipe);
                     progress = 0;
                 }
             } else if (progress > 0) {
@@ -210,35 +211,15 @@ public class SolidifierBlockEntity extends SyncableBlockEntity implements MenuPr
         return null;
     }
 
-    private void executeSolidifying(SolidifierRecipe recipe, @Nullable TankBlockEntity fuelTank) {
+    private void executeSolidifying(SolidifierRecipe recipe) {
         try (Transaction tx = Transaction.open(null)) {
-            inputFluidHandler.extractInternal(0, FluidResource.of(recipe.fluid()), recipe.fluid().amount(), tx);
-
-            if (fuelTank != null) {
-                int currentTemp = fuelTank.getFuelTemp().orElse(20);
-                int fluidTemp = recipe.meltingTemp();
-
-                if (currentTemp < fluidTemp) {
-                    FluidStack fuelStack = FluidUtil.getStack(fuelTank.getInputFluidHandler(), 0);
-                    if (!fuelStack.isEmpty()) {
-                        var fuelRecipe = TankBlockEntity.getFuel(level, fuelStack);
-                        if (fuelRecipe != null) {
-                            fuelTank.getInputFluidHandler().extractInternal(
-                                    0,
-                                    fuelTank.getInputFluidHandler().getResource(0),
-                                    fuelRecipe.value().fluid().amount(),
-                                    tx
-                            );
-                        }
-                    }
-                }
-            }
+            FluidStack inTank = FluidUtil.getStack(inputFluidHandler, 0);
+            inputFluidHandler.extractInternal(0, FluidResource.of(inTank), recipe.fluid().amount(), tx);
 
             ItemStack result = getStackFromSized(recipe.output());
             if (!result.isEmpty()) {
                 outputHandler.insertInternal(0, ItemResource.of(result), result.getCount(), tx);
             }
-
             tx.commit();
         }
     }
@@ -254,7 +235,7 @@ public class SolidifierBlockEntity extends SyncableBlockEntity implements MenuPr
     private boolean hasEnoughFluid(SolidifierRecipe recipe) {
         FluidStack inTank = FluidUtil.getStack(inputFluidHandler, 0);
         return !inTank.isEmpty() &&
-                FluidStack.isSameFluidSameComponents(inTank, recipe.fluid()) &&
+                recipe.fluid().ingredient().test(inTank) &&
                 inTank.getAmount() >= recipe.fluid().amount();
     }
 
@@ -265,17 +246,6 @@ public class SolidifierBlockEntity extends SyncableBlockEntity implements MenuPr
             long inserted = outputHandler.insertInternalReturn(
                     0, ItemResource.of(recipeOutput), recipeOutput.getCount(), tx);
             return inserted == recipeOutput.getCount();
-        }
-    }
-
-    private void executeSolidifying(SolidifierRecipe recipe) {
-        try (Transaction tx = Transaction.open(null)) {
-            inputFluidHandler.extractInternal(0, FluidResource.of(recipe.fluid()), recipe.fluid().amount(), tx);
-            ItemStack result = getStackFromSized(recipe.output());
-            if (!result.isEmpty()) {
-                outputHandler.insertInternal(0, ItemResource.of(result), result.getCount(), tx);
-            }
-            tx.commit();
         }
     }
 
@@ -300,8 +270,12 @@ public class SolidifierBlockEntity extends SyncableBlockEntity implements MenuPr
                 .stream()
                 .filter(holder -> holder.value().getType() == SolidifierRecipe.TYPE)
                 .map(holder -> (RecipeHolder<SolidifierRecipe>) holder)
-                .filter(holder -> holder.value().mold().test(mold) &&
-                        FluidStack.isSameFluidSameComponents(holder.value().fluid().create(), fluid))
+                .filter(holder -> {
+                    SolidifierRecipe recipe = holder.value();
+                    return recipe.mold().test(mold) &&
+                            recipe.fluid().ingredient().test(fluid) &&
+                            fluid.getAmount() >= recipe.fluid().amount();
+                })
                 .findFirst()
                 .orElse(null);
     }

@@ -3,15 +3,15 @@
   "inputs": [
     {
       "amount": 250,
-      "id": "casting:molten_ender"
+      "ingredient": "casting:molten_ender"
     },
     {
       "amount": 90,
-      "id": "casting:molten_energetic_alloy"
+      "ingredient": "casting:molten_energetic_alloy"
     },
     {
       "amount": 250,
-      "id": "casting:molten_glowstone"
+      "ingredient": "casting:molten_glowstone"
     }
   ],
   "output": {
