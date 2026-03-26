@@ -1,9 +1,11 @@
 package com.benbenlaw.casting.screen;
 
 import com.benbenlaw.casting.Casting;
+import com.benbenlaw.casting.block.entity.ControllerBlockEntity;
 import com.benbenlaw.core.Core;
 import com.benbenlaw.core.screen.util.DurationTooltip;
 import com.benbenlaw.core.screen.util.FluidRenderingUtils;
+import com.benbenlaw.core.util.MouseUtil;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -13,15 +15,16 @@ import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
+import net.neoforged.neoforge.transfer.fluid.FluidStacksResourceHandler;
 import net.neoforged.neoforge.transfer.fluid.FluidUtil;
 
 import java.util.List;
+import java.util.Objects;
 
 public class ControllerScreen extends AbstractContainerScreen<ControllerMenu> {
 
     private static final Identifier TEXTURE = Casting.identifier("textures/gui/controller_gui.png");
     private static final Identifier PROGRESS_ARROW = Casting.identifier("controller_progress");
-    private static final Identifier LIT_PROGRESS_SPRITE = Identifier.withDefaultNamespace("container/smoker/lit_progress");
 
     public ControllerScreen(ControllerMenu menu, Inventory inventory, Component title) {
         super(menu, inventory, title);
@@ -43,12 +46,17 @@ public class ControllerScreen extends AbstractContainerScreen<ControllerMenu> {
                 if (scaledHeight > 0) {
                     int row = i / 5;
                     int col = i % 5;
-
                     int slotX = x + 8 + (col * 19);
                     int slotY = y + 16 + (row * 19);
                     int yOffset = 16 - scaledHeight;
 
-                    guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, PROGRESS_ARROW, slotX, slotY + yOffset,16, scaledHeight);
+                    guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, PROGRESS_ARROW, slotX, slotY + yOffset, 16, scaledHeight);
+
+                    int xPos = 8 + (i * 10);
+                    if (i >= 5) xPos += 5;
+                    if (i >= 10) xPos += 5;
+
+                    guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, Core.identifier("duration_icon"), x + xPos, y - 5, 10, 10);
                 }
             }
         }
@@ -62,8 +70,33 @@ public class ControllerScreen extends AbstractContainerScreen<ControllerMenu> {
         int y = (height - imageHeight) / 2;
 
         renderTankTextures(guiGraphics, x, y, mouseX, mouseY);
-        DurationTooltip.renderDurationTooltip(guiGraphics, mouseX, mouseY, x, y, 161, 5, menu.data.get(0), menu.data.get(1));
+
+        renderDurationTooltips(guiGraphics, x, y, mouseX, mouseY);
         renderTankTooltips(guiGraphics, x, y, mouseX, mouseY);
+        if (ControllerBlockEntity.getActiveFuelTank(menu.level, menu.blockPos) != null) {
+            FluidRenderingUtils.renderFluid(guiGraphics,
+                    Objects.requireNonNull(ControllerBlockEntity.getActiveFuelTank(menu.level, menu.blockPos)).getInputFluidHandler(), 0, x, y, 110, 51, 16, 16, mouseX, mouseY);
+        } else if (MouseUtil.isMouseOver(mouseX, mouseY, x + 110, y + 51, 16, 16)) {
+            Component text = Component.translatable("tooltip.casting.no_fuel");
+            List<ClientTooltipComponent> components = List.of(ClientTooltipComponent.create(text.getVisualOrderText()));
+            guiGraphics.tooltip(this.font, components, mouseX, mouseY, DefaultTooltipPositioner.INSTANCE, null);
+        }
+    }
+
+
+    private void renderDurationTooltips(GuiGraphicsExtractor guiGraphics, int x, int y, int mouseX, int mouseY) {
+        for (int i = 0; i < 15; i++) {
+            if (menu.data.get(i) > 0) {
+                int xPos = 8 + (i * 10);
+                if (i >= 5) xPos += 5;
+                if (i >= 10) xPos += 5;
+
+                if (mouseX >= x + xPos && mouseX < x + xPos + 10 && mouseY >= y - 5 && mouseY < y + 5) {
+                    Component text = Component.translatable("tooltip.core.duration_tooltip", menu.data.get(i), menu.data.get(i + 15));
+                    guiGraphics.tooltip(this.font, List.of(ClientTooltipComponent.create(text.getVisualOrderText())), mouseX, mouseY, DefaultTooltipPositioner.INSTANCE, null);
+                }
+            }
+        }
     }
 
     private void renderTankTextures(GuiGraphicsExtractor guiGraphics, int x, int y, int mouseX, int mouseY) {

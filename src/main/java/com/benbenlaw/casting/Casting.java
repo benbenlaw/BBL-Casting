@@ -3,6 +3,7 @@ package com.benbenlaw.casting;
 import com.benbenlaw.casting.block.CastingBlockEntities;
 import com.benbenlaw.casting.block.CastingBlocks;
 import com.benbenlaw.casting.block.CastingCapabilities;
+import com.benbenlaw.casting.block.entity.renderer.TankBlockEntityRenderer;
 import com.benbenlaw.casting.config.BeheadingConfig;
 import com.benbenlaw.casting.config.CastingConfig;
 import com.benbenlaw.casting.config.EquipmentModifierConfig;
@@ -10,7 +11,7 @@ import com.benbenlaw.casting.fluid.CastingFluids;
 import com.benbenlaw.casting.item.CastingCreativeModeTab;
 import com.benbenlaw.casting.item.CastingDataComponents;
 import com.benbenlaw.casting.item.CastingItems;
-import com.benbenlaw.casting.recipe.CastingRecipes;
+import com.benbenlaw.casting.recipe.CastingRecipeTypes;
 import com.benbenlaw.casting.screen.CastingMenuTypes;
 import com.benbenlaw.casting.screen.ControllerScreen;
 import com.benbenlaw.casting.screen.MixerScreen;
@@ -60,8 +61,8 @@ public class Casting {
 
         ////    ModParticles.register(modEventBus);
         CastingMenuTypes.MENUS.register(modEventBus);
-        CastingRecipes.TYPES.register(modEventBus);
-        CastingRecipes.SERIALIZER.register(modEventBus);
+        CastingRecipeTypes.TYPES.register(modEventBus);
+        CastingRecipeTypes.SERIALIZER.register(modEventBus);
 
         //Configs
         modContainer.registerConfig(ModConfig.Type.STARTUP, EquipmentModifierConfig.SPEC, "bbl/casting/tool_modifiers.toml");
@@ -102,8 +103,7 @@ public class Casting {
 
         @SubscribeEvent
         public static void registerRenderers(final EntityRenderersEvent.RegisterRenderers event) {
-
-            //event.registerBlockEntityRenderer(CastingBlockEntities.CONTROLLER_BLOCK_ENTITY.get(), ControllerBlockEntityRenderer::new);
+            event.registerBlockEntityRenderer(CastingBlockEntities.TANK_BLOCK_ENTITY.get(), TankBlockEntityRenderer::new);
         }
 
         @SubscribeEvent

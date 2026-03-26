@@ -10,6 +10,22 @@ multiblock blocks not saving contents when broken
 Use SizedFluidIngredient for recipes that use fluids (26.1)
 Modifiers should use a enchantment like feature to be completely data driven (26.1)
 
+3.1.0
+- Updated to Core 12.1.2
+- Versioning updated
+- Melting and Solidifier recipes now have a duration modifier in there recipes, increase/ decrease total melting/ solidifying time
+- Solidifier recipes now require a melting temperature as well, this is used to calculate the speed of the solidifier and should be the same as the melting recipe
+- Coolant recipe type removed, coolants now use fuel recipe
+- Fuel recipe no longer need duration field this is now calculated based on fluid temp and duration modifier in recipes
+- Any fuel below the melting temp of the recipe will be treated as a coolant now
+- Added all coolant recipes and mixing recipes
+- Removed Coolant Tank
+- Added Tank fluid rendering
+- Fuel Tank is now called Simple Tank and can be used for both fuel and coolant
+- Added Tank recipe
+- Removed hard coded bucket recipes, these are now automatically generated for any fluid that has a bucket registered
+- Solidifier and Controller now show adjacent tank fluids in the GUI
+
 3.0.0
 - Updated to Minecraft 26.1
 - Removed Equipment Modifiers, this will return as a addon in the future

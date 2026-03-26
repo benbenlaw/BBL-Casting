@@ -1,8 +1,7 @@
 package com.benbenlaw.casting.data.custom;
 
 import com.benbenlaw.casting.Casting;
-import com.benbenlaw.casting.recipe.MeltingRecipe;
-import com.benbenlaw.casting.recipe.MixingRecipe;
+import com.benbenlaw.casting.recipe.custom.MixingRecipe;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRequirements;
 import net.minecraft.advancements.AdvancementRewards;
@@ -12,8 +11,6 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidStackTemplate;

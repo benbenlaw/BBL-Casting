@@ -5,7 +5,7 @@ import com.benbenlaw.casting.block.custom.CastingBlock;
 import com.benbenlaw.casting.block.custom.MixerBlock;
 import com.benbenlaw.casting.item.CastingDataComponents;
 import com.benbenlaw.casting.item.util.FluidListComponent;
-import com.benbenlaw.casting.recipe.MixingRecipe;
+import com.benbenlaw.casting.recipe.custom.MixingRecipe;
 import com.benbenlaw.casting.screen.MixerMenu;
 import com.benbenlaw.core.block.entity.SyncableBlockEntity;
 import com.benbenlaw.core.block.entity.handler.fluid.InputFluidHandler;

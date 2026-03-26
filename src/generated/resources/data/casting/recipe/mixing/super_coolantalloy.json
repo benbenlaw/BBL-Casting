@@ -1,0 +1,17 @@
+{
+  "type": "casting:mixing",
+  "inputs": [
+    {
+      "amount": 500,
+      "id": "casting:chilled_water"
+    },
+    {
+      "amount": 500,
+      "id": "casting:iced_water"
+    }
+  ],
+  "output": {
+    "amount": 1000,
+    "id": "casting:super_coolant"
+  }
+}

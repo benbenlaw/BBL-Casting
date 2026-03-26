@@ -32,12 +32,8 @@ public class CastingBlockEntities {
             BLOCK_ENTITIES.register("mixer_block_entity", () ->
                     new BlockEntityType<>(MixerBlockEntity::new, CastingBlocks.MIXER.get()));
 
-    public static final Supplier<BlockEntityType<TankBlockEntity>> FUEL_TANK_BLOCK_ENTITY =
-            BLOCK_ENTITIES.register("fuel_tank_block_entity", () ->
-                    new BlockEntityType<>(TankBlockEntity::new, CastingBlocks.FUEL_TANK.get()));
-
-    public static final Supplier<BlockEntityType<TankBlockEntity>> COOLANT_TANK_BLOCK_ENTITY =
-            BLOCK_ENTITIES.register("coolant_tank_block_entity", () ->
-                    new BlockEntityType<>(TankBlockEntity::new, CastingBlocks.COOLANT_TANK.get()));
+    public static final Supplier<BlockEntityType<TankBlockEntity>> TANK_BLOCK_ENTITY =
+            BLOCK_ENTITIES.register("tank_block_entity", () ->
+                    new BlockEntityType<>(TankBlockEntity::new, CastingBlocks.TANK.get()));
 
 }

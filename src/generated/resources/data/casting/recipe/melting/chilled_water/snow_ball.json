@@ -1,0 +1,15 @@
+{
+  "type": "casting:melting",
+  "durationModifier": 0.5,
+  "input": {
+    "count": 1,
+    "ingredient": "minecraft:snow"
+  },
+  "meltingTemp": 400,
+  "output": [
+    {
+      "amount": 250,
+      "id": "casting:chilled_water"
+    }
+  ]
+}

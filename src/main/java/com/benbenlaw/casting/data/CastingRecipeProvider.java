@@ -131,6 +131,15 @@ public class CastingRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_clay", has(CastingItems.BLACK_BRICK))
                 .save(output, "casting:crafting/mixer");
 
+        //Tank
+        shaped(RecipeCategory.MISC, CastingBlocks.TANK)
+                .pattern(" A ")
+                .pattern("ABA")
+                .pattern(" A ")
+                .define('A', CastingItems.BLACK_BRICK)
+                .define('B', CastingBlocks.BLACK_BRICK_GLASS)
+                .unlockedBy("has_clay", has(CastingItems.BLACK_BRICK))
+                .save(output, "casting:crafting/tank");
 
     }
 

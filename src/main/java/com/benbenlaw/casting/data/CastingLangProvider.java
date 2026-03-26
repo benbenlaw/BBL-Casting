@@ -20,11 +20,14 @@ public class CastingLangProvider extends LanguageProvider {
 
         //Tooltip
         add("tooltip.casting.fluids_header", "Fluids:");
+        add("tooltip.casting.no_fuel", "No Tank adjacent. place and fill with fuel to start melting!");
+        add("tooltip.casting.no_coolant", "No Tank adjacent. Place and fill with coolant to speed up the solidifier!");
 
         //JEI
         add("jei.casting.solidifier", "Solidifier");
         add("jei.casting.mixing", "Mixing");
         add("jei.casting.melting", "Melting");
+        add("jei.casting.fuel", "Fuels / Coolants");
 
         //Keys
         addKeyTranslation("category", "Casting");

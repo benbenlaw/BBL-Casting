@@ -9,6 +9,7 @@
     }
   ],
   "type": "casting:melting",
+  "durationModifier": 1.2,
   "input": {
     "count": 1,
     "ingredient": "#c:gears/charged_certus_quartz"

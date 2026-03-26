@@ -1,10 +1,8 @@
-// 26.1-pre-3	2026-03-24T17:49:18.5833657	Model Definitions - casting
+// 26.1-pre-3	2026-03-26T14:54:18.2592377	Model Definitions - casting
 2aa30e731299e20bfaeb5903cc0ebf7ed84c6ab3 assets/casting/blockstates/black_bricks.json
 b350b2f7bb3df5e34993e7791e783a609025c622 assets/casting/blockstates/black_brick_glass.json
 e5a33b4a2db42195222fa1709b3d9533ac41e453 assets/casting/blockstates/chilled_water.json
 cc797dd9774257fddcb545ed47a5c553c469bb01 assets/casting/blockstates/controller.json
-81f730fbbf253d527b9e5263e6533f3bb7d9167d assets/casting/blockstates/coolant_tank.json
-7d2a0285e607f8481df7e623ec250909bdb8d90f assets/casting/blockstates/fuel_tank.json
 e5a33b4a2db42195222fa1709b3d9533ac41e453 assets/casting/blockstates/iced_water.json
 a7ec64cf1b23a5c706f68bd4fae9da4a70875ac6 assets/casting/blockstates/mixer.json
 e5a33b4a2db42195222fa1709b3d9533ac41e453 assets/casting/blockstates/molten_aluminum.json
@@ -67,6 +65,7 @@ e5a33b4a2db42195222fa1709b3d9533ac41e453 assets/casting/blockstates/molten_vibra
 e5a33b4a2db42195222fa1709b3d9533ac41e453 assets/casting/blockstates/molten_zinc.json
 7536409671e71edcda76f3cd674d0e6d2983c6da assets/casting/blockstates/solidifier.json
 e5a33b4a2db42195222fa1709b3d9533ac41e453 assets/casting/blockstates/super_coolant.json
+14e39d12d656c141a1bf986b3943b024be5a3ac6 assets/casting/blockstates/tank.json
 4db00ad027dfcd94c4f01a6dda1a15448cc9cc37 assets/casting/items/ball_mold.json
 b22d8efffc5ec73f8f48f511a759b331e7953de1 assets/casting/items/black_brick.json
 dcebf362cf2f9103e95c7f100a2518c07e625e76 assets/casting/items/black_bricks.json
@@ -74,9 +73,7 @@ dcebf362cf2f9103e95c7f100a2518c07e625e76 assets/casting/items/black_bricks.json
 d90e79da7cb86ca5d713002003f462d0a272ed27 assets/casting/items/block_mold.json
 a69bdf882782f3e84036e2030265804279ba0049 assets/casting/items/chilled_water_bucket.json
 539a00e2644afe7898eda0e4ebd1b3fca82fef13 assets/casting/items/controller.json
-71884f0a8ddd2cdd2d8aaae363336ec45085cd7e assets/casting/items/coolant_tank.json
 f080d5ff39e7a006c40f6ae4d2d8eef0adc2ef35 assets/casting/items/dust_mold.json
-d589a908860c3aeb61e20548578af966019ac070 assets/casting/items/fuel_tank.json
 239aa2ebba847d9f15f82e800b7b7da5f3300624 assets/casting/items/gear_mold.json
 0e42ec5ce40983a757db1964d75991ce5621ae00 assets/casting/items/gem_mold.json
 36a7a151f50d547acbc577d9fb0514eb243984ca assets/casting/items/iced_water_bucket.json
@@ -145,6 +142,7 @@ c4ad83fa31e53ee8b006b25bc5cb2f34b015c561 assets/casting/items/plate_mold.json
 0d35b9828023516895f324cfaf976743b3085141 assets/casting/items/rod_mold.json
 0128bf899ddd95e72e990b1ef3b29870352b440e assets/casting/items/solidifier.json
 858c1a1d781c647b274815e623caeaa019456294 assets/casting/items/super_coolant_bucket.json
+4ddded36e592e9b375bff17bf1ecc11e3420c078 assets/casting/items/tank.json
 b450c0a1b6dad7a84c113ac2d7b25483c9ba4127 assets/casting/items/wire_mold.json
 fe2862acf1cc64652c664c258656b169d5051e53 assets/casting/models/block/black_bricks.json
 1d384f649eb1ddd28ebe9c6e86f4375cd87c44d2 assets/casting/models/block/black_brick_glass.json
@@ -152,8 +150,6 @@ fe2862acf1cc64652c664c258656b169d5051e53 assets/casting/models/block/black_brick
 19823985d8ed5e0944624bf1702ff5283481e583 assets/casting/models/block/controller_vertical.json
 9dfdada59eca1916f63da0ca61e730ecf44526a8 assets/casting/models/block/controller_working.json
 5e1a7f620013e44ef57192bb54270801d37d5b90 assets/casting/models/block/controller_working_vertical.json
-8ea46a5480b689c38afc2fcb693086b6d7d5dbca assets/casting/models/block/coolant_tank.json
-58dbcc57b1a4a25657fe30f38822e3a9eb136762 assets/casting/models/block/fuel_tank.json
 511d56d68bb0be44ab64fb433361cd0ecedc91d8 assets/casting/models/block/mixer.json
 e0dffd432b599b54f73c36186d6db70f3dbb5cc8 assets/casting/models/block/mixer_vertical.json
 c23e0cb59d616db3245547a2235f40c02e6f4b97 assets/casting/models/block/mixer_working.json
@@ -162,6 +158,7 @@ ba49fb46928c55ce72937bce301c5dbc033b9b40 assets/casting/models/block/solidifier.
 9f37ab44a46d2fdd8d2750c5c841b1bdffd3ff48 assets/casting/models/block/solidifier_vertical.json
 cdb1e95445b3b7e2d913f60c4bc8754b07c4a594 assets/casting/models/block/solidifier_working.json
 a529ea06113b1731555a8c8cb620d078c4ccead1 assets/casting/models/block/solidifier_working_vertical.json
+0c257796dc9c70b181701af2f8878d4c36c3c4fc assets/casting/models/block/tank.json
 410556918b1bcbb156949e41fe7a5776f1169578 assets/casting/models/item/ball_mold.json
 c458d3e96733818f13805ef73ad0ad87dcb05aa1 assets/casting/models/item/black_brick.json
 5ef57e44724fe244ce039e996866679b24b0db10 assets/casting/models/item/block_mold.json

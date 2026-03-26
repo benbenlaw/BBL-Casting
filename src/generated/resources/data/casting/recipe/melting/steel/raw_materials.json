@@ -9,6 +9,7 @@
     }
   ],
   "type": "casting:melting",
+  "durationModifier": 1.25,
   "input": {
     "count": 1,
     "ingredient": "#c:raw_materials/steel"

@@ -23,7 +23,7 @@ public class SolidifierMenu extends SimpleAbstractContainerMenu {
     protected BlockPos blockPos;
 
     public SolidifierMenu(int containerID, Inventory inventory, FriendlyByteBuf extraData) {
-        this(containerID, inventory, extraData.readBlockPos(), new SimpleContainerData(2));
+        this(containerID, inventory, extraData.readBlockPos(), new SimpleContainerData(4));
     }
 
     public SolidifierMenu(int containerID, Inventory inventory, BlockPos blockPos, ContainerData data) {

@@ -1,0 +1,8 @@
+{
+  "type": "casting:fuel",
+  "fluid": {
+    "amount": 25,
+    "id": "minecraft:lava"
+  },
+  "temp": 1000
+}

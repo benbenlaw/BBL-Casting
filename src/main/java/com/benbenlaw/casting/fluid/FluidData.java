@@ -76,7 +76,7 @@ public record FluidData(String name, String stillTexture, String flowTexture, in
 
         // --- Coolants ---
         fluidList.add(new FluidData("chilled_water", "block/thin_still", "block/thin_flow", 0xFF345baa,
-                new FluidProcessingData(200, 0, ProcessingType.CUSTOM)));
+                new FluidProcessingData(400, 0, ProcessingType.CUSTOM)));
         fluidList.add(new FluidData("iced_water", "block/thin_still", "block/thin_flow", 0xFF5e77a3,
                 new FluidProcessingData(200, 0, ProcessingType.CUSTOM)));
         fluidList.add(new FluidData("super_coolant", "block/thin_still", "block/thin_flow", 0xFF70c1cf,

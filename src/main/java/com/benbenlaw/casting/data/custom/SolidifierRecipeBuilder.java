@@ -1,31 +1,26 @@
 package com.benbenlaw.casting.data.custom;
 
 import com.benbenlaw.casting.Casting;
-import com.benbenlaw.casting.recipe.SolidifierRecipe;
+import com.benbenlaw.casting.recipe.custom.SolidifierRecipe;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRequirements;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.criterion.RecipeUnlockedTrigger;
-import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemStackTemplate;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.neoforged.neoforge.common.crafting.SizedIngredient;
-import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidStackTemplate;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class SolidifierRecipeBuilder implements RecipeBuilder {
 
@@ -33,16 +28,20 @@ public class SolidifierRecipeBuilder implements RecipeBuilder {
     protected SizedIngredient mold;
     protected SizedIngredient output;
     protected FluidStackTemplate fluid;
+    protected int meltingTemp;
+    protected Optional<Double> durationModifier;
     protected final Map<String, Criterion<?>> criteria = new LinkedHashMap<>();
 
-    public SolidifierRecipeBuilder(SizedIngredient mold, SizedIngredient output, FluidStackTemplate fluid) {
+    public SolidifierRecipeBuilder(SizedIngredient mold, SizedIngredient output, FluidStackTemplate fluid, int meltingTemp, Optional<Double> durationModifier) {
         this.mold = mold;
         this.output = output;
         this.fluid = fluid;
+        this.meltingTemp = meltingTemp;
+        this.durationModifier = durationModifier;
     }
 
-    public static SolidifierRecipeBuilder solidifierRecipesBuilder(SizedIngredient mold, SizedIngredient output, FluidStackTemplate fluid) {
-        return new SolidifierRecipeBuilder(mold, output, fluid);
+    public static SolidifierRecipeBuilder solidifierRecipesBuilder(SizedIngredient mold, SizedIngredient output, FluidStackTemplate fluid, int meltingTemp, Optional<Double> durationModifier) {
+        return new SolidifierRecipeBuilder(mold, output, fluid, meltingTemp, durationModifier);
     }
 
     @Override
@@ -78,7 +77,7 @@ public class SolidifierRecipeBuilder implements RecipeBuilder {
                 .rewards(AdvancementRewards.Builder.recipe(resourceKey))
                 .requirements(AdvancementRequirements.Strategy.OR);
         this.criteria.forEach(builder::addCriterion);
-        SolidifierRecipe solidifierRecipe = new SolidifierRecipe(this.mold, this.output, this.fluid);
+        SolidifierRecipe solidifierRecipe = new SolidifierRecipe(this.mold, this.output, this.fluid, this.meltingTemp, this.durationModifier);
         recipeOutput.accept(resourceKey, solidifierRecipe, builder.build(resourceKey.identifier().withPrefix("recipes/solidifier/")));
 
     }

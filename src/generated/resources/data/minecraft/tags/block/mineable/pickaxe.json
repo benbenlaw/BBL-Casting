@@ -4,8 +4,7 @@
     "casting:black_brick_glass",
     "casting:solidifier",
     "casting:mixer",
-    "casting:fuel_tank",
-    "casting:controller",
-    "casting:coolant_tank"
+    "casting:tank",
+    "casting:controller"
   ]
 }

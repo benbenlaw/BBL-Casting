@@ -1,23 +1,19 @@
 package com.benbenlaw.casting.data.custom;
 
 import com.benbenlaw.casting.Casting;
-import com.benbenlaw.casting.block.entity.MixerBlockEntity;
-import com.benbenlaw.casting.recipe.MeltingRecipe;
+import com.benbenlaw.casting.recipe.custom.MeltingRecipe;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRequirements;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.criterion.RecipeUnlockedTrigger;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.neoforged.neoforge.common.crafting.SizedIngredient;
-import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidStackTemplate;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -25,6 +21,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class MeltingRecipeBuilder implements RecipeBuilder {
 
@@ -32,16 +29,18 @@ public class MeltingRecipeBuilder implements RecipeBuilder {
     protected SizedIngredient input;
     protected List<FluidStackTemplate> output;
     protected int meltingTemp;
+    protected Optional<Double> durationModifier;
     protected final Map<String, Criterion<?>> criteria = new LinkedHashMap<>();
 
-    public MeltingRecipeBuilder(SizedIngredient input, List<FluidStackTemplate> output, int meltingTemp) {
+    public MeltingRecipeBuilder(SizedIngredient input, List<FluidStackTemplate> output, int meltingTemp, Optional<Double> durationModifier) {
         this.input = input;
         this.output = output;
         this.meltingTemp = meltingTemp;
+        this.durationModifier = durationModifier;
     }
 
-    public static MeltingRecipeBuilder meltingRecipesBuilder(SizedIngredient input, List<FluidStackTemplate> output, int meltingTemp) {
-        return new MeltingRecipeBuilder(input, output, meltingTemp);
+    public static MeltingRecipeBuilder meltingRecipesBuilder(SizedIngredient input, List<FluidStackTemplate> output, int meltingTemp, Optional<Double> durationModifier) {
+        return new MeltingRecipeBuilder(input, output, meltingTemp, durationModifier);
     }
 
     @Override
@@ -77,7 +76,7 @@ public class MeltingRecipeBuilder implements RecipeBuilder {
                 .rewards(AdvancementRewards.Builder.recipe(resourceKey))
                 .requirements(AdvancementRequirements.Strategy.OR);
         this.criteria.forEach(builder::addCriterion);
-        MeltingRecipe meltingRecipe = new MeltingRecipe(this.input, this.output, this.meltingTemp);
+        MeltingRecipe meltingRecipe = new MeltingRecipe(this.input, this.output, this.meltingTemp, this.durationModifier);
         recipeOutput.accept(resourceKey, meltingRecipe, builder.build(resourceKey.identifier().withPrefix("recipes/melting/")));
 
     }

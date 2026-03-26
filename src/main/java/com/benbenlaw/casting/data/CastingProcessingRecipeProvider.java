@@ -2,14 +2,12 @@ package com.benbenlaw.casting.data;
 
 import com.benbenlaw.casting.Casting;
 import com.benbenlaw.casting.block.CastingBlocks;
-import com.benbenlaw.casting.data.custom.FluidStackTemplateHelper;
-import com.benbenlaw.casting.data.custom.MeltingRecipeBuilder;
-import com.benbenlaw.casting.data.custom.MixingRecipeBuilder;
-import com.benbenlaw.casting.data.custom.SolidifierRecipeBuilder;
+import com.benbenlaw.casting.data.custom.*;
 import com.benbenlaw.casting.fluid.CastingFluids;
 import com.benbenlaw.casting.fluid.FluidData;
 import com.benbenlaw.casting.fluid.FluidProcessingData;
 import com.benbenlaw.casting.fluid.ProcessingType;
+import com.benbenlaw.casting.integration.jei.MeltingRecipeCategory;
 import com.benbenlaw.casting.integration.jei.MixingRecipeCategory;
 import com.benbenlaw.casting.item.CastingItems;
 import com.benbenlaw.core.fluid.FluidDeferredRegister;
@@ -42,8 +40,11 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
+
+import static com.benbenlaw.casting.data.custom.FluidStackTemplateHelper.getFluidStack;
 
 public class CastingProcessingRecipeProvider extends RecipeProvider {
 
@@ -70,180 +71,217 @@ public class CastingProcessingRecipeProvider extends RecipeProvider {
     @Override
     protected void buildRecipes() {
 
-        //Automatically generate recipes for all fluids based on their processing type
-        createBucketRecipe();
         createCommonRecipes();
 
         //Coal
-        simpleSolidifierRecipe(Items.COAL, FluidStackTemplateHelper.getFluidStack("molten_coal", 80),
-                CastingItems.GEM_MOLD, "coal/coal");
+        simpleSolidifierRecipe(Items.COAL, getFluidStack("molten_coal", 80),
+                CastingItems.GEM_MOLD, "coal/coal", ResourceType.GEMS, getTempFromFluid("molten_coal"));
 
         //Obsidian
-        simpleSolidifierRecipe(Blocks.OBSIDIAN, FluidStackTemplateHelper.getFluidStack("molten_obsidian", 1000),
-                CastingItems.BLOCK_MOLD, "obsidian/block");
+        simpleSolidifierRecipe(Blocks.OBSIDIAN, getFluidStack("molten_obsidian", 1000),
+                CastingItems.BLOCK_MOLD, "obsidian/block", ResourceType.STORAGE_BLOCKS, getTempFromFluid("molten_obsidian"));
 
         //End Stone
-        simpleSolidifierRecipe(Blocks.END_STONE, FluidStackTemplateHelper.getFluidStack("molten_end_stone", 1000),
-                CastingItems.BLOCK_MOLD, "end_stone/block");
+        simpleSolidifierRecipe(Blocks.END_STONE, getFluidStack("molten_end_stone", 1000),
+                CastingItems.BLOCK_MOLD, "end_stone/block", ResourceType.STORAGE_BLOCKS, getTempFromFluid("molten_end_stone"));
 
         //Stone
-        simpleSolidifierRecipe(Blocks.STONE, FluidStackTemplateHelper.getFluidStack("molten_stone", 1000),
-                CastingItems.BLOCK_MOLD, "stone/block");
+        simpleSolidifierRecipe(Blocks.STONE, getFluidStack("molten_stone", 1000),
+                CastingItems.BLOCK_MOLD, "stone/block", ResourceType.STORAGE_BLOCKS, getTempFromFluid("molten_stone"));
 
         //Glass
-        simpleSolidifierRecipe(Blocks.GLASS, FluidStackTemplateHelper.getFluidStack("molten_glass", 1000),
-                CastingItems.BLOCK_MOLD, "glass/block");
+        simpleSolidifierRecipe(Blocks.GLASS, getFluidStack("molten_glass", 1000),
+                CastingItems.BLOCK_MOLD, "glass/block", ResourceType.STORAGE_BLOCKS, getTempFromFluid("molten_glass"));
 
         //Soul
-        simpleSolidifierRecipe(Blocks.SOUL_SAND, FluidStackTemplateHelper.getFluidStack("molten_soul", 1000),
-                CastingItems.BLOCK_MOLD, "soul/block");
+        simpleSolidifierRecipe(Blocks.SOUL_SAND, getFluidStack("molten_soul", 1000),
+                CastingItems.BLOCK_MOLD, "soul/block", ResourceType.STORAGE_BLOCKS, getTempFromFluid("molten_soul"));
 
         //Ender
-        simpleSolidifierRecipe(Items.ENDER_PEARL, FluidStackTemplateHelper.getFluidStack("molten_ender", 250),
-                CastingItems.BALL_MOLD, "ender/pearl");
+        simpleSolidifierRecipe(Items.ENDER_PEARL, getFluidStack("molten_ender", 250),
+                CastingItems.BALL_MOLD, "ender/pearl", ResourceType.GEMS, getTempFromFluid("molten_ender"));
 
         //Silicon
-        simpleSolidifierRecipe(Items.SAND, FluidStackTemplateHelper.getFluidStack("molten_silicon", 250),
-                CastingItems.BALL_MOLD, "silicon/silicon");
+        simpleSolidifierRecipe(Items.SAND, getFluidStack("molten_silicon", 250),
+                CastingItems.BALL_MOLD, "silicon/silicon", ResourceType.GEMS, getTempFromFluid("molten_silicon"));
 
         //Bottle o ' Enchanting
-        simpleSolidifierRecipe(Items.EXPERIENCE_BOTTLE, FluidStackTemplateHelper.getFluidStack("molten_experience", 250),
-                CastingItems.BALL_MOLD, "experience/bottle");
+        simpleSolidifierRecipe(Items.EXPERIENCE_BOTTLE, getFluidStack("molten_experience", 250),
+                Items.GLASS_BOTTLE, "experience/bottle", ResourceType.GEMS, getTempFromFluid("molten_experience"));
 
         //Alloys
         //Bronze
-        alloyMixingRecipes("bronze", FluidStackTemplateHelper.getFluidStack("molten_bronze", 360),
+        alloyMixingRecipes("bronze", getFluidStack("molten_bronze", 360),
                 List.of(
-                        FluidStackTemplateHelper.getFluidStack("molten_copper", 270),
-                        FluidStackTemplateHelper.getFluidStack("molten_tin", 90)));
+                        getFluidStack("molten_copper", 270),
+                        getFluidStack("molten_tin", 90)));
 
         //Invar
-        alloyMixingRecipes("invar", FluidStackTemplateHelper.getFluidStack("molten_invar", 270),
+        alloyMixingRecipes("invar", getFluidStack("molten_invar", 270),
                 List.of(
-                        FluidStackTemplateHelper.getFluidStack("molten_iron", 180),
-                        FluidStackTemplateHelper.getFluidStack("molten_nickel", 90)));
+                        getFluidStack("molten_iron", 180),
+                        getFluidStack("molten_nickel", 90)));
 
         //Brass
-        alloyMixingRecipes("brass", FluidStackTemplateHelper.getFluidStack("molten_brass", 360),
+        alloyMixingRecipes("brass", getFluidStack("molten_brass", 360),
                 List.of(
-                        FluidStackTemplateHelper.getFluidStack("molten_copper", 270),
-                        FluidStackTemplateHelper.getFluidStack("molten_zinc", 90)));
+                        getFluidStack("molten_copper", 270),
+                        getFluidStack("molten_zinc", 90)));
 
         //Molten Fluix
-        alloyMixingRecipes("fluix", FluidStackTemplateHelper.getFluidStack("molten_fluix", 500),
+        alloyMixingRecipes("fluix", getFluidStack("molten_fluix", 500),
                 List.of(
-                        FluidStackTemplateHelper.getFluidStack("molten_certus_quartz", 250),
-                        FluidStackTemplateHelper.getFluidStack("molten_charged_certus_quartz", 250),
-                        FluidStackTemplateHelper.getFluidStack("molten_redstone", 90)));
+                        getFluidStack("molten_certus_quartz", 250),
+                        getFluidStack("molten_charged_certus_quartz", 250),
+                        getFluidStack("molten_redstone", 90)));
 
         //Enderium
-        alloyMixingRecipes("enderium", FluidStackTemplateHelper.getFluidStack("molten_enderium", 360),
+        alloyMixingRecipes("enderium", getFluidStack("molten_enderium", 360),
                 List.of(
-                        FluidStackTemplateHelper.getFluidStack("molten_lead", 270),
-                        FluidStackTemplateHelper.getFluidStack("molten_platinum", 90),
-                        FluidStackTemplateHelper.getFluidStack("molten_ender", 500)));
+                        getFluidStack("molten_lead", 270),
+                        getFluidStack("molten_platinum", 90),
+                        getFluidStack("molten_ender", 500)));
 
         //Pulsating Alloy
-        alloyMixingRecipes("pulsating_iron", FluidStackTemplateHelper.getFluidStack("molten_pulsating_alloy", 180),
+        alloyMixingRecipes("pulsating_iron", getFluidStack("molten_pulsating_alloy", 180),
                 List.of(
-                        FluidStackTemplateHelper.getFluidStack("molten_ender", 250),
-                        FluidStackTemplateHelper.getFluidStack("molten_iron", 90)));
+                        getFluidStack("molten_ender", 250),
+                        getFluidStack("molten_iron", 90)));
 
         //End Steel
-        alloyMixingRecipes("end_steel", FluidStackTemplateHelper.getFluidStack("molten_end_steel", 90),
+        alloyMixingRecipes("end_steel", getFluidStack("molten_end_steel", 90),
                 List.of(
-                        FluidStackTemplateHelper.getFluidStack("molten_end_stone", 1000),
-                        FluidStackTemplateHelper.getFluidStack("molten_dark_steel", 90),
-                        FluidStackTemplateHelper.getFluidStack("molten_obsidian", 1000)));
+                        getFluidStack("molten_end_stone", 1000),
+                        getFluidStack("molten_dark_steel", 90),
+                        getFluidStack("molten_obsidian", 1000)));
 
         //Electrum
-        alloyMixingRecipes("electrum", FluidStackTemplateHelper.getFluidStack("molten_electrum", 180),
+        alloyMixingRecipes("electrum", getFluidStack("molten_electrum", 180),
                 List.of(
-                        FluidStackTemplateHelper.getFluidStack("molten_gold", 90),
-                        FluidStackTemplateHelper.getFluidStack("molten_silver", 90)));
+                        getFluidStack("molten_gold", 90),
+                        getFluidStack("molten_silver", 90)));
 
         //Quartz Enriched Iron
-        alloyMixingRecipes("quartz_enriched_iron", FluidStackTemplateHelper.getFluidStack("molten_quartz_enriched_iron", 360),
+        alloyMixingRecipes("quartz_enriched_iron", getFluidStack("molten_quartz_enriched_iron", 360),
                 List.of(
-                        FluidStackTemplateHelper.getFluidStack("molten_iron", 270),
-                        FluidStackTemplateHelper.getFluidStack("molten_quartz", 250)));
+                        getFluidStack("molten_iron", 270),
+                        getFluidStack("molten_quartz", 250)));
 
         //Conductive Alloy
-        alloyMixingRecipes("conductive_alloy", FluidStackTemplateHelper.getFluidStack("molten_conductive_alloy", 360),
+        alloyMixingRecipes("conductive_alloy", getFluidStack("molten_conductive_alloy", 360),
                 List.of(
-                        FluidStackTemplateHelper.getFluidStack("molten_copper", 90),
-                        FluidStackTemplateHelper.getFluidStack("molten_iron", 90)));
+                        getFluidStack("molten_copper", 90),
+                        getFluidStack("molten_iron", 90)));
 
         //Vibrant Alloy
-        alloyMixingRecipes("vibrant_alloy", FluidStackTemplateHelper.getFluidStack("molten_vibrant_alloy", 90),
+        alloyMixingRecipes("vibrant_alloy", getFluidStack("molten_vibrant_alloy", 90),
                 List.of(
-                        FluidStackTemplateHelper.getFluidStack("molten_ender", 250),
-                        FluidStackTemplateHelper.getFluidStack("molten_energetic_alloy", 90),
-                        FluidStackTemplateHelper.getFluidStack("molten_glowstone", 250)));
+                        getFluidStack("molten_ender", 250),
+                        getFluidStack("molten_energetic_alloy", 90),
+                        getFluidStack("molten_glowstone", 250)));
 
         //Signalum
-        alloyMixingRecipes("signalum", FluidStackTemplateHelper.getFluidStack("molten_signalum", 360),
+        alloyMixingRecipes("signalum", getFluidStack("molten_signalum", 360),
                 List.of(
-                        FluidStackTemplateHelper.getFluidStack("molten_copper", 270),
-                        FluidStackTemplateHelper.getFluidStack("molten_silver", 90),
-                        FluidStackTemplateHelper.getFluidStack("molten_redstone", 360)));
+                        getFluidStack("molten_copper", 270),
+                        getFluidStack("molten_silver", 90),
+                        getFluidStack("molten_redstone", 360)));
 
         //Quartz Enriched Copper
-        alloyMixingRecipes("quartz_enriched_copper", FluidStackTemplateHelper.getFluidStack("molten_quartz_enriched_copper", 360),
+        alloyMixingRecipes("quartz_enriched_copper", getFluidStack("molten_quartz_enriched_copper", 360),
                 List.of(
-                        FluidStackTemplateHelper.getFluidStack("molten_copper", 270),
-                        FluidStackTemplateHelper.getFluidStack("molten_quartz", 250)));
+                        getFluidStack("molten_copper", 270),
+                        getFluidStack("molten_quartz", 250)));
 
         //Steel
-        alloyMixingRecipes("steel", FluidStackTemplateHelper.getFluidStack("molten_steel", 90),
+        alloyMixingRecipes("steel", getFluidStack("molten_steel", 90),
                 List.of(
-                        FluidStackTemplateHelper.getFluidStack("molten_iron", 90),
-                        FluidStackTemplateHelper.getFluidStack("molten_coal", 160)));
+                        getFluidStack("molten_iron", 90),
+                        getFluidStack("molten_coal", 160)));
 
         //Soularium
-        alloyMixingRecipes("soularium", FluidStackTemplateHelper.getFluidStack("molten_soularium", 90),
+        alloyMixingRecipes("soularium", getFluidStack("molten_soularium", 90),
                 List.of(
-                        FluidStackTemplateHelper.getFluidStack("molten_soul", 1000),
-                        FluidStackTemplateHelper.getFluidStack("molten_iron", 90)));
+                        getFluidStack("molten_soul", 1000),
+                        getFluidStack("molten_iron", 90)));
 
         //Dark Steel
-        alloyMixingRecipes("dark_steel", FluidStackTemplateHelper.getFluidStack("molten_dark_steel", 90),
+        alloyMixingRecipes("dark_steel", getFluidStack("molten_dark_steel", 90),
                 List.of(
-                        FluidStackTemplateHelper.getFluidStack("molten_iron", 90),
-                        FluidStackTemplateHelper.getFluidStack("molten_coal", 80),
-                        FluidStackTemplateHelper.getFluidStack("molten_obsidian", 1000)));
+                        getFluidStack("molten_iron", 90),
+                        getFluidStack("molten_coal", 80),
+                        getFluidStack("molten_obsidian", 1000)));
 
         //Lumium
-        alloyMixingRecipes("lumium", FluidStackTemplateHelper.getFluidStack("molten_lumium", 360),
+        alloyMixingRecipes("lumium", getFluidStack("molten_lumium", 360),
                 List.of(
-                        FluidStackTemplateHelper.getFluidStack("molten_tin", 270),
-                        FluidStackTemplateHelper.getFluidStack("molten_silver", 90),
-                        FluidStackTemplateHelper.getFluidStack("molten_glowstone", 500)));
+                        getFluidStack("molten_tin", 270),
+                        getFluidStack("molten_silver", 90),
+                        getFluidStack("molten_glowstone", 500)));
 
         //Constantan
-        alloyMixingRecipes("constantan", FluidStackTemplateHelper.getFluidStack("molten_constantan", 180),
+        alloyMixingRecipes("constantan", getFluidStack("molten_constantan", 180),
                 List.of(
-                        FluidStackTemplateHelper.getFluidStack("molten_copper", 90),
-                        FluidStackTemplateHelper.getFluidStack("molten_nickel", 90)));
+                        getFluidStack("molten_copper", 90),
+                        getFluidStack("molten_nickel", 90)));
 
         //Energetic Alloy
-        alloyMixingRecipes("energetic_alloy", FluidStackTemplateHelper.getFluidStack("molten_energetic_alloy", 90),
+        alloyMixingRecipes("energetic_alloy", getFluidStack("molten_energetic_alloy", 90),
                 List.of(
-                        FluidStackTemplateHelper.getFluidStack("molten_redstone", 90),
-                        FluidStackTemplateHelper.getFluidStack("molten_gold", 90),
-                        FluidStackTemplateHelper.getFluidStack("molten_conductive_alloy", 90)));
+                        getFluidStack("molten_redstone", 90),
+                        getFluidStack("molten_gold", 90),
+                        getFluidStack("molten_conductive_alloy", 90)));
 
         //Obsidian
-        alloyMixingRecipes("obsidian", FluidStackTemplateHelper.getFluidStack("molten_obsidian", 1000),
+        alloyMixingRecipes("obsidian", getFluidStack("molten_obsidian", 1000),
                 List.of(
                         new FluidStackTemplate(Fluids.LAVA, 1000),
                         new FluidStackTemplate(Fluids.WATER, 1000)));
 
         //Netherite
-        alloyMixingRecipes("netherite", FluidStackTemplateHelper.getFluidStack("molten_netherite", 90),
+        alloyMixingRecipes("netherite", getFluidStack("molten_netherite", 90),
                 List.of(
-                        FluidStackTemplateHelper.getFluidStack("molten_debris", 360),
-                        FluidStackTemplateHelper.getFluidStack("molten_gold", 360)));
+                        getFluidStack("molten_debris", 360),
+                        getFluidStack("molten_gold", 360)));
+
+        //Super Coolant
+        alloyMixingRecipes("super_coolant", getFluidStack("super_coolant", 1000),
+                List.of(
+                        getFluidStack("chilled_water", 500),
+                        getFluidStack("iced_water", 500)));
+
+        //Chilled Water
+        simpleMeltingRecipe(List.of(getFluidStack("chilled_water", 1000)), Items.SNOW_BLOCK,
+                "chilled_water/snow", ResourceType.STORAGE_BLOCKS, getTempFromFluid("chilled_water"));
+
+        simpleMeltingRecipe(List.of(getFluidStack("chilled_water", 250)), Items.SNOW,
+                "chilled_water/snow_ball", ResourceType.DUSTS, getTempFromFluid("chilled_water"));
+
+        //Iced Water
+        simpleMeltingRecipe(List.of(getFluidStack("iced_water", 1000)), Items.ICE,
+                "iced_water/ice", ResourceType.STORAGE_BLOCKS, getTempFromFluid("iced_water"));
+
+        simpleMeltingRecipe(List.of(getFluidStack("iced_water", 9000)), Items.PACKED_ICE,
+                "iced_water/packed_ice", ResourceType.STORAGE_BLOCKS, getTempFromFluid("iced_water"));
+
+        simpleMeltingRecipe(List.of(getFluidStack("iced_water", 81000)), Items.BLUE_ICE,
+                "iced_water/blue_ice", ResourceType.STORAGE_BLOCKS, getTempFromFluid("iced_water"));
+
+
+        //Fuel - Cool
+        FuelRecipeBuilder.fuelRecipesBuilder(new FluidStackTemplate(Fluids.LAVA, 25), 1000).save(output, "lava");
+        FuelRecipeBuilder.fuelRecipesBuilder(getFluidStack("molten_obsidian", 20), getTempFromFluid("molten_obsidian")).save(output, "obsidian");
+        FuelRecipeBuilder.fuelRecipesBuilder(getFluidStack("molten_coal", 25), getTempFromFluid("molten_coal")).save(output, "coal");
+        FuelRecipeBuilder.fuelRecipesBuilder(getFluidStack("molten_uranium", 15), getTempFromFluid("molten_uranium")).save(output, "uranium");
+        FuelRecipeBuilder.fuelRecipesBuilder(getFluidStack("molten_blaze", 25), getTempFromFluid("molten_blaze")).save(output, "blaze");
+
+        //Fuels - Heat
+        FuelRecipeBuilder.fuelRecipesBuilder(new FluidStackTemplate(Fluids.WATER , 25), 600).save(output, "water");
+        FuelRecipeBuilder.fuelRecipesBuilder(getFluidStack("chilled_water", 20), getTempFromFluid("chilled_water")).save(output, "chilled_water");
+        FuelRecipeBuilder.fuelRecipesBuilder(getFluidStack("iced_water", 15), getTempFromFluid("iced_water")).save(output, "iced_water");
+        FuelRecipeBuilder.fuelRecipesBuilder(getFluidStack("super_coolant", 5), getTempFromFluid("super_coolant")).save(output, "super_coolant");
+
+
 
     }
 
@@ -270,11 +308,11 @@ public class CastingProcessingRecipeProvider extends RecipeProvider {
         Fluid fluid = CastingFluids.FLUIDS_MAP.get(fluidName).getFluid();
 
         Item mold = getMainMold(type);
-        generateSubRecipe(materialName, type.getResourceType(), baseMb, 1, mold, fluid);
+        generateSubRecipe(materialName, type.getResourceType(), baseMb, 1, mold, fluid, temp);
         generateMeltingRecipe(materialName, type.getResourceType(), baseMb, 1, fluid, temp);
 
         int blockMultiplier = (type == ProcessingType.GEMS4 || type == ProcessingType.DUST4) ? 4 : 9;
-        generateSubRecipe(materialName, ResourceType.STORAGE_BLOCKS, baseMb * blockMultiplier, 1, CastingItems.BLOCK_MOLD.get(), fluid);
+        generateSubRecipe(materialName, ResourceType.STORAGE_BLOCKS, baseMb * blockMultiplier, 1, CastingItems.BLOCK_MOLD.get(), fluid, temp);
         generateMeltingRecipe(materialName, ResourceType.STORAGE_BLOCKS, baseMb * blockMultiplier, 1, fluid, temp);
         processBoth(materialName, ResourceType.NUGGETS, baseMb / 9, 1, CastingItems.NUGGET_MOLD.get(), fluid, temp);
         processBoth(materialName, ResourceType.PLATES, baseMb, 1, CastingItems.PLATE_MOLD.get(), fluid, temp);
@@ -289,11 +327,11 @@ public class CastingProcessingRecipeProvider extends RecipeProvider {
     }
 
     private void processBoth(String mat, ResourceType res, int mb, int count, Item mold, Fluid f, int t) {
-        generateSubRecipe(mat, res, mb, count, mold, f);
+        generateSubRecipe(mat, res, mb, count, mold, f, t);
         generateMeltingRecipe(mat, res, mb, 1, f, t);
     }
 
-    private void generateSubRecipe(String material, ResourceType resourceType, int fluidAmount, int outputCount, Item mold, Fluid fluid) {
+    private void generateSubRecipe(String material, ResourceType resourceType, int fluidAmount, int outputCount, Item mold, Fluid fluid, int temp) {
         TagKey<Item> tag = CommonTags.getItemTag(resourceType, material);
 
         String typePath = switch (resourceType) {
@@ -312,7 +350,9 @@ public class CastingProcessingRecipeProvider extends RecipeProvider {
         SolidifierRecipeBuilder.solidifierRecipesBuilder(
                         SizedIngredient.of(mold, 1),
                         new SizedIngredient(Ingredient.of(tag(tag).getValues()), outputCount),
-                        new FluidStackTemplate(fluid, fluidAmount))
+                        new FluidStackTemplate(fluid, fluidAmount),
+                        temp,
+                        Optional.of(getDurationModifier(resourceType)))
                 .unlockedBy("has_mold", has(mold))
                 .save(output.withConditions(new NotCondition(new TagEmptyCondition<>(tag))),
                         material + "/" + typePath);
@@ -326,7 +366,7 @@ public class CastingProcessingRecipeProvider extends RecipeProvider {
         MeltingRecipeBuilder.meltingRecipesBuilder(
                         new SizedIngredient(Ingredient.of(tag(tag).getValues()), inputCount),
                         List.of(new FluidStackTemplate(fluid, fluidAmount)),
-                        temp)
+                        temp, Optional.of(getDurationModifier(resourceType)))
                 .unlockedBy("has_" + typePath, has(tag))
                 .save(output.withConditions(new NotCondition(new TagEmptyCondition<>(tag))),
                         material + "/" + typePath);
@@ -337,8 +377,8 @@ public class CastingProcessingRecipeProvider extends RecipeProvider {
 
         MeltingRecipeBuilder.meltingRecipesBuilder(
                         new SizedIngredient(Ingredient.of(tag(tag).getValues()), 1),
-                        List.of(new FluidStackTemplate(fluid, fluidAmount), FluidStackTemplateHelper.getFluidStack("molten_experience", 10)),
-                        temp)
+                        List.of(new FluidStackTemplate(fluid, fluidAmount), getFluidStack("molten_experience", 10)),
+                        temp, Optional.of(getDurationModifier(resourceType)))
                 .unlockedBy("has_" + idSuffix, has(tag))
                 .save(output.withConditions(new NotCondition(new TagEmptyCondition<>(tag))),
                         material + "/" + idSuffix);
@@ -355,6 +395,28 @@ public class CastingProcessingRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_copper_ingot", has(CastingBlocks.MIXER))
                 .save(output, material + "alloy");
     }
+
+    public void simpleSolidifierRecipe(ItemLike block, FluidStackTemplate fluidStack, ItemLike mold, String id, ResourceType resourceType, int temp) {
+        SolidifierRecipeBuilder.solidifierRecipesBuilder(
+                SizedIngredient.of(mold, 1),
+                SizedIngredient.of(block.asItem(), 1),
+                fluidStack,
+                temp,
+                Optional.of(getDurationModifier(resourceType))).save(output, id);
+    }
+
+    public void simpleMeltingRecipe(List<FluidStackTemplate> outputs, ItemLike input, String id, ResourceType resourceType, int temp) {
+        MeltingRecipeBuilder.meltingRecipesBuilder(
+                SizedIngredient.of(input, 1),
+                outputs,
+                temp,
+                Optional.of(getDurationModifier(resourceType))).save(output, id);
+    }
+
+    public int getTempFromFluid(String fluidName) {
+        return FluidData.FLUID_DEFINITIONS.stream().filter(data -> data.name().equals(fluidName)).findFirst().orElseThrow().fluidProduceType().temp();
+    }
+
 
     private String getCleanPath(ResourceType resourceType) {
         return switch (resourceType) {
@@ -374,25 +436,17 @@ public class CastingProcessingRecipeProvider extends RecipeProvider {
         };
     }
 
-    public void createBucketRecipe() {
-
-        for (Map.Entry<String, FluidRegistryObject<FluidDeferredRegister.CoreFluidTypes,
-                BaseFlowingFluid.Source, BaseFlowingFluid.Flowing, LiquidBlock, BucketItem>> map : CastingFluids.FLUIDS_MAP.entrySet()) {
-
-            ItemStackTemplate bucket = new ItemStackTemplate(map.getValue().getBucket());
-            Fluid fluid = map.getValue().getFluid();
-
-            SolidifierRecipeBuilder.solidifierRecipesBuilder(
-                    SizedIngredient.of(Items.BUCKET, 1),
-                    SizedIngredient.of(bucket.item().value(), 1),
-                    new FluidStackTemplate(fluid, 1000)).save(output, "buckets/" + map.getKey());
-        }
-    }
-
-    public void simpleSolidifierRecipe(ItemLike block, FluidStackTemplate fluidStack, ItemLike mold, String id) {
-        SolidifierRecipeBuilder.solidifierRecipesBuilder(
-                SizedIngredient.of(mold, 1),
-                SizedIngredient.of(block.asItem(), 1),
-                fluidStack).save(output, id);
+    private double getDurationModifier(ResourceType type) {
+        return switch (type) {
+            case NUGGETS -> 0.2;
+            case RODS, WIRES -> 0.4;
+            case INGOTS, PLATES, DUSTS, GEMS -> 0.5;
+            case GEARS -> 1.2;
+            case STORAGE_BLOCKS -> 2.5;
+            case ORES -> 1.5;
+            case RAW_MATERIALS -> 1.25;
+            case RAW_STORAGE_BLOCKS -> 3.0;
+            default -> 1.0;
+        };
     }
 }

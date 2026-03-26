@@ -2,7 +2,7 @@ package com.benbenlaw.casting.integration.jei;
 
 import com.benbenlaw.casting.Casting;
 import com.benbenlaw.casting.block.CastingBlocks;
-import com.benbenlaw.casting.event.client.ClientRecipeCache;import com.benbenlaw.casting.recipe.SolidifierRecipe;
+import com.benbenlaw.casting.event.client.ClientRecipeCache;import com.benbenlaw.casting.recipe.custom.SolidifierRecipe;
 import com.benbenlaw.core.util.MouseUtil;import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.builder.ITooltipBuilder;import mezz.jei.api.gui.drawable.IDrawable;
@@ -12,21 +12,15 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import mezz.jei.api.recipe.types.IRecipeType;import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeHolder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.awt.*;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Stream;
 
 public class SolidifierRecipeCategory implements IRecipeCategory<SolidifierRecipe> {
 
@@ -109,7 +103,9 @@ public class SolidifierRecipeCategory implements IRecipeCategory<SolidifierRecip
     @Override
     public void getTooltip(ITooltipBuilder tooltip, SolidifierRecipe recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
         if (MouseUtil.isMouseAboveArea((int) mouseX, (int) mouseY, 56, 10, 0, 0, 28, 18)) {
-            tooltip.add(Component.translatable("tooltip.core.ticks", 200));
+            double modifier = recipe.durationModifier().orElse(1.0);
+            String timeString = String.valueOf((200 * modifier)).replace(".0", "");
+            tooltip.add(Component.translatable("tooltip.core.ticks", timeString));
         }
     }
 }

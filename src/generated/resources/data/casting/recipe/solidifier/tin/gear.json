@@ -9,10 +9,12 @@
     }
   ],
   "type": "casting:solidifier",
+  "duration_modifier": 1.2,
   "fluid": {
     "amount": 360,
     "id": "casting:molten_tin"
   },
+  "melting_temp": 1000,
   "mold": {
     "count": 1,
     "ingredient": "casting:gear_mold"

@@ -35,7 +35,9 @@ public class TankBlock extends SyncableBlock {
         if (!level.isClientSide()) {
             BlockEntity entity = level.getBlockEntity(pos);
             if (entity instanceof TankBlockEntity entity1) {
-                player.openMenu(new SimpleMenuProvider(entity1, entity1.getDisplayName()), pos);
+                if (entity1.onPlayerUse(player, player.getUsedItemHand())) {
+                    return InteractionResult.SUCCESS;
+                }
             } else {
                 throw new IllegalStateException("Our Container provider is missing!");
             }
@@ -50,7 +52,7 @@ public class TankBlock extends SyncableBlock {
 
     @Override
     public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(@NotNull Level level, @NotNull BlockState state, @NotNull BlockEntityType<T> blockEntityType) {
-        return createTickerHelper(blockEntityType, CastingBlockEntities.FUEL_TANK_BLOCK_ENTITY.get(),
+        return createTickerHelper(blockEntityType, CastingBlockEntities.TANK_BLOCK_ENTITY.get(),
                 (thisLevel, thisPos, thisState, thisEntity) -> thisEntity.tick());
     }
 }

@@ -1,20 +1,16 @@
 package com.benbenlaw.casting.data.custom;
 
 import com.benbenlaw.casting.Casting;
-import com.benbenlaw.casting.recipe.FuelRecipe;
+import com.benbenlaw.casting.recipe.custom.FuelRecipe;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRequirements;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.criterion.RecipeUnlockedTrigger;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidStackTemplate;
@@ -29,17 +25,15 @@ public class FuelRecipeBuilder implements RecipeBuilder {
     protected String group;
     protected FluidStackTemplate fluid;
     protected int temp;
-    protected int duration;
     protected final Map<String, Criterion<?>> criteria = new LinkedHashMap<>();
 
-    public FuelRecipeBuilder(FluidStackTemplate fluid, int temp, int duration) {
+    public FuelRecipeBuilder(FluidStackTemplate fluid, int temp) {
         this.fluid = fluid;
         this.temp = temp;
-        this.duration = duration;
     }
 
-    public static FuelRecipeBuilder fuelRecipesBuilder(FluidStackTemplate fluid, int temp, int duration) {
-        return new FuelRecipeBuilder(fluid, temp, duration);
+    public static FuelRecipeBuilder fuelRecipesBuilder(FluidStackTemplate fluid, int temp) {
+        return new FuelRecipeBuilder(fluid, temp);
     }
 
 
@@ -76,7 +70,7 @@ public class FuelRecipeBuilder implements RecipeBuilder {
                 .rewards(AdvancementRewards.Builder.recipe(resourceKey))
                 .requirements(AdvancementRequirements.Strategy.OR);
         this.criteria.forEach(builder::addCriterion);
-        FuelRecipe fuelRecipe = new FuelRecipe(this.fluid, this.temp, this.duration);
+        FuelRecipe fuelRecipe = new FuelRecipe(this.fluid, this.temp);
         recipeOutput.accept(resourceKey, fuelRecipe, builder.build(resourceKey.identifier().withPrefix("recipes/fuel/")));
 
     }

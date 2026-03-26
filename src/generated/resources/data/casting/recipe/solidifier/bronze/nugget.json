@@ -9,10 +9,12 @@
     }
   ],
   "type": "casting:solidifier",
+  "duration_modifier": 0.2,
   "fluid": {
     "amount": 10,
     "id": "casting:molten_bronze"
   },
+  "melting_temp": 1000,
   "mold": {
     "count": 1,
     "ingredient": "casting:nugget_mold"

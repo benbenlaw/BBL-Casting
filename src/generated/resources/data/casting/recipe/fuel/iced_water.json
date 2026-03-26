@@ -1,0 +1,8 @@
+{
+  "type": "casting:fuel",
+  "fluid": {
+    "amount": 15,
+    "id": "casting:iced_water"
+  },
+  "temp": 200
+}

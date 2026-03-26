@@ -9,10 +9,12 @@
     }
   ],
   "type": "casting:solidifier",
+  "duration_modifier": 0.4,
   "fluid": {
     "amount": 45,
     "id": "casting:molten_silver"
   },
+  "melting_temp": 1000,
   "mold": {
     "count": 1,
     "ingredient": "casting:rod_mold"

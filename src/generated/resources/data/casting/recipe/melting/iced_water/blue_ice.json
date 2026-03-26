@@ -1,0 +1,15 @@
+{
+  "type": "casting:melting",
+  "durationModifier": 2.5,
+  "input": {
+    "count": 1,
+    "ingredient": "minecraft:blue_ice"
+  },
+  "meltingTemp": 200,
+  "output": [
+    {
+      "amount": 81000,
+      "id": "casting:iced_water"
+    }
+  ]
+}

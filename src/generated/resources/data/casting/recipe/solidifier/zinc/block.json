@@ -9,10 +9,12 @@
     }
   ],
   "type": "casting:solidifier",
+  "duration_modifier": 2.5,
   "fluid": {
     "amount": 810,
     "id": "casting:molten_zinc"
   },
+  "melting_temp": 1000,
   "mold": {
     "count": 1,
     "ingredient": "casting:block_mold"

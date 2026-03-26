@@ -30,9 +30,8 @@ public class CastingBlockTags extends BlockTagsProvider {
                 .add(CastingBlocks.BLACK_BRICK_GLASS.get())
                 .add(CastingBlocks.SOLIDIFIER.get())
                 .add(CastingBlocks.MIXER.get())
-                .add(CastingBlocks.FUEL_TANK.get())
+                .add(CastingBlocks.TANK.get())
                 .add(CastingBlocks.CONTROLLER.get())
-                .add(CastingBlocks.COOLANT_TANK.get())
         ;
 
         //Processing Tags

@@ -9,6 +9,7 @@
     }
   ],
   "type": "casting:melting",
+  "durationModifier": 0.5,
   "input": {
     "count": 1,
     "ingredient": "#c:ingots/silicon"

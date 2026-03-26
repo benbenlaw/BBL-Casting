@@ -9,6 +9,7 @@
     }
   ],
   "type": "casting:melting",
+  "durationModifier": 1.5,
   "input": {
     "count": 1,
     "ingredient": "#c:ores/quartz_enriched_iron"

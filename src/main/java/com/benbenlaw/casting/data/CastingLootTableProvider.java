@@ -35,8 +35,7 @@ public class CastingLootTableProvider extends VanillaBlockLoot {
         this.dropWithFluidComponent(CastingBlocks.CONTROLLER.get());
         this.dropWithFluidComponent(CastingBlocks.SOLIDIFIER.get());
         this.dropWithFluidComponent(CastingBlocks.MIXER.get());
-        this.dropWithFluidComponent(CastingBlocks.FUEL_TANK.get());
-        this.dropWithFluidComponent(CastingBlocks.COOLANT_TANK.get());
+        this.dropWithFluidComponent(CastingBlocks.TANK.get());
     }
 
 

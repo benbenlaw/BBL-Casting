@@ -2,9 +2,7 @@ package com.benbenlaw.casting.integration.jei;
 
 import com.benbenlaw.casting.Casting;
 import com.benbenlaw.casting.block.CastingBlocks;
-import com.benbenlaw.casting.event.client.ClientRecipeCache;import com.benbenlaw.casting.recipe.MixingRecipe;
-import com.benbenlaw.casting.recipe.SolidifierRecipe;
-import com.benbenlaw.core.recipe.NoInventoryRecipe;
+import com.benbenlaw.casting.event.client.ClientRecipeCache;import com.benbenlaw.casting.recipe.custom.MixingRecipe;
 import com.benbenlaw.core.util.MouseUtil;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
@@ -20,14 +18,10 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import mezz.jei.api.recipe.types.IRecipeType;import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Recipe;import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidStackTemplate;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -133,7 +127,6 @@ public class MixingRecipeCategory implements IRecipeCategory<MixingRecipe> {
     @Override
     public void draw(MixingRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphicsExtractor guiGraphics, double mouseX, double mouseY) {
         guiGraphics.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, 0, 0, 0, 0, width, height, width, height);
-
     }
 
     public void createRecipeExtras(IRecipeExtrasBuilder builder, MixingRecipe recipe, IFocusGroup focuses) {

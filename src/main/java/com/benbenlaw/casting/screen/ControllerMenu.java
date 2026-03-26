@@ -20,7 +20,7 @@ public class ControllerMenu extends SimpleAbstractContainerMenu {
     protected BlockPos blockPos;
 
     public ControllerMenu(int containerID, Inventory inventory, FriendlyByteBuf extraData) {
-        this(containerID, inventory, extraData.readBlockPos(), new SimpleContainerData(30));
+        this(containerID, inventory, extraData.readBlockPos(), new SimpleContainerData(31));
     }
     public ControllerMenu(int containerID, Inventory inventory, BlockPos blockPos, ContainerData data) {
         super(CastingMenuTypes.CONTROLLER_MENU.get(), containerID, inventory, blockPos, 15);

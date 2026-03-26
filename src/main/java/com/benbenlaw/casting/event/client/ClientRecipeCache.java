@@ -1,8 +1,9 @@
 package com.benbenlaw.casting.event.client;
 
-import com.benbenlaw.casting.recipe.MeltingRecipe;
-import com.benbenlaw.casting.recipe.MixingRecipe;
-import com.benbenlaw.casting.recipe.SolidifierRecipe;
+import com.benbenlaw.casting.recipe.custom.FuelRecipe;
+import com.benbenlaw.casting.recipe.custom.MeltingRecipe;
+import com.benbenlaw.casting.recipe.custom.MixingRecipe;
+import com.benbenlaw.casting.recipe.custom.SolidifierRecipe;
 import net.minecraft.resources.Identifier;
 
 import java.util.Collection;
@@ -43,6 +44,19 @@ public class ClientRecipeCache {
     public static Collection<MixingRecipe> getCachedMixingRecipes() {
         return cachedMixingRecipes.values();
     }
+
+    //Fuel Recipes
+    public static Map<Identifier, FuelRecipe> cachedFuelRecipes = new HashMap<>();
+
+    public static void setCachedFuelRecipes(Map<Identifier, FuelRecipe> cachedFuelRecipes) {
+        ClientRecipeCache.cachedFuelRecipes = cachedFuelRecipes;
+    }
+
+    public static Collection<FuelRecipe> getCachedFuelRecipes() {
+        return cachedFuelRecipes.values();
+    }
+
+
 
 
 

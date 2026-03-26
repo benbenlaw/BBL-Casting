@@ -51,13 +51,7 @@ public class CastingBlocks {
                     .requiresCorrectToolForDrops()
                     .noOcclusion()));
 
-    public static final DeferredBlock<Block> FUEL_TANK = registerBlock("fuel_tank",
-            properties -> new TankBlock(properties
-                    .strength(1.0F)
-                    .requiresCorrectToolForDrops()
-                    .noOcclusion()));
-
-    public static final DeferredBlock<Block> COOLANT_TANK = registerBlock("coolant_tank",
+    public static final DeferredBlock<Block> TANK = registerBlock("tank",
             properties -> new TankBlock(properties
                     .strength(1.0F)
                     .requiresCorrectToolForDrops()
