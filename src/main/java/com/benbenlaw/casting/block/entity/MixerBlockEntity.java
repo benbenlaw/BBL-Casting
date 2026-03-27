@@ -8,6 +8,7 @@ import com.benbenlaw.casting.item.util.FluidListComponent;
 import com.benbenlaw.casting.recipe.custom.MixingRecipe;
 import com.benbenlaw.casting.screen.MixerMenu;
 import com.benbenlaw.core.block.entity.SyncableBlockEntity;
+import com.benbenlaw.core.block.entity.handler.fluid.FilterFluidHandler;
 import com.benbenlaw.core.block.entity.handler.fluid.InputFluidHandler;
 import com.benbenlaw.core.block.entity.handler.fluid.OutputFluidHandler;
 import net.minecraft.core.BlockPos;
@@ -35,14 +36,15 @@ import net.neoforged.neoforge.transfer.fluid.FluidUtil;
 import net.neoforged.neoforge.transfer.transaction.Transaction;
 import org.jetbrains.annotations.Nullable;
 
-public class MixerBlockEntity extends SyncableBlockEntity implements MenuProvider {
+public class MixerBlockEntity extends SyncableBlockEntity implements MenuProvider, FluidSending, FluidAccepting {
 
     private final ContainerData data;
     private int maxProgress = 200;
     private int progress = 0;
 
-    private final InputFluidHandler inputFluidHandler = new InputFluidHandler(this, 4, 16000, (i, stack) -> i <= 3);
+    private final InputFluidHandler inputFluidHandler = new InputFluidHandler(this, 4, 8000, (i, stack) -> i <= 3);
     private final OutputFluidHandler outputFluidHandler = new OutputFluidHandler(this, 1, 16000, i -> i == 0);
+    private FilterFluidHandler filterFluidHandler = new FilterFluidHandler(this, 4);
 
     private RecipeHolder<MixingRecipe> cachedRecipes;
 
@@ -118,6 +120,7 @@ public class MixerBlockEntity extends SyncableBlockEntity implements MenuProvide
         }
 
         updateWorkingState(isCurrentlyWorking);
+        this.tickResourceSending(level, worldPosition);
 
         if (changed) {
             setChanged();
@@ -155,8 +158,6 @@ public class MixerBlockEntity extends SyncableBlockEntity implements MenuProvide
 
                 if (remainingToDrain > 0) return;
             }
-            tx.commit();
-
 
             FluidStack outputStack = recipe.outputFluid().create();
             outputFluidHandler.insertInternal(
@@ -222,6 +223,11 @@ public class MixerBlockEntity extends SyncableBlockEntity implements MenuProvide
         return new CombinedResourceHandler<>(inputFluidHandler, outputFluidHandler);
     }
 
+    public FilterFluidHandler getFilterFluidHandler() {
+        return filterFluidHandler;
+    }
+
+
     @Override
     public @Nullable AbstractContainerMenu createMenu(int container, Inventory inventory, Player player) {
         return new MixerMenu(container, inventory, this.worldPosition, data);
@@ -237,6 +243,7 @@ public class MixerBlockEntity extends SyncableBlockEntity implements MenuProvide
 
         inputFluidHandler.serialize(output.child("inputFluids"));
         outputFluidHandler.serialize(output.child("outputFluid"));
+        filterFluidHandler.serialize(output.child("filterFluids"));
         output.putInt("progress", progress);
         output.putInt("maxProgress", maxProgress);
 
@@ -249,6 +256,7 @@ public class MixerBlockEntity extends SyncableBlockEntity implements MenuProvide
 
         inputFluidHandler.deserialize(input.childOrEmpty("inputFluids"));
         outputFluidHandler.deserialize(input.childOrEmpty("outputFluid"));
+        filterFluidHandler.deserialize(input.childOrEmpty("filterFluids"));
         progress = input.getIntOr("progress", 0);
         maxProgress = input.getIntOr("maxProgress", 200);
 
@@ -273,5 +281,20 @@ public class MixerBlockEntity extends SyncableBlockEntity implements MenuProvide
             System.out.println(component.fluids());
             component.applyToHandlers(inputFluidHandler, outputFluidHandler);
         }
+    }
+
+    @Override
+    public InputFluidHandler receivingHandler() {
+        return inputFluidHandler;
+    }
+
+    @Override
+    public @Nullable FilterFluidHandler getFilter() {
+        return filterFluidHandler;
+    }
+
+    @Override
+    public OutputFluidHandler sendingHandler() {
+        return outputFluidHandler;
     }
 }

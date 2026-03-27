@@ -2,13 +2,19 @@ package com.benbenlaw.casting.screen;
 
 import com.benbenlaw.casting.block.entity.MixerBlockEntity;
 import com.benbenlaw.core.screen.SimpleAbstractContainerMenu;
+import com.benbenlaw.core.screen.util.slot.FilterFluidSlot;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.inventory.ContainerInput;
 import net.minecraft.world.inventory.SimpleContainerData;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.transfer.fluid.FluidUtil;
 
 public class MixerMenu extends SimpleAbstractContainerMenu {
 
@@ -30,7 +36,37 @@ public class MixerMenu extends SimpleAbstractContainerMenu {
         this.data = data;
         this.blockEntity = (MixerBlockEntity) this.level.getBlockEntity(blockPos);
 
+
+        SimpleContainer fluidFilterContainer = new SimpleContainer(4);
+        assert blockEntity != null;
+        this.addSlot(new FilterFluidSlot(fluidFilterContainer, blockEntity.getFilterFluidHandler(), 0, 8, 20));
+        this.addSlot(new FilterFluidSlot(fluidFilterContainer, blockEntity.getFilterFluidHandler(), 1, 35, 20));
+        this.addSlot(new FilterFluidSlot(fluidFilterContainer, blockEntity.getFilterFluidHandler(), 2, 62, 20));
+        this.addSlot(new FilterFluidSlot(fluidFilterContainer, blockEntity.getFilterFluidHandler(), 3, 89, 20));
+
+
+
         this.addDataSlots(data);
+    }
+
+    @Override
+    public void clicked(int slotId, int button, ContainerInput clickType, Player player) {
+        if (slotId >= 0 && slotId < slots.size()) {
+            if (this.slots.get(slotId) instanceof FilterFluidSlot filterSlot) {
+
+                if (this.getCarried().isEmpty()) {
+                    filterSlot.setEmpty();
+                } else {
+                    ItemStack carried = this.getCarried();
+                    FluidStack fluidInStack = FluidUtil.getFirstStackContained(carried);
+                    if (!fluidInStack.isEmpty()) {
+                        filterSlot.set(fluidInStack);
+                    }
+                }
+                return;
+            }
+            super.clicked(slotId, button, clickType, player);
+        }
     }
 
     public boolean isCrafting() {

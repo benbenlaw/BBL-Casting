@@ -34,11 +34,15 @@ public class MixerScreen extends AbstractContainerScreen<MixerMenu> {
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
 
+
         guiGraphics.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, x, y, 0, 0, imageWidth, imageHeight, 256, 256);
+
 
         if (menu.isCrafting()) {
             guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, PROGRESS_ARROW, 24, 16, 0, 0, x + 117, y + 34, menu.getScaledProgress() + 1, 16);
         }
+
+        renderTankTextures(guiGraphics, x, y, mouseX, mouseY);
     }
 
     @Override
@@ -48,16 +52,19 @@ public class MixerScreen extends AbstractContainerScreen<MixerMenu> {
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
 
-        renderTankTextures(guiGraphics, x, y, mouseX, mouseY);
         DurationTooltip.renderDurationTooltip(guiGraphics, mouseX, mouseY, x, y, 161, 5, menu.data.get(0), menu.data.get(1));
         renderTankTooltips(guiGraphics, x, y, mouseX, mouseY);
     }
 
     private void renderTankTextures(GuiGraphicsExtractor guiGraphics, int x, int y, int mouseX, int mouseY) {
-        drawTankFluid(guiGraphics, menu.blockEntity.getInputFluidHandler(), 0, x + 8, y + 20, 16, 47);
-        drawTankFluid(guiGraphics, menu.blockEntity.getInputFluidHandler(), 1, x + 35, y + 20, 16, 47);
-        drawTankFluid(guiGraphics, menu.blockEntity.getInputFluidHandler(), 2, x + 62, y + 20, 16, 47);
-        drawTankFluid(guiGraphics, menu.blockEntity.getInputFluidHandler(), 3, x + 89, y + 20, 16, 47);
+        drawTankFluid(guiGraphics, menu.blockEntity.getInputFluidHandler(), 0, x + 8, y + 44, 16, 23);
+        drawTankFluid(guiGraphics, menu.blockEntity.getInputFluidHandler(), 1, x + 35, y + 44, 16, 23);
+        drawTankFluid(guiGraphics, menu.blockEntity.getInputFluidHandler(), 2, x + 62, y + 44, 16, 23);
+        drawTankFluid(guiGraphics, menu.blockEntity.getInputFluidHandler(), 3, x + 89, y + 44, 16, 23);
+
+        for (int i = 0; i < 4; i++) {
+            drawTankFluid(guiGraphics, menu.blockEntity.getFilterFluidHandler(), i, x + 8 + (i * 27), y + 20, 16, 16);
+        }
 
         drawTankFluid(guiGraphics, menu.blockEntity.getOutputFluidHandler(), 0, x + 152, y + 20, 16, 47);
     }
@@ -68,17 +75,21 @@ public class MixerScreen extends AbstractContainerScreen<MixerMenu> {
 
         if (!stack.isEmpty()) {
             int capacity = fluidHandler.getCapacityAsInt(slot, FluidResource.of(stack));
-            int displayLevel = (int)((float)stack.getAmount() / (float)capacity * (float)height);
+            int displayLevel = (int) ((float) stack.getAmount() / (float) capacity * (float) height);
 
             FluidRenderingUtils.renderFluidStack(guiGraphics, stack, x, y + height - displayLevel, width, displayLevel, 0, 0);
         }
     }
 
     private void renderTankTooltips(GuiGraphicsExtractor guiGraphics, int x, int y, int mouseX, int mouseY) {
-        drawTankTooltip(guiGraphics, menu.blockEntity.getInputFluidHandler(), 0, x + 8, y + 20, 16, 47, mouseX, mouseY);
-        drawTankTooltip(guiGraphics, menu.blockEntity.getInputFluidHandler(), 1, x + 35, y + 20, 16, 47, mouseX, mouseY);
-        drawTankTooltip(guiGraphics, menu.blockEntity.getInputFluidHandler(), 2, x + 62, y + 20, 16, 47, mouseX, mouseY);
-        drawTankTooltip(guiGraphics, menu.blockEntity.getInputFluidHandler(), 3, x + 89, y + 20, 16, 47, mouseX, mouseY);
+        drawTankTooltip(guiGraphics, menu.blockEntity.getInputFluidHandler(), 0, x + 8, y + 44, 16, 23, mouseX, mouseY);
+        drawTankTooltip(guiGraphics, menu.blockEntity.getInputFluidHandler(), 1, x + 35, y + 44, 16, 23, mouseX, mouseY);
+        drawTankTooltip(guiGraphics, menu.blockEntity.getInputFluidHandler(), 2, x + 62, y + 44, 16, 23, mouseX, mouseY);
+        drawTankTooltip(guiGraphics, menu.blockEntity.getInputFluidHandler(), 3, x + 89, y + 44, 16, 23, mouseX, mouseY);
+
+        for (int i = 0; i < 4; i++) {
+            drawTankTooltip(guiGraphics, menu.blockEntity.getFilterFluidHandler(), i, x + 8 + (i * 27), y + 20, 16, 16, mouseX, mouseY);
+        }
 
         drawTankTooltip(guiGraphics, menu.blockEntity.getOutputFluidHandler(), 0, x + 152, y + 20, 16, 47, mouseX, mouseY);
     }
@@ -90,7 +101,7 @@ public class MixerScreen extends AbstractContainerScreen<MixerMenu> {
         if (mouseX >= x && mouseX < x + width && mouseY >= y && mouseY < y + height) {
 
             if (stack.isEmpty()) {
-                Component text = Component.literal("Empty");
+                Component text = Component.literal("Empty Filter");
                 List<ClientTooltipComponent> components = List.of(ClientTooltipComponent.create(text.getVisualOrderText()));
 
                 guiGraphics.tooltip(

@@ -40,7 +40,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.OptionalInt;
 
-public class ControllerBlockEntity extends SyncableBlockEntity implements MenuProvider {
+public class ControllerBlockEntity extends SyncableBlockEntity implements MenuProvider, FluidSending {
 
     private final ContainerData data;
 
@@ -52,7 +52,7 @@ public class ControllerBlockEntity extends SyncableBlockEntity implements MenuPr
             new InputItemHandler(this, 15, (i, stack) -> i >= 0 && i <= 14);
 
     private final OutputFluidHandler outputFluidHandler =
-            new OutputFluidHandler(this, 4, 16000, i -> i >= 0 && i <= 3);
+            new OutputFluidHandler(this, 4, 8000, i -> i >= 0 && i <= 3);
 
     public ControllerBlockEntity(BlockPos pos, BlockState state) {
         super(CastingBlockEntities.CONTROLLER_BLOCK_ENTITY.get(), pos, state);
@@ -94,6 +94,7 @@ public class ControllerBlockEntity extends SyncableBlockEntity implements MenuPr
             updateWorkingState(false);
             return;
         }
+
 
         int currentTemp = temperature.getAsInt();
         boolean changed = false;
@@ -144,7 +145,7 @@ public class ControllerBlockEntity extends SyncableBlockEntity implements MenuPr
         }
 
         updateWorkingState(isWorking);
-
+        this.tickResourceSending(level, worldPosition);
         if (changed) {
             setChanged();
             sync();
@@ -286,5 +287,10 @@ public class ControllerBlockEntity extends SyncableBlockEntity implements MenuPr
         super.applyImplicitComponents(components);
         FluidListComponent component = components.get(CastingDataComponents.FLUIDS.get());
         if (component != null) component.applyToHandlers(outputFluidHandler);
+    }
+
+    @Override
+    public OutputFluidHandler sendingHandler() {
+        return outputFluidHandler;
     }
 }

@@ -81,7 +81,7 @@ dependencies {
     //BBL Core
     implementation("curse.maven:bblcore-1135181:${core_version}")
     //Routers
-    implementation("curse.maven:bbl-routers-1334500:7711063")
+    implementation("curse.maven:bbl-routers-1334500:7805885")
 
 }
 

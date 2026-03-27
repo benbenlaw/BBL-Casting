@@ -8,7 +8,9 @@ import com.benbenlaw.casting.recipe.*;
 import com.benbenlaw.casting.recipe.custom.SolidifierRecipe;
 import com.benbenlaw.casting.screen.ControllerScreen;
 import com.benbenlaw.casting.screen.MixerScreen;
+import com.benbenlaw.casting.screen.SolidifierMenu;
 import com.benbenlaw.casting.screen.SolidifierScreen;
+import com.benbenlaw.core.integration.jei.GhostFilter;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.VanillaTypes;
@@ -107,6 +109,8 @@ public class JEICastingPlugin implements IModPlugin {
         registration.addRecipeClickArea(MixerScreen.class, 117, 34, 24, 16, MixingRecipeCategory.RECIPE_TYPE);
         registration.addRecipeClickArea(SolidifierScreen.class, 76, 34, 24, 16, SolidifierRecipeCategory.RECIPE_TYPE);
 
+        registration.addGhostIngredientHandler(SolidifierScreen.class, new GhostFilter<>());
+        registration.addGhostIngredientHandler(MixerScreen.class, new GhostFilter<>());
     }
 
 }

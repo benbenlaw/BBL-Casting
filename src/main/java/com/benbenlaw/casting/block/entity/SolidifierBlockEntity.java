@@ -9,6 +9,7 @@ import com.benbenlaw.casting.recipe.custom.MixingRecipe;
 import com.benbenlaw.casting.recipe.custom.SolidifierRecipe;
 import com.benbenlaw.casting.screen.SolidifierMenu;
 import com.benbenlaw.core.block.entity.SyncableBlockEntity;
+import com.benbenlaw.core.block.entity.handler.fluid.FilterFluidHandler;
 import com.benbenlaw.core.block.entity.handler.fluid.InputFluidHandler;
 import com.benbenlaw.core.block.entity.handler.item.CombinedItemHandler;
 import com.benbenlaw.core.block.entity.handler.item.InputItemHandler;
@@ -45,7 +46,7 @@ import org.jspecify.annotations.NonNull;
 
 import java.util.OptionalInt;
 
-public class SolidifierBlockEntity extends SyncableBlockEntity implements MenuProvider {
+public class SolidifierBlockEntity extends SyncableBlockEntity implements MenuProvider, FluidAccepting {
 
     private final ContainerData data;
     private int maxProgress = 200;
@@ -53,8 +54,9 @@ public class SolidifierBlockEntity extends SyncableBlockEntity implements MenuPr
     private OptionalInt temperature = OptionalInt.empty();
 
     private final InputItemHandler inputHandler = new InputItemHandler(this, 1, (i, stack) -> i == 0);
-    private final InputFluidHandler inputFluidHandler = new InputFluidHandler(this, 1, 16000, (i, stack) -> i == 0);
+    private final InputFluidHandler inputFluidHandler = new InputFluidHandler(this, 1, 8000, (i, stack) -> i == 0);
     private final OutputItemHandler outputHandler = new OutputItemHandler(this, 1, i -> i == 0);
+    private FilterFluidHandler filterFluidHandler = new FilterFluidHandler(this, 1);
 
     public SolidifierBlockEntity(BlockPos pos, BlockState state) {
         super(CastingBlockEntities.SOLIDIFIER_BLOCK_ENTITY.get(), pos, state);
@@ -289,6 +291,7 @@ public class SolidifierBlockEntity extends SyncableBlockEntity implements MenuPr
         inputHandler.serialize(output.child("input"));
         inputFluidHandler.serialize(output.child("inputFluid"));
         outputHandler.serialize(output.child("output"));
+        filterFluidHandler.serialize(output.child("filterFluid"));
         output.putInt("progress", progress);
         output.putInt("maxProgress", maxProgress);
 
@@ -302,6 +305,7 @@ public class SolidifierBlockEntity extends SyncableBlockEntity implements MenuPr
         inputHandler.deserialize(input.childOrEmpty("input"));
         inputFluidHandler.deserialize(input.childOrEmpty("inputFluid"));
         outputHandler.deserialize(input.childOrEmpty("output"));
+        filterFluidHandler.deserialize(input.childOrEmpty("filterFluid"));
         progress = input.getIntOr("progress", 0);
         maxProgress = input.getIntOr("maxProgress", 200);
 
@@ -316,6 +320,7 @@ public class SolidifierBlockEntity extends SyncableBlockEntity implements MenuPr
     public OutputItemHandler getOutputHandler() { return outputHandler; }
     public ResourceHandler<ItemResource> getItemCapability() { return new CombinedItemHandler(inputHandler, outputHandler); }
     public ResourceHandler<FluidResource> getFluidCapability() { return inputFluidHandler; }
+    public FilterFluidHandler getFilterFluidHandler() { return filterFluidHandler; }
 
     @Override
     public @Nullable AbstractContainerMenu createMenu(int container, @NonNull Inventory inventory, @NonNull Player player) {
@@ -346,5 +351,15 @@ public class SolidifierBlockEntity extends SyncableBlockEntity implements MenuPr
         if (component != null) {
             component.applyToHandlers(inputFluidHandler);
         }
+    }
+
+    @Override
+    public InputFluidHandler receivingHandler() {
+        return inputFluidHandler;
+    }
+
+    @Override
+    public @Nullable FilterFluidHandler getFilter() {
+        return filterFluidHandler;
     }
 }
