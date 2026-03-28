@@ -40,7 +40,10 @@ public class CastingBlock extends SyncableBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        // 1. Add FACING and RUNNING from SyncableBlock
         super.createBlockStateDefinition(builder);
+        // 2. Add your new WORKING property
+        builder.add(WORKING);
     }
 
     public static void setWorkingState(Level level, BlockPos pos, boolean working) {
