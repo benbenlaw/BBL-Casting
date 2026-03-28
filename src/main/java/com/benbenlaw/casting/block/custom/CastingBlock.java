@@ -11,12 +11,15 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import org.jetbrains.annotations.NotNull;
 
 public class CastingBlock extends SyncableBlock {
 
     public static final BooleanProperty WORKING = BooleanProperty.create("working");
+    public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
 
     public CastingBlock(BlockBehaviour.Properties properties) {
         super(properties);
@@ -26,6 +29,7 @@ public class CastingBlock extends SyncableBlock {
                 .setValue(WORKING, false));
     }
 
+    @Override
     protected @NotNull MapCodec<? extends BaseEntityBlock> codec() {
         return simpleCodec(CastingBlock::new);
     }
@@ -40,10 +44,7 @@ public class CastingBlock extends SyncableBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        // 1. Add FACING and RUNNING from SyncableBlock
-        super.createBlockStateDefinition(builder);
-        // 2. Add your new WORKING property
-        builder.add(WORKING);
+        builder.add(FACING, RUNNING, WORKING);
     }
 
     public static void setWorkingState(Level level, BlockPos pos, boolean working) {
