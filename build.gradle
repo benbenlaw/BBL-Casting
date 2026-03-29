@@ -177,9 +177,12 @@ modrinth {
 }
 
 tasks.register('publishMod') {
-    dependsOn ordered('publish', 'modrinth', 'publishCurseForge')
+    dependsOn 'publish', 'modrinth', 'publishCurseForge'
+
+    tasks.named('modrinth').mustRunAfter 'publish'
+    tasks.named('publishCurseForge').mustRunAfter 'modrinth'
 
     doLast {
-        publishDiscord()
+        println("All mod publishing tasks completed successfully!")
     }
 }
