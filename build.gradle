@@ -37,8 +37,13 @@ base {
     archivesName = mod_id
 }
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(25)
-
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(25)
+        vendor = null
+    }
+    withSourcesJar()
+}
 neoForge {
     version = project.neo_version
 
@@ -180,6 +185,6 @@ tasks.register('publishMod') {
     dependsOn 'publish', 'modrinth', 'publishCurseForge'
 
     doLast {
-        println("All mod publishing tasks completed successfully!")
+        publishDiscord()
     }
 }

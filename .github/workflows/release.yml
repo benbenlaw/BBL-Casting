@@ -5,10 +5,10 @@ jobs:
   build:
     runs-on: ubuntu-22.04
     container:
-      image: eclipse-temurin:25-jdk-focal
+      image: mcr.microsoft.com/openjdk/jdk:21-ubuntu
+      options: --user root
     steps:
       - uses: actions/checkout@v4
-      - run: chmod +x ./gradlew
       - run: ./gradlew build publishMod
         env:
           CURSEFORGE_KEY: ${{ secrets.CURSEFORGE_KEY }}
