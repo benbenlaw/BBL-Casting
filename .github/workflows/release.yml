@@ -3,8 +3,7 @@ name: Auto Publish Mod
 on:
   push:
     branches:
-      - main
-      - release/*
+      - ${{ steps.meta.outputs.minecraft_version }}
 
 concurrency:
   group: auto-publish-${{ github.ref_name || github.run_id }}
