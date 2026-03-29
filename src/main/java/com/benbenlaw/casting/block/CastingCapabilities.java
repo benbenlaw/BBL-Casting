@@ -28,9 +28,12 @@ public class CastingCapabilities {
 
 
         //Mixer
-        event.registerBlockEntity(Capabilities.Fluid.BLOCK, CastingBlockEntities.MIXER_BLOCK_ENTITY
-                .get(), (blockEntity, side) -> blockEntity.getFluidCapability());
+        event.registerBlockEntity(Capabilities.Fluid.BLOCK, CastingBlockEntities.MIXER_BLOCK_ENTITY.get(),
+                (blockEntity, side) -> blockEntity.getFluidCapability());
 
+        //Tank
+        event.registerBlockEntity(Capabilities.Fluid.BLOCK, CastingBlockEntities.TANK_BLOCK_ENTITY.get(),
+                (blockEntity, side) -> blockEntity.getFluidCapability());
 
     }
 }

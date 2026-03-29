@@ -18,6 +18,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.fluid.FluidResource;
 import net.neoforged.neoforge.transfer.fluid.FluidUtil;
 import org.jspecify.annotations.NonNull;
 
@@ -49,6 +51,9 @@ public class TankBlockEntity extends SyncableBlockEntity{
     }
 
     public InputFluidHandler getInputFluidHandler() {
+        return inputFluidHandler;
+    }
+    public ResourceHandler<FluidResource> getFluidCapability() {
         return inputFluidHandler;
     }
 

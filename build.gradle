@@ -176,3 +176,10 @@ modrinth {
     }
 }
 
+tasks.register('publishMod') {
+    dependsOn ordered('publish', 'modrinth', 'publishCurseForge')
+
+    doLast {
+        publishDiscord()
+    }
+}
