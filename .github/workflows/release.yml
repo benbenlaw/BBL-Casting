@@ -5,16 +5,11 @@ jobs:
   build:
     runs-on: ubuntu-22.04
     container:
-      image: mcr.microsoft.com/openjdk/jdk:21-ubuntu
-      options: --user root
+      image: eclipse-temurin:25-jdk-focal
     steps:
       - uses: actions/checkout@v4
-
-      - name: Make gradlew executable
-        run: chmod +x ./gradlew
-
-      - name: Build and publish
-        run: ./gradlew build publishMod
+      - run: chmod +x ./gradlew
+      - run: ./gradlew build publishMod
         env:
           CURSEFORGE_KEY: ${{ secrets.CURSEFORGE_KEY }}
           MODRINTH_KEY: ${{ secrets.MODRINTH_KEY }}
