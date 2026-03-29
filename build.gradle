@@ -35,10 +35,8 @@ base {
     archivesName = mod_id
 }
 
-java {
-    toolchain.languageVersion = JavaLanguageVersion.of(25)
-    withSourcesJar()
-}
+java.toolchain.languageVersion = JavaLanguageVersion.of(25)
+
 
 neoForge {
     version = project.neo_version
