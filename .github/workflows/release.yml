@@ -3,7 +3,7 @@ name: Auto Publish Mod
 on:
   push:
     branches:
-      - 26.1
+      - '*'  # trigger on all branches
 
 concurrency:
   group: auto-publish-${{ github.ref_name || github.run_id }}
@@ -36,12 +36,22 @@ jobs:
         id: meta
         shell: bash
         run: |
-          # Read mod info from gradle.properties
+          # Get current branch name
+          current_branch="${GITHUB_REF##*/}"
+          echo "Current branch: $current_branch"
+
+          # Read gradle.properties
+          minecraft_version=$(awk -F= '/^minecraft_version=/{print $2}' gradle.properties | tr -d '\r')
           mod_name=$(awk -F= '/^mod_name=/{print $2}' gradle.properties | tr -d '\r')
           mod_version=$(awk -F= '/^mod_version=/{print $2}' gradle.properties | tr -d '\r')
-          minecraft_version=$(awk -F= '/^minecraft_version=/{print $2}' gradle.properties | tr -d '\r')
-          curseforge_id=$(awk -F= '/^curseforge_project_id=/{print $2}' gradle.properties | tr -d '\r')
-          modrinth_id=$(awk -F= '/^modrinth_project_id=/{print $2}' gradle.properties | tr -d '\r')
+          curseforge_id=$(awk -F= '/^curseforge_id=/{print $2}' gradle.properties | tr -d '\r')
+          modrinth_id=$(awk -F= '/^modrinth_id=/{print $2}' gradle.properties | tr -d '\r')
+
+          # Skip build if branch doesn't match minecraft_version
+          if [[ "$current_branch" != "$minecraft_version" ]]; then
+            echo "Branch $current_branch does not match minecraft_version $minecraft_version. Skipping workflow."
+            exit 0
+          fi
 
           # Major version for changelog filename
           mod_major_version="${mod_version%%.*}"
@@ -147,7 +157,6 @@ jobs:
           loaders: ${{ needs.build.outputs.loader }}
           game-versions: ${{ needs.build.outputs.minecraft_version }}
           java: 25
-          environment: client,server
           curseforge-id: ${{ needs.build.outputs.curseforge_id }}
           curseforge-token: ${{ env.CURSEFORGE_TOKEN }}
 
