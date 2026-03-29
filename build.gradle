@@ -38,12 +38,10 @@ base {
 }
 
 java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(25)
-        vendor = null
-    }
+    toolchain.languageVersion = JavaLanguageVersion.of(25)
     withSourcesJar()
 }
+
 neoForge {
     version = project.neo_version
 
