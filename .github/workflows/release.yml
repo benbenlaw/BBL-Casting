@@ -40,12 +40,12 @@ jobs:
           current_branch="${GITHUB_REF##*/}"
           echo "Current branch: $current_branch"
 
-          # Read gradle.properties
-          minecraft_version=$(awk -F= '/^minecraft_version=/{print $2}' gradle.properties | tr -d '\r')
-          mod_name=$(awk -F= '/^mod_name=/{print $2}' gradle.properties | tr -d '\r')
-          mod_version=$(awk -F= '/^mod_version=/{print $2}' gradle.properties | tr -d '\r')
-          curseforge_id=$(awk -F= '/^curseforge_id=/{print $2}' gradle.properties | tr -d '\r')
-          modrinth_id=$(awk -F= '/^modrinth_id=/{print $2}' gradle.properties | tr -d '\r')
+          # Read gradle.properties and trim whitespace
+          minecraft_version=$(awk -F= '/^minecraft_version=/{print $2}' gradle.properties | tr -d '\r' | xargs)
+          mod_name=$(awk -F= '/^mod_name=/{print $2}' gradle.properties | tr -d '\r' | xargs)
+          mod_version=$(awk -F= '/^mod_version=/{print $2}' gradle.properties | tr -d '\r' | xargs)
+          curseforge_id=$(awk -F= '/^curseforge_id=/{print $2}' gradle.properties | tr -d '\r' | xargs)
+          modrinth_id=$(awk -F= '/^modrinth_id=/{print $2}' gradle.properties | tr -d '\r' | xargs)
 
           # Skip build if branch doesn't match minecraft_version
           if [[ "$current_branch" != "$minecraft_version" ]]; then
@@ -89,6 +89,7 @@ jobs:
           # Detect java version
           java_version=$(grep -oE 'JavaLanguageVersion\.of\([0-9]+\)' build.gradle.kts | grep -oE '[0-9]+' || echo 21)
 
+          # Output all metadata to GitHub
           echo "mod_name=$mod_name" >> "$GITHUB_OUTPUT"
           echo "release_tag=${minecraft_version}-${mod_version}" >> "$GITHUB_OUTPUT"
           echo "changelog<<EOF" >> "$GITHUB_OUTPUT"
