@@ -9,6 +9,9 @@ jobs:
       options: --user root
     steps:
       - uses: actions/checkout@v4
+
+      - run: chmod +x ./gradlew
+
       - run: ./gradlew build publishMod
         env:
           CURSEFORGE_KEY: ${{ secrets.CURSEFORGE_KEY }}
