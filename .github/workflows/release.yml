@@ -3,7 +3,7 @@ name: Auto Publish Mod
 on:
   push:
     branches:
-      - ${{ steps.meta.outputs.minecraft_version }}
+      - 26.1
 
 concurrency:
   group: auto-publish-${{ github.ref_name || github.run_id }}
