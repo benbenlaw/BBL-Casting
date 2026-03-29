@@ -1,5 +1,3 @@
-import net.darkhax.curseforgegradle.TaskPublishCurseForge
-
 plugins {
     id 'java-library'
     id 'eclipse'
@@ -138,51 +136,5 @@ idea {
     module {
         downloadSources = true
         downloadJavadoc = true
-    }
-}
-
-tasks.register('publishCurseForge', TaskPublishCurseForge) {
-    group "modpublishing"
-
-    apiToken = System.getenv("curseforge_token").toString()
-
-    def projectId = curseforge_id
-    def mainFile = upload(projectId, jar)
-
-    mainFile.changelog = changelog
-    mainFile.releaseType = "${release_type}"
-
-    "${release_versions}".split(',').each {
-        mainFile.addGameVersion("${it}")
-    }
-
-    mainFile.addModLoader("neoforge")
-    mainFile.addEnvironment("server", "client")
-
-}
-
-
-tasks.getByName("modrinth").setGroup("modpublishing")
-
-modrinth {
-    token = System.getenv("modrinth_token").toString()
-    projectId = "${modrinth_id}"
-    versionType = "${release_type}"
-    versionName = "${mod_id}" + "$minecraft_version" + "-" + "$mod_version"
-    uploadFile = jar // With Loom, this MUST be set to `remapJar` instead of `jar`!
-
-    gameVersions = "${release_versions}".split(',').collect {e -> e}
-    loaders = ["neoforge"]
-    changelog = project.changelog
-    dependencies {
-        optional.project "jei"
-    }
-}
-
-tasks.register('publishMod') {
-    dependsOn 'publish', 'modrinth', 'publishCurseForge'
-
-    doLast {
-        publishDiscord()
     }
 }

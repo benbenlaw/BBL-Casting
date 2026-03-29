@@ -1,18 +1,187 @@
-name: Release
-on: [workflow_dispatch]
+name: Auto Publish Mod
+
+on:
+  push:
+    branches:
+      - main
+      - release/*
+
+concurrency:
+  group: auto-publish-${{ github.ref_name || github.run_id }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
-    container:
-      image: eclipse-temurin:17-jdk-alpine
-      options: --user root
+    name: Build Mod
+    runs-on: ubuntu-latest
+    outputs:
+      mod_name: ${{ steps.meta.outputs.mod_name }}
+      release_tag: ${{ steps.meta.outputs.release_tag }}
+      changelog: ${{ steps.meta.outputs.changelog }}
+      loader: ${{ steps.meta.outputs.loader }}
+      minecraft_version: ${{ steps.meta.outputs.minecraft_version }}
+      java_version: ${{ steps.meta.outputs.java_version }}
+      curseforge_id: ${{ steps.meta.outputs.curseforge_id }}
+      modrinth_id: ${{ steps.meta.outputs.modrinth_id }}
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - run: chmod +x ./gradlew
+      - name: Read project metadata
+        id: meta
+        shell: bash
+        run: |
+          # Read mod info from gradle.properties
+          mod_name=$(awk -F= '/^mod_name=/{print $2}' gradle.properties | tr -d '\r')
+          mod_version=$(awk -F= '/^mod_version=/{print $2}' gradle.properties | tr -d '\r')
+          minecraft_version=$(awk -F= '/^minecraft_version=/{print $2}' gradle.properties | tr -d '\r')
+          curseforge_id=$(awk -F= '/^curseforge_project_id=/{print $2}' gradle.properties | tr -d '\r')
+          modrinth_id=$(awk -F= '/^modrinth_project_id=/{print $2}' gradle.properties | tr -d '\r')
 
-      - run: ./gradlew build publishMod
+          # Major version for changelog filename
+          mod_major_version="${mod_version%%.*}"
+          changelog_file="CHANGELOGS/${minecraft_version}-${mod_major_version}.x.md"
+
+          if [[ ! -f "$changelog_file" ]]; then
+            echo "Missing changelog file: $changelog_file"
+            exit 1
+          fi
+
+          # Extract only current version changelog
+          changelog_body=$(awk -v version="$mod_version" '
+            $0 ~ "# " version {flag=1; next}
+            /^#/ {flag=0}
+            flag {print}
+          ' "$changelog_file")
+
+          if [[ -z "$changelog_body" ]]; then
+            echo "No changelog entry found for version $mod_version in $changelog_file"
+            exit 1
+          fi
+
+          # Prepend version heading to changelog
+          changelog="# $mod_version"$'\n'"$changelog_body"
+
+          # Detect loader
+          if grep -q 'id("net.neoforged.moddev")' build.gradle.kts; then
+            loader="neoforge"
+          elif grep -q 'id("net.minecraftforge.gradle")' build.gradle.kts; then
+            loader="forge"
+          else
+            loader="neoforge"
+          fi
+
+          # Detect java version
+          java_version=$(grep -oE 'JavaLanguageVersion\.of\([0-9]+\)' build.gradle.kts | grep -oE '[0-9]+' || echo 21)
+
+          echo "mod_name=$mod_name" >> "$GITHUB_OUTPUT"
+          echo "release_tag=${minecraft_version}-${mod_version}" >> "$GITHUB_OUTPUT"
+          echo "changelog<<EOF" >> "$GITHUB_OUTPUT"
+          echo "$changelog" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
+          echo "loader=$loader" >> "$GITHUB_OUTPUT"
+          echo "minecraft_version=$minecraft_version" >> "$GITHUB_OUTPUT"
+          echo "java_version=$java_version" >> "$GITHUB_OUTPUT"
+          echo "curseforge_id=$curseforge_id" >> "$GITHUB_OUTPUT"
+          echo "modrinth_id=$modrinth_id" >> "$GITHUB_OUTPUT"
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: ${{ steps.meta.outputs.java_version }}
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v3
+
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
+      - name: Build
+        run: ./gradlew clean build --console=plain
         env:
-          CURSEFORGE_KEY: ${{ secrets.CURSEFORGE_KEY }}
-          MODRINTH_KEY: ${{ secrets.MODRINTH_KEY }}
+          CI: true
+          BUILD_VERSION: ${{ steps.meta.outputs.release_tag }}
+          CHANGELOG: ${{ steps.meta.outputs.changelog }}
+          PUBLISH: true
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-build
+          path: build/libs/*.jar
+
+  publish-curseforge:
+    name: Publish to CurseForge
+    needs: build
+    runs-on: ubuntu-latest
+    env:
+      CURSEFORGE_TOKEN: ${{ secrets.TOKEN_CURSEFORGE }}
+    steps:
+      - name: Skip if no CurseForge token
+        shell: bash
+        run: |
+          if [[ -z "$CURSEFORGE_TOKEN" ]]; then
+            echo "No CurseForge token configured. Skipping."
+            exit 0
+          fi
+
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: release-build
+          path: build/libs
+
+      - name: Publish to CurseForge
+        uses: Kira-NT/mc-publish@v3.3.0
+        with:
+          name: ${{ needs.build.outputs.mod_name }} - ${{ needs.build.outputs.release_tag }}
+          version: ${{ needs.build.outputs.release_tag }}
+          files: build/libs/*.jar
+          changelog: ${{ needs.build.outputs.changelog }}
+          loaders: ${{ needs.build.outputs.loader }}
+          game-versions: ${{ needs.build.outputs.minecraft_version }}
+          java: 25
+          environment: client,server
+          curseforge-id: ${{ needs.build.outputs.curseforge_id }}
+          curseforge-token: ${{ env.CURSEFORGE_TOKEN }}
+
+  publish-modrinth:
+    name: Publish to Modrinth
+    needs: build
+    runs-on: ubuntu-latest
+    env:
+      MODRINTH_TOKEN: ${{ secrets.TOKEN_MODRINTH }}
+    steps:
+      - name: Skip if no Modrinth token
+        shell: bash
+        run: |
+          if [[ -z "$MODRINTH_TOKEN" ]]; then
+            echo "No Modrinth token configured. Skipping."
+            exit 0
+          fi
+
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: release-build
+          path: build/libs
+
+      - name: Publish to Modrinth
+        uses: Kira-NT/mc-publish@v3.3.0
+        with:
+          name: ${{ needs.build.outputs.mod_name }} - ${{ needs.build.outputs.release_tag }}
+          version: ${{ needs.build.outputs.release_tag }}
+          files: build/libs/*.jar
+          changelog: ${{ needs.build.outputs.changelog }}
+          loaders: ${{ needs.build.outputs.loader }}
+          game-versions: ${{ needs.build.outputs.minecraft_version }}
+          java: 25
+          modrinth-id: ${{ needs.build.outputs.modrinth_id }}
+          modrinth-token: ${{ env.MODRINTH_TOKEN }}
