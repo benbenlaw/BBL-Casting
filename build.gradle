@@ -179,8 +179,13 @@ modrinth {
 tasks.register('publishMod') {
     dependsOn 'publish', 'modrinth', 'publishCurseForge'
 
-    tasks.named('modrinth').mustRunAfter 'publish'
-    tasks.named('publishCurseForge').mustRunAfter 'modrinth'
+    // Strict execution order using configure on the providers
+    tasks.named('modrinth') {
+        mustRunAfter 'publish'
+    }
+    tasks.named('publishCurseForge') {
+        mustRunAfter 'modrinth'
+    }
 
     doLast {
         println("All mod publishing tasks completed successfully!")
