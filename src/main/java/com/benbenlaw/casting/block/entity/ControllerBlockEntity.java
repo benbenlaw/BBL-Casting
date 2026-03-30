@@ -3,8 +3,10 @@ package com.benbenlaw.casting.block.entity;
 import com.benbenlaw.casting.block.CastingBlockEntities;
 import com.benbenlaw.casting.block.custom.CastingBlock;
 import com.benbenlaw.casting.block.custom.ControllerBlock;
+import com.benbenlaw.casting.config.CastingConfig;
 import com.benbenlaw.casting.item.CastingDataComponents;
 import com.benbenlaw.casting.item.util.FluidListComponent;
+import com.benbenlaw.casting.recipe.MeltingRecipeInput;
 import com.benbenlaw.casting.recipe.custom.MeltingRecipe;
 import com.benbenlaw.casting.screen.ControllerMenu;
 import com.benbenlaw.core.block.entity.SyncableBlockEntity;
@@ -12,6 +14,7 @@ import com.benbenlaw.core.block.entity.handler.fluid.OutputFluidHandler;
 import com.benbenlaw.core.block.entity.handler.item.InputItemHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.network.chat.Component;
@@ -21,12 +24,16 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.CraftingInput;
+import net.minecraft.world.item.crafting.CraftingRecipe;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
+import net.neoforged.neoforge.common.crafting.IngredientType;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidStackTemplate;
 import net.neoforged.neoforge.transfer.ResourceHandler;
@@ -35,9 +42,10 @@ import net.neoforged.neoforge.transfer.fluid.FluidUtil;
 import net.neoforged.neoforge.transfer.item.ItemResource;
 import net.neoforged.neoforge.transfer.transaction.Transaction;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.OptionalInt;
 
 public class ControllerBlockEntity extends SyncableBlockEntity implements MenuProvider, FluidSending {
@@ -118,7 +126,7 @@ public class ControllerBlockEntity extends SyncableBlockEntity implements MenuPr
 
                 if (currentTemp >= recipe.meltingTemp()) {
 
-                    int max = 200;
+                    int max = CastingConfig.defaultControllerSpeed.get();
                     int tempDiff = currentTemp - recipe.meltingTemp();
                     max -= (tempDiff / 100) * 10;
                     if (recipe.durationModifier().isPresent()) {
@@ -197,6 +205,7 @@ public class ControllerBlockEntity extends SyncableBlockEntity implements MenuPr
     }
 
     private void updateWorkingState(boolean working) {
+        assert level != null;
         BlockState state = level.getBlockState(worldPosition);
         if (state.getValue(CastingBlock.WORKING) != working) {
             level.setBlock(worldPosition, state.setValue(CastingBlock.WORKING, working), 3);
@@ -272,18 +281,18 @@ public class ControllerBlockEntity extends SyncableBlockEntity implements MenuPr
     public ResourceHandler<ItemResource> getItemCapability() { return inputHandler; }
     public OutputFluidHandler getOutputFluidHandler() { return outputFluidHandler; }
     public ResourceHandler<FluidResource> getFluidCapability() { return outputFluidHandler; }
-    @Override public @Nullable AbstractContainerMenu createMenu(int id, Inventory inv, Player player) { return new ControllerMenu(id, inv, this.worldPosition, data); }
-    @Override public Component getDisplayName() { return Component.translatable("block.casting.controller"); }
-    @Override public void preRemoveSideEffects(BlockPos pos, BlockState state) { dropInventoryContents(inputHandler); }
+    @Override public @Nullable AbstractContainerMenu createMenu(int id, @NonNull Inventory inv, @NonNull Player player) { return new ControllerMenu(id, inv, this.worldPosition, data); }
+    @Override public @NonNull Component getDisplayName() { return Component.translatable("block.casting.controller"); }
+    @Override public void preRemoveSideEffects(@NonNull BlockPos pos, @NonNull BlockState state) { dropInventoryContents(inputHandler); }
 
     @Override
-    protected void collectImplicitComponents(DataComponentMap.Builder builder) {
+    protected void collectImplicitComponents(DataComponentMap.@NonNull Builder builder) {
         super.collectImplicitComponents(builder);
         builder.set(CastingDataComponents.FLUIDS.get(), FluidListComponent.fromHandlers(outputFluidHandler));
     }
 
     @Override
-    protected void applyImplicitComponents(DataComponentGetter components) {
+    protected void applyImplicitComponents(@NonNull DataComponentGetter components) {
         super.applyImplicitComponents(components);
         FluidListComponent component = components.get(CastingDataComponents.FLUIDS.get());
         if (component != null) component.applyToHandlers(outputFluidHandler);
@@ -293,4 +302,5 @@ public class ControllerBlockEntity extends SyncableBlockEntity implements MenuPr
     public OutputFluidHandler sendingHandler() {
         return outputFluidHandler;
     }
+
 }

@@ -14,7 +14,7 @@
     "count": 1,
     "ingredient": "#c:gears/uranium"
   },
-  "meltingTemp": 1000,
+  "meltingTemp": 1600,
   "output": [
     {
       "amount": 360,

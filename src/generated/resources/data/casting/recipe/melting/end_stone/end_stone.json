@@ -1,0 +1,15 @@
+{
+  "type": "casting:melting",
+  "durationModifier": 2.5,
+  "input": {
+    "count": 1,
+    "ingredient": "minecraft:end_stone"
+  },
+  "meltingTemp": 1000,
+  "output": [
+    {
+      "amount": 1000,
+      "id": "casting:molten_end_stone"
+    }
+  ]
+}

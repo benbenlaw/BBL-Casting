@@ -79,6 +79,12 @@ public class CastingRecipeProvider extends RecipeProvider {
         createMoldRecipe(new ItemStackTemplate(CastingItems.BALL_MOLD.get()), TagKey.create(Registries.ITEM, Identifier.parse("c:ball_items")));
         createMoldRecipe(new ItemStackTemplate(CastingItems.WIRE_MOLD.get()), TagKey.create(Registries.ITEM, Identifier.parse("c:wires")));
 
+        //Reset
+        shapeless(RecipeCategory.MISC, CastingBlocks.CONTROLLER).requires(CastingBlocks.CONTROLLER);
+        shapeless(RecipeCategory.MISC, CastingBlocks.SOLIDIFIER).requires(CastingBlocks.SOLIDIFIER);
+        shapeless(RecipeCategory.MISC, CastingBlocks.MIXER).requires(CastingBlocks.MIXER);
+        shapeless(RecipeCategory.MISC, CastingBlocks.TANK).requires(CastingBlocks.TANK);
+
         //Black Bricks
         SimpleCookingRecipeBuilder.blasting(Ingredient.of(Items.CLAY_BALL), RecipeCategory.MISC, CookingBookCategory.MISC, CastingItems.BLACK_BRICK, 0.1f, 200)
                 .unlockedBy("has_clay", has(Items.CLAY))

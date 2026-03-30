@@ -2,7 +2,7 @@
   "type": "casting:solidifier",
   "duration_modifier": 0.5,
   "fluid": {
-    "amount": 250,
+    "amount": 1000,
     "ingredient": "casting:molten_experience"
   },
   "melting_temp": 1000,

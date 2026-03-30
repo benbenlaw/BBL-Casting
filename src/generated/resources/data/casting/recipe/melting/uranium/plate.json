@@ -14,7 +14,7 @@
     "count": 1,
     "ingredient": "#c:plates/uranium"
   },
-  "meltingTemp": 1000,
+  "meltingTemp": 1600,
   "output": [
     {
       "amount": 90,

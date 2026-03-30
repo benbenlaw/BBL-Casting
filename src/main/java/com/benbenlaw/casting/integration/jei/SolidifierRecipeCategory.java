@@ -102,7 +102,7 @@ public class SolidifierRecipeCategory implements IRecipeCategory<SolidifierRecip
 
     @Override
     public void getTooltip(ITooltipBuilder tooltip, SolidifierRecipe recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
-        if (MouseUtil.isMouseAboveArea((int) mouseX, (int) mouseY, 56, 10, 0, 0, 28, 18)) {
+        if (MouseUtil.isMouseAboveArea((int) mouseX, (int) mouseY, 56, 1, 0, 0, 28, 18)) {
             double modifier = recipe.durationModifier().orElse(1.0);
             String timeString = String.valueOf((200 * modifier)).replace(".0", "");
             tooltip.add(Component.translatable("tooltip.core.ticks", timeString));

@@ -1,0 +1,17 @@
+{
+  "type": "casting:solidifier",
+  "duration_modifier": 0.5,
+  "fluid": {
+    "amount": 1000,
+    "ingredient": "casting:molten_experience"
+  },
+  "melting_temp": 1000,
+  "mold": {
+    "count": 1,
+    "ingredient": "casting:ball_mold"
+  },
+  "output": {
+    "count": 1,
+    "ingredient": "casting:experience_ball"
+  }
+}

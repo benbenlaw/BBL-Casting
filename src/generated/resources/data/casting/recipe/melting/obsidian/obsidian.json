@@ -1,0 +1,15 @@
+{
+  "type": "casting:melting",
+  "durationModifier": 2.5,
+  "input": {
+    "count": 1,
+    "ingredient": "minecraft:obsidian"
+  },
+  "meltingTemp": 1200,
+  "output": [
+    {
+      "amount": 1000,
+      "id": "casting:molten_obsidian"
+    }
+  ]
+}

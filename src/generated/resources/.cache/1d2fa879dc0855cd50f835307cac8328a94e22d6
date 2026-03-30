@@ -1,4 +1,4 @@
-// 26.1-pre-3	2026-03-26T14:54:18.2592377	Model Definitions - casting
+// 26.1-pre-3	2026-03-30T11:57:17.2625679	Model Definitions - casting
 2aa30e731299e20bfaeb5903cc0ebf7ed84c6ab3 assets/casting/blockstates/black_bricks.json
 b350b2f7bb3df5e34993e7791e783a609025c622 assets/casting/blockstates/black_brick_glass.json
 e5a33b4a2db42195222fa1709b3d9533ac41e453 assets/casting/blockstates/chilled_water.json
@@ -74,6 +74,7 @@ d90e79da7cb86ca5d713002003f462d0a272ed27 assets/casting/items/block_mold.json
 a69bdf882782f3e84036e2030265804279ba0049 assets/casting/items/chilled_water_bucket.json
 539a00e2644afe7898eda0e4ebd1b3fca82fef13 assets/casting/items/controller.json
 f080d5ff39e7a006c40f6ae4d2d8eef0adc2ef35 assets/casting/items/dust_mold.json
+86c89f0d26da9fcb81235be4ae81d15cf29db2c6 assets/casting/items/experience_ball.json
 239aa2ebba847d9f15f82e800b7b7da5f3300624 assets/casting/items/gear_mold.json
 0e42ec5ce40983a757db1964d75991ce5621ae00 assets/casting/items/gem_mold.json
 36a7a151f50d547acbc577d9fb0514eb243984ca assets/casting/items/iced_water_bucket.json
@@ -142,7 +143,7 @@ c4ad83fa31e53ee8b006b25bc5cb2f34b015c561 assets/casting/items/plate_mold.json
 0d35b9828023516895f324cfaf976743b3085141 assets/casting/items/rod_mold.json
 0128bf899ddd95e72e990b1ef3b29870352b440e assets/casting/items/solidifier.json
 858c1a1d781c647b274815e623caeaa019456294 assets/casting/items/super_coolant_bucket.json
-4ddded36e592e9b375bff17bf1ecc11e3420c078 assets/casting/items/tank.json
+0200a53dac910c05e0bad4aee6583231c678ed50 assets/casting/items/tank.json
 b450c0a1b6dad7a84c113ac2d7b25483c9ba4127 assets/casting/items/wire_mold.json
 fe2862acf1cc64652c664c258656b169d5051e53 assets/casting/models/block/black_bricks.json
 1d384f649eb1ddd28ebe9c6e86f4375cd87c44d2 assets/casting/models/block/black_brick_glass.json
@@ -163,6 +164,7 @@ a529ea06113b1731555a8c8cb620d078c4ccead1 assets/casting/models/block/solidifier_
 c458d3e96733818f13805ef73ad0ad87dcb05aa1 assets/casting/models/item/black_brick.json
 5ef57e44724fe244ce039e996866679b24b0db10 assets/casting/models/item/block_mold.json
 37b2423e087aba4168c4382dad45ac5afa40f06a assets/casting/models/item/dust_mold.json
+6ca9cfd070d06f79fcf53b45f490df8e12ee5bfb assets/casting/models/item/experience_ball.json
 549bfdb4f27483849ce359a3f7e3e2781796614e assets/casting/models/item/gear_mold.json
 cf9eae803bac38044112d744bde8b6b12c3af28c assets/casting/models/item/gem_mold.json
 0b04b6b6d70bf4321f1120a56f0aa5e03818e717 assets/casting/models/item/ingot_mold.json

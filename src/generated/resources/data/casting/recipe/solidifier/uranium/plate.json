@@ -14,7 +14,7 @@
     "amount": 90,
     "ingredient": "#c:molten_uranium"
   },
-  "melting_temp": 1000,
+  "melting_temp": 1600,
   "mold": {
     "count": 1,
     "ingredient": "casting:plate_mold"

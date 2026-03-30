@@ -27,7 +27,7 @@ import java.util.OptionalInt;
 
 public class TankBlockEntity extends SyncableBlockEntity{
 
-    private final InputFluidHandler inputFluidHandler = new InputFluidHandler(this, 1, 16000, (i, stack) -> i == 0);
+    private final InputFluidHandler inputFluidHandler = new InputFluidHandler(this, 1, 4000, (i, stack) -> i == 0);
 
     public TankBlockEntity(BlockPos pos, BlockState state) {
         super(CastingBlockEntities.TANK_BLOCK_ENTITY.get(), pos, state);

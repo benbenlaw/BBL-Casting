@@ -51,7 +51,7 @@ public record FluidData(String name, String stillTexture, String flowTexture, in
         fluidList.add(new FluidData("molten_quartz", "block/molten_still", "block/molten_flow", 0xFFdad1c4,
                 new FluidProcessingData(1000, 250, ProcessingType.GEMS4)));
         fluidList.add(new FluidData("molten_coal", "block/molten_still", "block/molten_flow", 0xFF252525,
-                new FluidProcessingData(1000, 80, ProcessingType.GEMS9)));
+                new FluidProcessingData(1200, 80, ProcessingType.GEMS9)));
 
         fluidList.add(new FluidData("molten_redstone", "block/molten_still", "block/molten_flow", 0xFFfc0000,
                 new FluidProcessingData(1000, 100, ProcessingType.DUST9)));
@@ -72,7 +72,7 @@ public record FluidData(String name, String stillTexture, String flowTexture, in
         fluidList.add(new FluidData("molten_ender", "block/molten_still", "block/molten_flow", 0xFF083c3c,
                 new FluidProcessingData(1000, 250, ProcessingType.CUSTOM)));
         fluidList.add(new FluidData("molten_blaze", "block/molten_still", "block/molten_flow", 0xFFf5a100,
-                new FluidProcessingData(1200, 250, ProcessingType.CUSTOM)));
+                new FluidProcessingData(1400, 250, ProcessingType.CUSTOM)));
 
         // --- Coolants ---
         fluidList.add(new FluidData("chilled_water", "block/thin_still", "block/thin_flow", 0xFF345baa,
@@ -103,7 +103,7 @@ public record FluidData(String name, String stillTexture, String flowTexture, in
         fluidList.add(new FluidData("molten_osmium", "block/molten_still", "block/molten_flow", 0xFFafc6cc,
                 new FluidProcessingData(1000, 90, ProcessingType.INGOT9)));
         fluidList.add(new FluidData("molten_uranium", "block/molten_still", "block/molten_flow", 0xFFe5eac0,
-                new FluidProcessingData(1000, 90, ProcessingType.INGOT9)));
+                new FluidProcessingData(1600, 90, ProcessingType.INGOT9)));
         fluidList.add(new FluidData("molten_silver", "block/molten_still", "block/molten_flow", 0xFFd1dadf,
                 new FluidProcessingData(1000, 90, ProcessingType.INGOT9)));
         fluidList.add(new FluidData("molten_nickel", "block/molten_still", "block/molten_flow", 0xFFc5beac,

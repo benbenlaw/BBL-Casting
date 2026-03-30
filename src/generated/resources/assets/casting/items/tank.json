@@ -1,6 +1,18 @@
 {
   "model": {
-    "type": "minecraft:model",
-    "model": "casting:block/tank"
+    "type": "minecraft:composite",
+    "models": [
+      {
+        "type": "minecraft:model",
+        "model": "casting:block/tank"
+      },
+      {
+        "type": "minecraft:special",
+        "base": "casting:block/tank",
+        "model": {
+          "type": "casting:block/tank_fluid"
+        }
+      }
+    ]
   }
 }

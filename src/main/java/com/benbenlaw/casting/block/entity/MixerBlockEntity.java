@@ -3,6 +3,7 @@ package com.benbenlaw.casting.block.entity;
 import com.benbenlaw.casting.block.CastingBlockEntities;
 import com.benbenlaw.casting.block.custom.CastingBlock;
 import com.benbenlaw.casting.block.custom.MixerBlock;
+import com.benbenlaw.casting.config.CastingConfig;
 import com.benbenlaw.casting.item.CastingDataComponents;
 import com.benbenlaw.casting.item.util.FluidListComponent;
 import com.benbenlaw.casting.recipe.custom.MixingRecipe;
@@ -39,7 +40,7 @@ import org.jetbrains.annotations.Nullable;
 public class MixerBlockEntity extends SyncableBlockEntity implements MenuProvider, FluidSending, FluidAccepting {
 
     private final ContainerData data;
-    private int maxProgress = 200;
+    private int maxProgress = CastingConfig.defaultMixerSpeed.get();
     private int progress = 0;
 
     private final InputFluidHandler inputFluidHandler = new InputFluidHandler(this, 4, 8000, (i, stack) -> i <= 3);
@@ -258,7 +259,7 @@ public class MixerBlockEntity extends SyncableBlockEntity implements MenuProvide
         outputFluidHandler.deserialize(input.childOrEmpty("outputFluid"));
         filterFluidHandler.deserialize(input.childOrEmpty("filterFluids"));
         progress = input.getIntOr("progress", 0);
-        maxProgress = input.getIntOr("maxProgress", 200);
+        maxProgress = input.getIntOr("maxProgress", CastingConfig.defaultMixerSpeed.get());
 
         super.loadAdditional(input);
     }

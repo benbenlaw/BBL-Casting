@@ -14,7 +14,7 @@
     "amount": 80,
     "ingredient": "#c:molten_coal"
   },
-  "melting_temp": 1000,
+  "melting_temp": 1200,
   "mold": {
     "count": 1,
     "ingredient": "casting:gem_mold"

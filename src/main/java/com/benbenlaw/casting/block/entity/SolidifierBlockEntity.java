@@ -3,6 +3,7 @@ package com.benbenlaw.casting.block.entity;
 import com.benbenlaw.casting.block.CastingBlockEntities;
 import com.benbenlaw.casting.block.custom.CastingBlock;
 import com.benbenlaw.casting.block.custom.SolidifierBlock;
+import com.benbenlaw.casting.config.CastingConfig;
 import com.benbenlaw.casting.item.CastingDataComponents;
 import com.benbenlaw.casting.item.util.FluidListComponent;
 import com.benbenlaw.casting.recipe.custom.MixingRecipe;
@@ -49,7 +50,7 @@ import java.util.OptionalInt;
 public class SolidifierBlockEntity extends SyncableBlockEntity implements MenuProvider, FluidAccepting {
 
     private final ContainerData data;
-    private int maxProgress = 200;
+    private int maxProgress = CastingConfig.defaultSolidifierSpeed.get();
     private int progress = 0;
     private OptionalInt temperature = OptionalInt.empty();
 
@@ -133,18 +134,8 @@ public class SolidifierBlockEntity extends SyncableBlockEntity implements MenuPr
             if (canFormOutput(recipe) && hasEnoughFluid(recipe)) {
                 isCurrentlyWorking = true;
 
-                int baseMaxProgress = 200;
-                double recipeModifier = recipe.durationModifier().orElse(1.0);
-                double finalModifier = recipeModifier;
-
-                if (activeFuelTank != null) {
-                    int fluidTemp = recipe.meltingTemp();
-                    if (currentTemp < fluidTemp) {
-                        int tempDifference = fluidTemp - currentTemp;
-                        float tempModifier = (tempDifference / 25f) * 0.01f;
-                        finalModifier = recipeModifier - tempModifier;
-                    }
-                }
+                int baseMaxProgress = CastingConfig.defaultSolidifierSpeed.get();
+                double finalModifier = getFinalModifier(recipe, activeFuelTank, currentTemp);
 
                 maxProgress = (int) (baseMaxProgress * finalModifier);
                 if (maxProgress < 10) maxProgress = 10;
@@ -171,6 +162,21 @@ public class SolidifierBlockEntity extends SyncableBlockEntity implements MenuPr
             setChanged();
             sync();
         }
+    }
+
+    private static double getFinalModifier(SolidifierRecipe recipe, TankBlockEntity activeFuelTank, int currentTemp) {
+        double recipeModifier = recipe.durationModifier().orElse(1.0);
+        double finalModifier = recipeModifier;
+
+        if (activeFuelTank != null) {
+            int fluidTemp = recipe.meltingTemp();
+            if (currentTemp < fluidTemp) {
+                int tempDifference = fluidTemp - currentTemp;
+                float tempModifier = (tempDifference / 25f) * 0.01f;
+                finalModifier = recipeModifier - tempModifier;
+            }
+        }
+        return finalModifier;
     }
 
     private boolean canFillBucket(ItemStack inputStack) {
@@ -307,7 +313,7 @@ public class SolidifierBlockEntity extends SyncableBlockEntity implements MenuPr
         outputHandler.deserialize(input.childOrEmpty("output"));
         filterFluidHandler.deserialize(input.childOrEmpty("filterFluid"));
         progress = input.getIntOr("progress", 0);
-        maxProgress = input.getIntOr("maxProgress", 200);
+        maxProgress = input.getIntOr("maxProgress", CastingConfig.defaultSolidifierSpeed.get());
 
         int tempVal = input.getIntOr("temperature", Integer.MIN_VALUE);
         this.temperature = (tempVal == Integer.MIN_VALUE) ? OptionalInt.empty() : OptionalInt.of(tempVal);

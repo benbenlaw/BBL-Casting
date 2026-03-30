@@ -3,6 +3,7 @@ package com.benbenlaw.casting.data;
 import com.benbenlaw.casting.Casting;
 import com.benbenlaw.casting.block.CastingBlocks;
 import com.benbenlaw.casting.block.custom.CastingBlock;
+import com.benbenlaw.casting.block.entity.renderer.TankSpecialRenderer;
 import com.benbenlaw.casting.item.CastingItems;
 import com.benbenlaw.core.block.SyncableBlock;
 import net.minecraft.client.data.models.BlockModelGenerators;
@@ -13,6 +14,9 @@ import net.minecraft.client.data.models.blockstates.BlockModelDefinitionGenerato
 import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
 import net.minecraft.client.data.models.blockstates.PropertyDispatch;
 import net.minecraft.client.data.models.model.*;
+import net.minecraft.client.renderer.item.CompositeModel;
+import net.minecraft.client.renderer.item.ItemModel;
+import net.minecraft.client.renderer.special.SpecialModelRenderer;
 import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -63,6 +67,8 @@ public class CastingModelProvider extends ModelProvider {
         itemModels.generateFlatItem(CastingItems.BALL_MOLD.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(CastingItems.WIRE_MOLD.get(), ModelTemplates.FLAT_ITEM);
 
+        itemModels.generateFlatItem(CastingItems.EXPERIENCE_BALL.get(), ModelTemplates.FLAT_ITEM);
+
 
         // Bucket Models
         for (var entry : FLUIDS_MAP.entrySet()) {
@@ -81,12 +87,24 @@ public class CastingModelProvider extends ModelProvider {
         blockModels.createTrivialCube(CastingBlocks.BLACK_BRICKS.get());
         blockModels.createTrivialCube(CastingBlocks.BLACK_BRICK_GLASS.get());
         blockModels.createTrivialCube(CastingBlocks.TANK.get());
+        createTankItemModel(itemModels, CastingBlocks.TANK.get());
 
         //Fluids?
         for (var entry : FLUIDS_MAP.entrySet()) {
             Block fluidBlock = entry.getValue().getBlock();
             blockModels.createNonTemplateModelBlock(fluidBlock, Blocks.WATER);
         }
+    }
+
+    public void createTankItemModel(ItemModelGenerators itemModels, Block tankBlock) {
+        Identifier blockModelId = ModelLocationUtils.getModelLocation(tankBlock);
+        SpecialModelRenderer.Unbaked tankFluidSpecial = new TankSpecialRenderer.Unbaked();
+
+        itemModels.itemModelOutput.accept(tankBlock.asItem(),
+                ItemModelUtils.composite(ItemModelUtils.plainModel(blockModelId),
+                ItemModelUtils.specialModel(blockModelId, tankFluidSpecial))
+        );
+
     }
 
     public void createMachineBlock(Block block, Consumer<BlockModelDefinitionGenerator> blockStateOutput, BiConsumer<Identifier, ModelInstance> modelOutput) {

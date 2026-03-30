@@ -21,5 +21,8 @@ public class CastingItems {
     public static final DeferredItem<Item> WIRE_MOLD = ITEMS.registerSimpleItem("wire_mold");
 
     public static final DeferredItem<Item> BLACK_BRICK = ITEMS.registerSimpleItem("black_brick");
+
+    public static final DeferredItem<Item> EXPERIENCE_BALL = ITEMS.registerItem("experience_ball",
+            ExperienceBallItem::new, properties -> properties.stacksTo(16));
 }
 

@@ -14,7 +14,7 @@
     "count": 1,
     "ingredient": "#c:ores/coal"
   },
-  "meltingTemp": 1000,
+  "meltingTemp": 1200,
   "output": [
     {
       "amount": 120,

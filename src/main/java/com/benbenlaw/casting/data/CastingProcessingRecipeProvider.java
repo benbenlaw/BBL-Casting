@@ -22,6 +22,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.resources.Identifier;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
@@ -33,6 +34,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.conditions.NotCondition;
 import net.neoforged.neoforge.common.conditions.TagEmptyCondition;
 import net.neoforged.neoforge.common.crafting.SizedIngredient;
@@ -83,26 +85,47 @@ public class CastingProcessingRecipeProvider extends RecipeProvider {
                 CastingItems.GEM_MOLD, "coal/coal", ResourceType.GEMS, getTempFromFluid("molten_coal"));
 
         //Obsidian
+        simpleMeltingRecipe(List.of(getFluidStack("molten_obsidian", 1000)), Blocks.OBSIDIAN,
+                "obsidian/obsidian", ResourceType.STORAGE_BLOCKS, getTempFromFluid("molten_obsidian"));
+
         simpleSolidifierRecipe(Blocks.OBSIDIAN, getFluidIngredient("molten_obsidian", 1000),
                 CastingItems.BLOCK_MOLD, "obsidian/block", ResourceType.STORAGE_BLOCKS, getTempFromFluid("molten_obsidian"));
 
         //End Stone
+        simpleMeltingRecipe(List.of(getFluidStack("molten_end_stone", 1000)), Blocks.END_STONE,
+                "end_stone/end_stone", ResourceType.STORAGE_BLOCKS, getTempFromFluid("molten_end_stone"));
+
         simpleSolidifierRecipe(Blocks.END_STONE, getFluidIngredient("molten_end_stone", 1000),
                 CastingItems.BLOCK_MOLD, "end_stone/block", ResourceType.STORAGE_BLOCKS, getTempFromFluid("molten_end_stone"));
 
         //Stone
+        simpleMeltingRecipe(List.of(getFluidStack("molten_stone", 1000)), tag(Tags.Items.STONES),
+                "stone/stone", ResourceType.STORAGE_BLOCKS, getTempFromFluid("molten_stone"));
+
+        simpleMeltingRecipe(List.of(getFluidStack("molten_stone", 1000)), tag(Tags.Items.COBBLESTONES),
+                "stone/cobblestone", ResourceType.STORAGE_BLOCKS, getTempFromFluid("molten_stone"));;
+
         simpleSolidifierRecipe(Blocks.STONE, getFluidIngredient("molten_stone", 1000),
                 CastingItems.BLOCK_MOLD, "stone/block", ResourceType.STORAGE_BLOCKS, getTempFromFluid("molten_stone"));
 
         //Glass
+        simpleMeltingRecipe(List.of(getFluidStack("molten_glass", 1000)), tag(Tags.Items.SANDS),
+                "glass/sand", ResourceType.STORAGE_BLOCKS, getTempFromFluid("molten_stone"));;
+
         simpleSolidifierRecipe(Blocks.GLASS, getFluidIngredient("molten_glass", 1000),
                 CastingItems.BLOCK_MOLD, "glass/block", ResourceType.STORAGE_BLOCKS, getTempFromFluid("molten_glass"));
 
         //Soul
+        simpleMeltingRecipe(List.of(getFluidStack("molten_soul", 1000)), tag(ItemTags.SOUL_FIRE_BASE_BLOCKS),
+                "soul/soul_sand", ResourceType.STORAGE_BLOCKS, getTempFromFluid("molten_soul"));
+
         simpleSolidifierRecipe(Blocks.SOUL_SAND, getFluidIngredient("molten_soul", 1000),
                 CastingItems.BLOCK_MOLD, "soul/block", ResourceType.STORAGE_BLOCKS, getTempFromFluid("molten_soul"));
 
         //Ender
+        simpleMeltingRecipe(List.of(getFluidStack("molten_ender", 250)), Items.ENDER_PEARL,
+                "ender/pearl", ResourceType.GEMS, getTempFromFluid("molten_ender"));
+
         simpleSolidifierRecipe(Items.ENDER_PEARL, getFluidIngredient("molten_ender", 250),
                 CastingItems.BALL_MOLD, "ender/pearl", ResourceType.GEMS, getTempFromFluid("molten_ender"));
 
@@ -110,9 +133,36 @@ public class CastingProcessingRecipeProvider extends RecipeProvider {
         simpleSolidifierRecipe(Items.SAND, getFluidIngredient("molten_silicon", 250),
                 CastingItems.BALL_MOLD, "silicon/silicon", ResourceType.GEMS, getTempFromFluid("molten_silicon"));
 
-        //Bottle o ' Enchanting
-        simpleSolidifierRecipe(Items.EXPERIENCE_BOTTLE, getFluidIngredient("molten_experience", 250),
+        //Experience
+        simpleSolidifierRecipe(CastingItems.EXPERIENCE_BALL, getFluidIngredient("molten_experience", 1000),
+                CastingItems.BALL_MOLD, "experience/ball", ResourceType.GEMS, getTempFromFluid("molten_experience"));
+
+        simpleSolidifierRecipe(Items.EXPERIENCE_BOTTLE, getFluidIngredient("molten_experience", 1000),
                 Items.GLASS_BOTTLE, "experience/bottle", ResourceType.GEMS, getTempFromFluid("molten_experience"));
+
+        //Black Bricks
+        simpleSolidifierRecipe(CastingBlocks.BLACK_BRICKS.get(), getFluidIngredient("molten_black_brick", 1000),
+                CastingItems.BLOCK_MOLD, "black_brick/block", ResourceType.STORAGE_BLOCKS, getTempFromFluid("molten_black_brick"));
+
+        simpleSolidifierRecipe(CastingItems.BLACK_BRICK.get(), getFluidIngredient("molten_black_brick", 250),
+                CastingItems.BLOCK_MOLD, "black_brick/brick", ResourceType.STORAGE_BLOCKS, getTempFromFluid("molten_black_brick"));
+
+        simpleMeltingRecipe(List.of(getFluidStack("molten_black_brick", 1000)), CastingBlocks.BLACK_BRICKS.get(),
+                "black_brick/block", ResourceType.STORAGE_BLOCKS, getTempFromFluid("molten_black_brick"));
+
+        simpleMeltingRecipe(List.of(getFluidStack("molten_black_brick", 250)), CastingItems.BLACK_BRICK.get(),
+                "black_brick/brick", ResourceType.STORAGE_BLOCKS, getTempFromFluid("molten_black_brick"));
+
+        simpleMeltingRecipe(List.of(getFluidStack("molten_black_brick", 1000)), Blocks.CLAY,
+                "black_brick/clay", ResourceType.STORAGE_BLOCKS, getTempFromFluid("molten_black_brick"));
+
+        simpleMeltingRecipe(List.of(getFluidStack("molten_black_brick", 250)), Items.CLAY_BALL,
+                "black_brick/clay_ball", ResourceType.STORAGE_BLOCKS, getTempFromFluid("molten_black_brick"));
+
+
+
+
+
 
         //Alloys
         //Bronze
@@ -415,6 +465,14 @@ public class CastingProcessingRecipeProvider extends RecipeProvider {
     public void simpleMeltingRecipe(List<FluidStackTemplate> outputs, ItemLike input, String id, ResourceType resourceType, int temp) {
         MeltingRecipeBuilder.meltingRecipesBuilder(
                 SizedIngredient.of(input, 1),
+                outputs,
+                temp,
+                Optional.of(getDurationModifier(resourceType))).save(output, id);
+    }
+
+    public void simpleMeltingRecipe(List<FluidStackTemplate> outputs, Ingredient input, String id, ResourceType resourceType, int temp) {
+        MeltingRecipeBuilder.meltingRecipesBuilder(
+                new SizedIngredient(input, 1),
                 outputs,
                 temp,
                 Optional.of(getDurationModifier(resourceType))).save(output, id);

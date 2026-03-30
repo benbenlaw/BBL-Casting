@@ -14,7 +14,7 @@
     "count": 1,
     "ingredient": "#c:ores/uranium"
   },
-  "meltingTemp": 1000,
+  "meltingTemp": 1600,
   "output": [
     {
       "amount": 135,
