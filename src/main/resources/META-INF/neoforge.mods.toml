@@ -9,9 +9,6 @@ authors="${mod_authors}" #optional
 logoFile= "../logo.png" #optional
 description='''${mod_description}'''
 
-[[mixins]]
-config="${mod_id}.mixins.json"
-
 [[dependencies."${mod_id}"]] #optional
 # the modid of the dependency
 modId="neoforge" #mandatory

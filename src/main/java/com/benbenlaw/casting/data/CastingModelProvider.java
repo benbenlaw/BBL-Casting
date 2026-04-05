@@ -104,7 +104,6 @@ public class CastingModelProvider extends ModelProvider {
                 ItemModelUtils.composite(ItemModelUtils.plainModel(blockModelId),
                 ItemModelUtils.specialModel(blockModelId, tankFluidSpecial))
         );
-
     }
 
     public void createMachineBlock(Block block, Consumer<BlockModelDefinitionGenerator> blockStateOutput, BiConsumer<Identifier, ModelInstance> modelOutput) {

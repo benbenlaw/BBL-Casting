@@ -75,7 +75,6 @@ public class Casting {
 
         @SubscribeEvent
         public static void registerSpecialModel(RegisterSpecialModelRendererEvent event) {
-            System.out.println("REGISTERING TANK RENDERER AT: " + Casting.identifier("block/tank_fluid"));
             event.register(Casting.identifier("block/tank_fluid"), TankSpecialRenderer.Unbaked.CODEC);
         }
 

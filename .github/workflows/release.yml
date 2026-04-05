@@ -3,7 +3,7 @@ name: Auto Publish Mod
 on:
   push:
     branches:
-      - '*'  # trigger on all branches
+      - '26.1.1'
 
 concurrency:
   group: auto-publish-${{ github.ref_name || github.run_id }}
@@ -156,7 +156,7 @@ jobs:
           files: build/libs/*.jar
           changelog: ${{ needs.build.outputs.changelog }}
           loaders: ${{ needs.build.outputs.loader }}
-          game-versions: ${{ needs.build.outputs.minecraft_version }}
+          game-versions: ${{ needs.build.outputs.minecraft_version_range }}
           java: 25
           curseforge-id: ${{ needs.build.outputs.curseforge_id }}
           curseforge-token: ${{ env.CURSEFORGE_TOKEN }}
@@ -190,7 +190,7 @@ jobs:
           files: build/libs/*.jar
           changelog: ${{ needs.build.outputs.changelog }}
           loaders: ${{ needs.build.outputs.loader }}
-          game-versions: ${{ needs.build.outputs.minecraft_version }}
+          game-versions: ${{ needs.build.outputs.minecraft_version_range }}
           java: 25
           modrinth-id: ${{ needs.build.outputs.modrinth_id }}
           modrinth-token: ${{ env.MODRINTH_TOKEN }}

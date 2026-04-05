@@ -78,7 +78,7 @@ dependencies {
     //JEI
     implementation("mezz.jei:jei-${jei_mc_version}-neoforge:${jei_version}")
     //BBL Core
-    implementation("curse.maven:bblcore-1135181:${core_version}")
+    implementation("curse.maven:bbl-core-1135181:${core_version}")
     //Routers
     implementation("curse.maven:bbl-routers-1334500:7805885")
 
