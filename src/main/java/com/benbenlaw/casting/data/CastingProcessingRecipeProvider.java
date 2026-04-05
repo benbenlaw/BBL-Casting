@@ -403,6 +403,7 @@ public class CastingProcessingRecipeProvider extends RecipeProvider {
             default -> resourceType.name().toLowerCase(Locale.ROOT);
         };
 
+
         HolderSet<Fluid> fluidTagSet = getFluidTag(material);
         SolidifierRecipeBuilder.solidifierRecipesBuilder(
                         SizedIngredient.of(mold, 1),
