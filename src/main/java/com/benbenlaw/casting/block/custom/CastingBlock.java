@@ -50,4 +50,5 @@ public class CastingBlock extends SyncableBlock {
             level.setBlockAndUpdate(pos, state.setValue(WORKING, working));
         }
     }
+
 }
