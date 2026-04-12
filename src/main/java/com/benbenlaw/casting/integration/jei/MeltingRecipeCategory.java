@@ -105,7 +105,7 @@ public class MeltingRecipeCategory implements IRecipeCategory<MeltingRecipe> {
                     .add(fluids.get(i).fluid().value(), fluids.get(i).amount())
                     .addRichTooltipCallback((slot, tooltip) -> {
                         tooltip.add(Component.literal(fluids.get(finalIndex).amount() + "mB").withStyle(ChatFormatting.GOLD));
-                        tooltip.add(Component.translatable("gui.casting.jei.melting_temp", recipe.meltingTemp()).withStyle(ChatFormatting.GOLD));
+                        tooltip.add(Component.translatable("jei.casting.melting_temp", recipe.meltingTemp()).withStyle(ChatFormatting.GOLD));
                     })
                     .setBackground(JEICastingPlugin.slotDrawable, -1, -1);
         }

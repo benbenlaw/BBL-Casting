@@ -20,6 +20,7 @@ import mezz.jei.api.registration.*;
 import mezz.jei.api.runtime.IIngredientManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -51,7 +52,7 @@ public class JEICastingPlugin implements IModPlugin {
     @Override
     public void registerIngredientAliases(IIngredientAliasRegistration registration) {
         registration.addAlias(CastingBlocks.CONTROLLER.toStack(), "Smeltery Controller");
-        registration.addAlias(CastingBlocks.SOLIDIFIER.toStack(), "Casting Table)");
+        registration.addAlias(CastingBlocks.SOLIDIFIER.toStack(), "Casting Table");
         registration.addAlias(CastingBlocks.MIXER.toStack(), "Alloyer");
         registration.addAlias(CastingBlocks.TANK.toStack(), "Tank");
     }
@@ -102,6 +103,15 @@ public class JEICastingPlugin implements IModPlugin {
         registration.addRecipes(SolidifierRecipeCategory.RECIPE_TYPE, solidifierRecipes);
         registration.addRecipes(MixingRecipeCategory.RECIPE_TYPE, ClientRecipeCache.getCachedMixingRecipes().stream().toList());
         registration.addRecipes(FuelRecipeCategory.RECIPE_TYPE, ClientRecipeCache.getCachedFuelRecipes().stream().toList());
+
+        registration.addIngredientInfo(new ItemStack(CastingBlocks.SOLIDIFIER), VanillaTypes.ITEM_STACK,
+                Component.translatable("jei.casting.information.solidifier"));
+
+        registration.addIngredientInfo(new ItemStack(CastingBlocks.MIXER), VanillaTypes.ITEM_STACK,
+                Component.translatable("jei.casting.information.mixer"));
+
+        registration.addIngredientInfo(new ItemStack(CastingBlocks.CONTROLLER), VanillaTypes.ITEM_STACK,
+                Component.translatable("jei.casting.information.controller"));
     }
 
     public void registerGuiHandlers(IGuiHandlerRegistration registration) {

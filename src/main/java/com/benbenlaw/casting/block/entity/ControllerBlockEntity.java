@@ -57,7 +57,12 @@ public class ControllerBlockEntity extends SyncableBlockEntity implements MenuPr
     private OptionalInt temperature = OptionalInt.empty();
 
     private final InputItemHandler inputHandler =
-            new InputItemHandler(this, 15, (i, stack) -> i >= 0 && i <= 14);
+            new InputItemHandler(this, 15, (i, stack) -> i >= 0 && i <= 14) {
+                @Override
+                protected int getCapacity(int index, ItemResource resource) {
+                    return 1;
+                }
+            };
 
     private final OutputFluidHandler outputFluidHandler =
             new OutputFluidHandler(this, 4, 8000, i -> i >= 0 && i <= 3);

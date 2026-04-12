@@ -80,21 +80,21 @@ public class CastingRecipeProvider extends RecipeProvider {
         createMoldRecipe(new ItemStackTemplate(CastingItems.WIRE_MOLD.get()), TagKey.create(Registries.ITEM, Identifier.parse("c:wires")));
 
         //Reset
-        shapeless(RecipeCategory.MISC, CastingBlocks.CONTROLLER).requires(CastingBlocks.CONTROLLER);
-        shapeless(RecipeCategory.MISC, CastingBlocks.SOLIDIFIER).requires(CastingBlocks.SOLIDIFIER);
-        shapeless(RecipeCategory.MISC, CastingBlocks.MIXER).requires(CastingBlocks.MIXER);
-        shapeless(RecipeCategory.MISC, CastingBlocks.TANK).requires(CastingBlocks.TANK);
+        shapeless(RecipeCategory.MISC, CastingBlocks.CONTROLLER).requires(CastingBlocks.CONTROLLER).unlockedBy("has_controller", has(CastingBlocks.CONTROLLER)).save(output);
+        shapeless(RecipeCategory.MISC, CastingBlocks.SOLIDIFIER).requires(CastingBlocks.SOLIDIFIER).unlockedBy("has_solidifier", has(CastingBlocks.SOLIDIFIER)) .save(output);
+        shapeless(RecipeCategory.MISC, CastingBlocks.MIXER).requires(CastingBlocks.MIXER).unlockedBy("has_mixer", has(CastingBlocks.MIXER)).save(output);
+        shapeless(RecipeCategory.MISC, CastingBlocks.TANK).requires(CastingBlocks.TANK).unlockedBy("has_tank", has(CastingBlocks.TANK)).save(output);
 
         //Black Bricks
-        SimpleCookingRecipeBuilder.blasting(Ingredient.of(Items.CLAY_BALL), RecipeCategory.MISC, CookingBookCategory.MISC, CastingItems.BLACK_BRICK, 0.1f, 200)
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(Items.CLAY_BALL), RecipeCategory.MISC, CookingBookCategory.MISC, CastingItems.BLACK_BRICK, 0.1f, 100)
                 .unlockedBy("has_clay", has(Items.CLAY))
                 .save(output, "casting:smelting/black_brick_from_clay");
 
-        SimpleCookingRecipeBuilder.blasting(Ingredient.of(Items.CLAY), RecipeCategory.MISC, CookingBookCategory.MISC, CastingBlocks.BLACK_BRICKS, 0.1f, 200)
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(Items.CLAY), RecipeCategory.MISC, CookingBookCategory.MISC, CastingBlocks.BLACK_BRICKS, 0.1f, 100)
                 .unlockedBy("has_clay", has(Items.CLAY))
                 .save(output, "casting:smelting/black_bricks_from_clay_block");
 
-        shaped(RecipeCategory.MISC, CastingBlocks.BLACK_BRICKS, 4).define('#', CastingItems.BLACK_BRICK).pattern("##").pattern("##")
+        shaped(RecipeCategory.MISC, CastingBlocks.BLACK_BRICKS, 1).define('#', CastingItems.BLACK_BRICK).pattern("##").pattern("##")
                 .unlockedBy("has_clay", has(CastingItems.BLACK_BRICK))
                 .save(output, "casting:crafting/black_bricks");
 

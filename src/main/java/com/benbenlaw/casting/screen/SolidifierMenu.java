@@ -32,7 +32,7 @@ public class SolidifierMenu extends SimpleAbstractContainerMenu {
     }
 
     public SolidifierMenu(int containerID, Inventory inventory, BlockPos blockPos, ContainerData data) {
-        super(CastingMenuTypes.SOLIDIFIER_MENU.get(), containerID, inventory, blockPos, 2);
+        super(CastingMenuTypes.SOLIDIFIER_MENU.get(), containerID, inventory, blockPos, 3);
         this.player = inventory.player;
         this.blockPos = blockPos;
         this.level = inventory.player.level();
@@ -51,11 +51,10 @@ public class SolidifierMenu extends SimpleAbstractContainerMenu {
             }
         });
 
+        this.addSlot(new ResultSlot(blockEntity.getOutputHandler(), blockEntity.getOutputHandler()::set, 0, 116, 35));
+
         SimpleContainer fluidFilterContainer = new SimpleContainer(1);
         this.addSlot(new FilterFluidSlot(fluidFilterContainer, blockEntity.getFilterFluidHandler(), 0, 8, 20));
-
-
-        this.addSlot(new ResultSlot(blockEntity.getOutputHandler(), blockEntity.getOutputHandler()::set, 0, 116, 35));
 
         addDataSlots(data);
     }

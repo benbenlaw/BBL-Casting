@@ -2,6 +2,7 @@ package com.benbenlaw.casting.event.client;
 
 import com.benbenlaw.casting.Casting;
 import com.benbenlaw.casting.item.CastingDataComponents;
+import com.benbenlaw.casting.item.CastingItems;
 import com.benbenlaw.casting.item.util.FluidListComponent;
 import com.benbenlaw.core.util.TooltipUtil;
 import net.minecraft.ChatFormatting;
@@ -21,6 +22,9 @@ public class TooltipEvent {
     @SubscribeEvent
     public static void onTooltipEvent(ItemTooltipEvent event) {
         ItemStack stack = event.getItemStack();
+
+        TooltipUtil.addShiftTooltip(stack, event, CastingItems.EXPERIENCE_BALL.get(), "tooltip.casting.experience_ball");
+
         if (stack.has(CastingDataComponents.FLUIDS.get())) {
             FluidListComponent fluidListComponent = stack.get(CastingDataComponents.FLUIDS.get());
 

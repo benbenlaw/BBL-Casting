@@ -39,8 +39,7 @@ public class ControllerMenu extends SimpleAbstractContainerMenu {
             int slotX = 8 + (col * 19);
             int slotY = 16 + (row * 19);
 
-            this.addSlot(new InputSlot(blockEntity.getInputHandler(),
-                    blockEntity.getInputHandler()::set, i, slotX, slotY));
+            this.addSlot(new InputSlot(blockEntity.getInputHandler(), blockEntity.getInputHandler()::set, i, slotX, slotY).size(1));
         }
 
         addDataSlots(data);

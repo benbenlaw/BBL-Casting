@@ -1,10 +1,12 @@
-// 26.1-pre-3	2026-03-26T14:54:18.2769611	casting Recipes
+// 26.1.2	2026-04-12T10:20:19.4411982	casting Recipes
+550234ae914bc91a457f44d4b664b9021868fbcb data/casting/advancement/recipes/misc/controller.json
 36a28d0ef5f87a394c872d3c095247aad5bc598f data/casting/advancement/recipes/misc/crafting/black_bricks.json
 348be5fe5a0a9dbecaf340a4caa26afff421b94b data/casting/advancement/recipes/misc/crafting/black_brick_glass.json
 95df1c79d357db5853aa0505807b9f319916d83f data/casting/advancement/recipes/misc/crafting/controller.json
 c3f24f569c88d20690c3d07bb3bb8003ee57319d data/casting/advancement/recipes/misc/crafting/mixer.json
 3218c5ac4f9c5a3c047fecf65b1d0086c79a8113 data/casting/advancement/recipes/misc/crafting/solidifier.json
 89e336a80aedec302feae39f4af852ba0eb251b6 data/casting/advancement/recipes/misc/crafting/tank.json
+be78ce2ab9d1ad716b36ce4a3d3eb26c6c1e5a9e data/casting/advancement/recipes/misc/mixer.json
 6082081724e3004137af355cf7d60c4ec47728ac data/casting/advancement/recipes/misc/molds/ball_mold_from_ball_items.json
 36b9b80fcc3255c8453a58c73e8efe526a86ca19 data/casting/advancement/recipes/misc/molds/block_mold_from_cobblestones.json
 8e22cb4d757177ac654929fff0d671a7de91fe27 data/casting/advancement/recipes/misc/molds/block_mold_from_stones.json
@@ -21,12 +23,16 @@ e4c1878e226a879ad4b562624ebc3251d1921db6 data/casting/advancement/recipes/misc/m
 f6f85f8f30d191493dfd6d714614f09ba7d13c9f data/casting/advancement/recipes/misc/molds/wire_mold_from_wires.json
 92e92cb8ba70fb61ad21dc246995a178a458f0e0 data/casting/advancement/recipes/misc/smelting/black_bricks_from_clay_block.json
 40fff070759285abf833b99b090ad7124d7f4c47 data/casting/advancement/recipes/misc/smelting/black_brick_from_clay.json
-5a508d3760c11a70e732e2999397ecf2997de112 data/casting/recipe/crafting/black_bricks.json
+c9f5231546d8189c091fd1b158007d9aedcccdde data/casting/advancement/recipes/misc/solidifier.json
+c8c8111c77fb050b9c948ec6b462b704685ee790 data/casting/advancement/recipes/misc/tank.json
+6af6515c85739be639a48f1e7b2a803761a2d827 data/casting/recipe/controller.json
+c92fdb4bc87739c34e0bf2fce0956d45d1978dda data/casting/recipe/crafting/black_bricks.json
 caa901ec6cf85f78d9605c3b556bd4473229de00 data/casting/recipe/crafting/black_brick_glass.json
 d6d96444aafd281ed6a7686ed31e982c71523baa data/casting/recipe/crafting/controller.json
 8338bbc7326e8668161028b8492e7fdc6162c9e2 data/casting/recipe/crafting/mixer.json
 832f2df962467af8b3a596da0cf1c5f28c33239b data/casting/recipe/crafting/solidifier.json
 737649233d58d1210440ea30fad7041ebec48fd4 data/casting/recipe/crafting/tank.json
+2d7e72ec03366d782a33a95442ec2ac91e57a935 data/casting/recipe/mixer.json
 d4a5bef02a6fcd11b1aa344155a080de370be577 data/casting/recipe/molds/ball_mold_from_ball_items.json
 1289d3745596c3e7ad532d0b2055de9d9fe5738c data/casting/recipe/molds/block_mold_from_cobblestones.json
 415a230702a48f6579b94fef3467625e5d36bab2 data/casting/recipe/molds/block_mold_from_stones.json
@@ -41,5 +47,7 @@ aeb3f6c6df3de30ab19a11cb42d1080d8736591f data/casting/recipe/molds/ingot_mold_fr
 3ad9542850d9c7427de34cf24e70199ada530b13 data/casting/recipe/molds/plate_mold_from_wooden_pressure_plates.json
 83aca60c54ba55177c05ae43315c482c02719027 data/casting/recipe/molds/rod_mold_from_rods.json
 aac4cf97558ff9f4520e929e3cb3a993380a6436 data/casting/recipe/molds/wire_mold_from_wires.json
-35d8885480e8fe5daebbab0fb013d92f05125b2c data/casting/recipe/smelting/black_bricks_from_clay_block.json
-52acd93cf3057ebb44e267aa862ff1ad216f7461 data/casting/recipe/smelting/black_brick_from_clay.json
+8aae7194a8072e5b58d892cac94d870589d60088 data/casting/recipe/smelting/black_bricks_from_clay_block.json
+ef1a57303cf69c3b329cfdc203d9387456adfa9c data/casting/recipe/smelting/black_brick_from_clay.json
+6891559cd3febd358159746b3c1b92ea85687523 data/casting/recipe/solidifier.json
+de6d91ff054ea64a9f27ea4b57ba76198f2f9dfe data/casting/recipe/tank.json

@@ -113,7 +113,7 @@ public class FuelRecipeCategory implements IRecipeCategory<FuelRecipe> {
                     .addRichTooltipCallback((slot, tooltip) ->
                             tooltip.add(Component.literal(fuel.fluid().amount() + "mB").withStyle(ChatFormatting.GOLD)))
                     .addRichTooltipCallback((slot, tooltip) ->
-                            tooltip.add(Component.translatable("gui.casting.jei.fuel_temp", fuel.temp())
+                            tooltip.add(Component.translatable("jei.casting.fuel_temp", fuel.temp())
                                     .withStyle(fuel.temp() >= 1000 ? ChatFormatting.RED : ChatFormatting.AQUA)));
         }
 
