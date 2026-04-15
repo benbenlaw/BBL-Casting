@@ -80,7 +80,11 @@ dependencies {
     //BBL Core
     implementation("curse.maven:bbl-core-1135181:${core_version}")
     //Routers
-    implementation("curse.maven:bbl-routers-1334500:7805885")
+    runtimeOnly("curse.maven:bbl-routers-1334500:7805885")
+    //All The Ores
+    runtimeOnly("curse.maven:ato-405593:7928265")
+    //Guide Me
+    runtimeOnly("curse.maven:guideme-1173950:7929350")
 
 }
 
