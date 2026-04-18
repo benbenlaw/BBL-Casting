@@ -36,6 +36,7 @@ public class ModifierSetsConfig {
                 .defineListAllowEmpty(
                         List.of("modifier_groups"),
                         Collections.emptyList(),
+                        () -> "",
                         obj -> obj instanceof String && ((String) obj).contains("=")
                 );
 

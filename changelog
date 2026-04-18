@@ -10,6 +10,9 @@ multiblock blocks not saving contents when broken
 Use SizedFluidIngredient for recipes that use fluids (26.1)
 Modifiers should use a enchantment like feature to be completely data driven (26.1)
 
+2.3.10
+- Maybe fixed issue with config spam
+
 2.3.9
 - Removed test casting recipe
 
