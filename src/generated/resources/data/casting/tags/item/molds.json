@@ -9,6 +9,7 @@
     "casting:gem_mold",
     "casting:rod_mold",
     "casting:ball_mold",
-    "casting:wire_mold"
+    "casting:wire_mold",
+    "casting:shard_mold"
   ]
 }

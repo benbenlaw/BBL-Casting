@@ -145,7 +145,7 @@ public class CastingProcessingRecipeProvider extends RecipeProvider {
                 CastingItems.BLOCK_MOLD, "black_brick/block", ResourceType.STORAGE_BLOCKS, getTempFromFluid("molten_black_brick"));
 
         simpleSolidifierRecipe(CastingItems.BLACK_BRICK.get(), getFluidIngredient("molten_black_brick", 250),
-                CastingItems.BLOCK_MOLD, "black_brick/brick", ResourceType.STORAGE_BLOCKS, getTempFromFluid("molten_black_brick"));
+                CastingItems.BLOCK_MOLD, "black_brick/brick", ResourceType.INGOTS, getTempFromFluid("molten_black_brick"));
 
         simpleMeltingRecipe(List.of(getFluidStack("molten_black_brick", 1000)), CastingBlocks.BLACK_BRICKS.get(),
                 "black_brick/block", ResourceType.STORAGE_BLOCKS, getTempFromFluid("molten_black_brick"));

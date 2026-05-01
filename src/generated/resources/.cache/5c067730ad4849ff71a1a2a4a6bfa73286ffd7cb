@@ -1,4 +1,4 @@
-// 26.1.2	2026-05-01T11:18:21.2189515	casting Processing Recipes
+// 26.1.2	2026-05-01T16:45:27.8477138	casting Processing Recipes
 6cf7daa5e446d262d0b513ba376716ae43524819 data/casting/advancement/recipes/fuel/fuel/blaze.json
 519547486eb3fbbb51b3460ed5c7a9695e33e52f data/casting/advancement/recipes/fuel/fuel/chilled_water.json
 3bac6b66e74a81f8f22540209612ceca3658333e data/casting/advancement/recipes/fuel/fuel/coal.json
@@ -1690,7 +1690,7 @@ d1cf7dbeacb36a9b5d82f8133ae748bbd3b16a75 data/casting/recipe/solidifier/aluminum
 15f528da57b85036b22829499657562d4c958b25 data/casting/recipe/solidifier/aluminum/shard.json
 10bbb11110537ca3023391c6567829ad03f180d2 data/casting/recipe/solidifier/aluminum/wire.json
 1541f24635f07154bb0f0828209e8a2d9b62945b data/casting/recipe/solidifier/black_brick/block.json
-d540545a8de78ea7d87d7c882a937715192da582 data/casting/recipe/solidifier/black_brick/brick.json
+b5a12438799054bae1d5119394085ac02626dda3 data/casting/recipe/solidifier/black_brick/brick.json
 4e7fcbeb6271a752d773ee7ec4c88373165b9a07 data/casting/recipe/solidifier/black_quartz/block.json
 51016c3ef828208a093ded49744e668bf88f4bd1 data/casting/recipe/solidifier/black_quartz/gear.json
 78ae967d5edd8f1f07e38aec2e474c4e4eba014d data/casting/recipe/solidifier/black_quartz/gem.json
