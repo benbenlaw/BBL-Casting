@@ -1,0 +1,24 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:gears/allthemodium"
+      }
+    }
+  ],
+  "type": "casting:melting",
+  "durationModifier": 1.2,
+  "input": {
+    "count": 1,
+    "ingredient": "#c:gears/allthemodium"
+  },
+  "meltingTemp": 1000,
+  "output": [
+    {
+      "amount": 360,
+      "id": "casting:molten_allthemodium"
+    }
+  ]
+}

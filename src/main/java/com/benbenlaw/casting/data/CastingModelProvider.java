@@ -66,6 +66,7 @@ public class CastingModelProvider extends ModelProvider {
         itemModels.generateFlatItem(CastingItems.DUST_MOLD.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(CastingItems.BALL_MOLD.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(CastingItems.WIRE_MOLD.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(CastingItems.SHARD_MOLD.get(), ModelTemplates.FLAT_ITEM);
 
         itemModels.generateFlatItem(CastingItems.EXPERIENCE_BALL.get(), ModelTemplates.FLAT_ITEM);
 

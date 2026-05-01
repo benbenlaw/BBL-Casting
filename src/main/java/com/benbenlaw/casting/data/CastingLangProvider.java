@@ -40,6 +40,7 @@ public class CastingLangProvider extends LanguageProvider {
         addItemTranslation("dust_mold", "Dust Mold");
         addItemTranslation("ball_mold", "Ball Mold");
         addItemTranslation("wire_mold", "Wire Mold");
+        addItemTranslation("shard_mold", "Shard Mold");
 
         addItemTranslation("black_brick", "Black Brick");
         addItemTranslation("experience_ball", "Experience Ball");

@@ -41,6 +41,13 @@ public class CastingItemTags extends ItemTagsProvider {
                 .add(Items.ENDER_EYE)
                 .add(Items.CLAY_BALL);
 
+        //All Shards
+        tag(CastingTags.Items.SHARDS)
+                .add(Items.AMETHYST_SHARD)
+                .addOptionalTag(TagKey.create(Registries.ITEM, Identifier.parse("geore:geore_shards")))
+        ;
+
+
         //Bricks
         tag(Tags.Items.BRICKS).add(CastingItems.BLACK_BRICK.asItem());
 
@@ -68,10 +75,12 @@ public class CastingItemTags extends ItemTagsProvider {
         tag(CastingTags.Items.BLOCK_MOLD).add(CastingItems.BLOCK_MOLD.asItem());
         tag(CastingTags.Items.BALL_MOLD).add(CastingItems.BALL_MOLD.asItem());
         tag(CastingTags.Items.WIRE_MOLD).add(CastingItems.WIRE_MOLD.asItem());
+        tag(CastingTags.Items.SHARD_MOLD).add(CastingItems.SHARD_MOLD.asItem());
 
         //Buckets
         for (var entry : FLUIDS_MAP.entrySet()) {
             tag(Tags.Items.BUCKETS).add(entry.getValue().getBucket());
+
         }
 
         //Processing Tags

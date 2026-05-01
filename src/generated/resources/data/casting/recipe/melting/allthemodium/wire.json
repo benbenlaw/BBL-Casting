@@ -1,0 +1,24 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:wires/allthemodium"
+      }
+    }
+  ],
+  "type": "casting:melting",
+  "durationModifier": 0.4,
+  "input": {
+    "count": 1,
+    "ingredient": "#c:wires/allthemodium"
+  },
+  "meltingTemp": 1000,
+  "output": [
+    {
+      "amount": 45,
+      "id": "casting:molten_allthemodium"
+    }
+  ]
+}

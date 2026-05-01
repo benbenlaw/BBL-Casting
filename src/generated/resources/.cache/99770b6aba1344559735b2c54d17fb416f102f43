@@ -1,8 +1,8 @@
-// 26.1.2	2026-04-12T10:10:07.4504827	Tags for minecraft:item mod id casting
+// 26.1.2	2026-05-01T11:10:08.2848687	Tags for minecraft:item mod id casting
 da92033666b77dcdcd2ecfd54b5fcf76989db3a0 data/casting/tags/item/molds.json
 523cf825e8643e793dc1a64cd6939e6cdd4adc88 data/c/tags/item/ball_items.json
 38236b67cf98b68238695adf5a39edf921a1998c data/c/tags/item/bricks.json
-a0086fa2305fb2151b53a0e36d1bab62c0af339e data/c/tags/item/buckets.json
+5156562fddc4b01b4ebe4270b44470f29393803f data/c/tags/item/buckets.json
 b5b443005446a7c462821af2bd14b03a5178a666 data/c/tags/item/molds/ball.json
 c5b03813e61f7b4ffd00ab3a09b1def2f4e7c5e3 data/c/tags/item/molds/block.json
 046ccfb1e090314dacdeaa4b1e6894cc1a20ebfa data/c/tags/item/molds/dust.json
@@ -12,6 +12,8 @@ c5b03813e61f7b4ffd00ab3a09b1def2f4e7c5e3 data/c/tags/item/molds/block.json
 a1b71944075bcc841153139d092cef8e7aac2f51 data/c/tags/item/molds/nugget.json
 0be4e41267ac11dd65be0b1e78e44a2723917fa7 data/c/tags/item/molds/plate.json
 7fdf15f53e9e4982af823382293bde7914e971c4 data/c/tags/item/molds/rod.json
+d1d989caa4a013c44c64b0e31f52449455c142d7 data/c/tags/item/molds/shards.json
 3f5fe81976ac535ee0ed76c613fa59c8552e489d data/c/tags/item/molds/wire.json
+c31fff4e389c90e49e80aa377623a4356a59dd6e data/c/tags/item/shards.json
 2e32a7b83e54ddce24aaeff94c215bb46e0c6628 data/c/tags/item/storage_blocks/glowstone.json
 fbb0fe25e25b7fd86df64c2f168425efedf11710 data/c/tags/item/storage_blocks/quartz.json

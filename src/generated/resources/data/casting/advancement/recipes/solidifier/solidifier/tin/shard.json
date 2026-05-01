@@ -1,0 +1,41 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "geore:geore_shards/tin"
+      }
+    }
+  ],
+  "criteria": {
+    "has_mold": {
+      "conditions": {
+        "items": [
+          {
+            "items": "casting:shard_mold"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "casting:solidifier/tin/shard"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_mold"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "casting:solidifier/tin/shard"
+    ]
+  },
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,26 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:rods/vibranium"
+      }
+    }
+  ],
+  "type": "casting:solidifier",
+  "duration_modifier": 0.4,
+  "fluid": {
+    "amount": 45,
+    "ingredient": "#c:molten_vibranium"
+  },
+  "melting_temp": 1000,
+  "mold": {
+    "count": 1,
+    "ingredient": "casting:rod_mold"
+  },
+  "output": {
+    "count": 1,
+    "ingredient": "#c:rods/vibranium"
+  }
+}

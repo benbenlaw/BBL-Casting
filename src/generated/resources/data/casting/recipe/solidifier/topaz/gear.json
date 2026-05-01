@@ -1,0 +1,26 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:gears/topaz"
+      }
+    }
+  ],
+  "type": "casting:solidifier",
+  "duration_modifier": 1.2,
+  "fluid": {
+    "amount": 360,
+    "ingredient": "#c:molten_topaz"
+  },
+  "melting_temp": 1000,
+  "mold": {
+    "count": 1,
+    "ingredient": "casting:gear_mold"
+  },
+  "output": {
+    "count": 1,
+    "ingredient": "#c:gears/topaz"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:plates/unobtainium"
+      }
+    }
+  ],
+  "type": "casting:melting",
+  "durationModifier": 0.5,
+  "input": {
+    "count": 1,
+    "ingredient": "#c:plates/unobtainium"
+  },
+  "meltingTemp": 1000,
+  "output": [
+    {
+      "amount": 90,
+      "id": "casting:molten_unobtainium"
+    }
+  ]
+}

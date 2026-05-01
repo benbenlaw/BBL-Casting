@@ -37,6 +37,8 @@ public class CastingTags{
         public static final TagKey<Item> BALL_MOLD = commonTag("molds/ball");
         public static final TagKey<Item> WIRE_MOLD = commonTag("molds/wire");
         public static final TagKey<Item> BLOCK_MOLD = commonTag("molds/block");
+        public static final TagKey<Item> SHARD_MOLD = commonTag("molds/shards");
+        public static final TagKey<Item> SHARDS = commonTag("shards");
         public static final TagKey<Item> BALL_ITEMS = commonTag("ball_items");
         public static final TagKey<Item> MELTING_OUTPUT_AMOUNT_EFFECTED = tag(Casting.MOD_ID, "melting_output_amount_effected");
         public static final TagKey<Item> MELTING_PRODUCES_EXPERIENCE = tag(Casting.MOD_ID, "melting_produces_experience");

@@ -159,11 +159,6 @@ public class CastingProcessingRecipeProvider extends RecipeProvider {
         simpleMeltingRecipe(List.of(getFluidStack("molten_black_brick", 250)), Items.CLAY_BALL,
                 "black_brick/clay_ball", ResourceType.STORAGE_BLOCKS, getTempFromFluid("molten_black_brick"));
 
-
-
-
-
-
         //Alloys
         //Bronze
         alloyMixingRecipes("bronze", getFluidStack("molten_bronze", 360),
@@ -375,6 +370,7 @@ public class CastingProcessingRecipeProvider extends RecipeProvider {
         processBoth(materialName, ResourceType.GEARS, baseMb * 4, 1, CastingItems.GEAR_MOLD.get(), fluid, temp);
         processBoth(materialName, ResourceType.RODS, baseMb / 2, 1, CastingItems.ROD_MOLD.get(), fluid, temp);
         processBoth(materialName, ResourceType.WIRES, baseMb / 2, 1, CastingItems.WIRE_MOLD.get(), fluid, temp);
+        processBoth(materialName, ResourceType.SHARDS, baseMb, 1, CastingItems.SHARD_MOLD.get(), fluid, temp);
 
         //Melting Ores and Raw Materials
         int oreAmount = (int) (baseMb * 1.5);
@@ -390,6 +386,10 @@ public class CastingProcessingRecipeProvider extends RecipeProvider {
     private void generateSubRecipe(String material, ResourceType resourceType, int fluidAmount, int outputCount, Item mold, Fluid fluid, int temp) {
         TagKey<Item> tag = CommonTags.getItemTag(resourceType, material);
 
+        if (resourceType == ResourceType.SHARDS) {
+            tag = TagKey.create(Registries.ITEM, Identifier.parse("geore:geore_shards/" + material));
+        }
+
         String typePath = switch (resourceType) {
             case STORAGE_BLOCKS -> "block";
             case DUSTS -> "dust";
@@ -400,6 +400,7 @@ public class CastingProcessingRecipeProvider extends RecipeProvider {
             case GEARS -> "gear";
             case RODS -> "rod";
             case WIRES -> "wire";
+            case SHARDS -> "shard";
             default -> resourceType.name().toLowerCase(Locale.ROOT);
         };
 
@@ -419,6 +420,11 @@ public class CastingProcessingRecipeProvider extends RecipeProvider {
 
     private void generateMeltingRecipe(String material, ResourceType resourceType, int fluidAmount, int inputCount, Fluid fluid, int temp) {
         TagKey<Item> tag = CommonTags.getItemTag(resourceType, material);
+
+        if (resourceType == ResourceType.SHARDS) {
+            tag = TagKey.create(Registries.ITEM, Identifier.parse("geore:geore_shards/" + material));
+        }
+
         String typePath = getCleanPath(resourceType);
 
         MeltingRecipeBuilder.meltingRecipesBuilder(
@@ -450,7 +456,7 @@ public class CastingProcessingRecipeProvider extends RecipeProvider {
         MixingRecipeBuilder.mixingRecipesBuilder(
                         inputs,
                         outputFluid)
-                .unlockedBy("has_copper_ingot", has(CastingBlocks.MIXER))
+                .unlockedBy("has_mixer", has(CastingBlocks.MIXER))
                 .save(output, material + "alloy");
     }
 
@@ -490,6 +496,7 @@ public class CastingProcessingRecipeProvider extends RecipeProvider {
             case DUSTS -> "dust";
             case INGOTS -> "ingot";
             case GEMS -> "gem";
+            case SHARDS -> "shard";
             default -> resourceType.name().toLowerCase(Locale.ROOT).replaceAll("s$", "");
         };
     }
@@ -506,7 +513,7 @@ public class CastingProcessingRecipeProvider extends RecipeProvider {
         return switch (type) {
             case NUGGETS -> 0.2;
             case RODS, WIRES -> 0.4;
-            case INGOTS, PLATES, DUSTS, GEMS -> 0.5;
+            case INGOTS, PLATES, DUSTS, GEMS, SHARDS -> 0.5;
             case GEARS -> 1.2;
             case STORAGE_BLOCKS -> 2.5;
             case ORES -> 1.5;

@@ -1,6 +1,6 @@
 {
   "criteria": {
-    "has_copper_ingot": {
+    "has_mixer": {
       "conditions": {
         "items": [
           {
@@ -20,7 +20,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_copper_ingot"
+      "has_mixer"
     ]
   ],
   "rewards": {

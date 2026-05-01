@@ -1,0 +1,26 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "geore:geore_shards/quartz"
+      }
+    }
+  ],
+  "type": "casting:solidifier",
+  "duration_modifier": 0.5,
+  "fluid": {
+    "amount": 250,
+    "ingredient": "#c:molten_quartz"
+  },
+  "melting_temp": 1000,
+  "mold": {
+    "count": 1,
+    "ingredient": "casting:shard_mold"
+  },
+  "output": {
+    "count": 1,
+    "ingredient": "#geore:geore_shards/quartz"
+  }
+}

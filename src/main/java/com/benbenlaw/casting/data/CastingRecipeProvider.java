@@ -78,6 +78,7 @@ public class CastingRecipeProvider extends RecipeProvider {
         createMoldRecipe(new ItemStackTemplate(CastingItems.DUST_MOLD.get()), Tags.Items.DUSTS);
         createMoldRecipe(new ItemStackTemplate(CastingItems.BALL_MOLD.get()), TagKey.create(Registries.ITEM, Identifier.parse("c:ball_items")));
         createMoldRecipe(new ItemStackTemplate(CastingItems.WIRE_MOLD.get()), TagKey.create(Registries.ITEM, Identifier.parse("c:wires")));
+        createMoldRecipe(new ItemStackTemplate(CastingItems.SHARD_MOLD.get()), TagKey.create(Registries.ITEM, Identifier.parse("c:shards")));
 
         //Reset
         shapeless(RecipeCategory.MISC, CastingBlocks.CONTROLLER).requires(CastingBlocks.CONTROLLER).unlockedBy("has_controller", has(CastingBlocks.CONTROLLER)).save(output);
@@ -164,5 +165,20 @@ public class CastingRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_cobblestone", has(ingredient))
                 .save(output.withConditions(new NotCondition(new TagEmptyCondition<>(ingredient))),
                         "casting:molds/" + getItemName(result.item().value()) + "_from_" + path);
+    }
+
+    public void createMoldRecipe(ItemStackTemplate result, ItemLike itemLike) {
+
+        String path = getItemName(itemLike);
+
+        shaped(RecipeCategory.MISC, result)
+                .pattern(" A ")
+                .pattern("ABA")
+                .pattern(" A ")
+                .define('A', CastingItems.BLACK_BRICK)
+                .define('B', itemLike)
+                .group(Casting.MOD_ID)
+                .unlockedBy("has_cobblestone", has(itemLike))
+                .save(output, "casting:molds/" + getItemName(result.item().value()) + "_from_" + path);
     }
 }

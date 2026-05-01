@@ -1,0 +1,26 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "geore:geore_shards/coal"
+      }
+    }
+  ],
+  "type": "casting:solidifier",
+  "duration_modifier": 0.5,
+  "fluid": {
+    "amount": 80,
+    "ingredient": "#c:molten_coal"
+  },
+  "melting_temp": 1200,
+  "mold": {
+    "count": 1,
+    "ingredient": "casting:shard_mold"
+  },
+  "output": {
+    "count": 1,
+    "ingredient": "#geore:geore_shards/coal"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "geore:geore_shards/redstone"
+      }
+    }
+  ],
+  "type": "casting:melting",
+  "durationModifier": 0.5,
+  "input": {
+    "count": 1,
+    "ingredient": "#geore:geore_shards/redstone"
+  },
+  "meltingTemp": 1000,
+  "output": [
+    {
+      "amount": 100,
+      "id": "casting:molten_redstone"
+    }
+  ]
+}

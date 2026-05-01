@@ -1,4 +1,4 @@
-// 26.1.2	2026-04-12T10:20:19.4411982	casting Recipes
+// 26.1.2	2026-05-01T11:10:08.2863734	casting Recipes
 550234ae914bc91a457f44d4b664b9021868fbcb data/casting/advancement/recipes/misc/controller.json
 36a28d0ef5f87a394c872d3c095247aad5bc598f data/casting/advancement/recipes/misc/crafting/black_bricks.json
 348be5fe5a0a9dbecaf340a4caa26afff421b94b data/casting/advancement/recipes/misc/crafting/black_brick_glass.json
@@ -20,6 +20,7 @@ e4c1878e226a879ad4b562624ebc3251d1921db6 data/casting/advancement/recipes/misc/m
 86b49046191223d4fa809f8cdf017084481dc186 data/casting/advancement/recipes/misc/molds/plate_mold_from_plates.json
 96c040d6b6013d4a276304f66e782e182ccfcfd1 data/casting/advancement/recipes/misc/molds/plate_mold_from_wooden_pressure_plates.json
 41d59d3979e6fe2e7b1956ffc7717bf9504bcee8 data/casting/advancement/recipes/misc/molds/rod_mold_from_rods.json
+b9dd1f08dd1cce85688645d4539b905c00332eb5 data/casting/advancement/recipes/misc/molds/shard_mold_from_shards.json
 f6f85f8f30d191493dfd6d714614f09ba7d13c9f data/casting/advancement/recipes/misc/molds/wire_mold_from_wires.json
 92e92cb8ba70fb61ad21dc246995a178a458f0e0 data/casting/advancement/recipes/misc/smelting/black_bricks_from_clay_block.json
 40fff070759285abf833b99b090ad7124d7f4c47 data/casting/advancement/recipes/misc/smelting/black_brick_from_clay.json
@@ -46,6 +47,7 @@ aeb3f6c6df3de30ab19a11cb42d1080d8736591f data/casting/recipe/molds/ingot_mold_fr
 7febe1b2e7a20e7674a4a6d8af5a9349eb5d3374 data/casting/recipe/molds/plate_mold_from_plates.json
 3ad9542850d9c7427de34cf24e70199ada530b13 data/casting/recipe/molds/plate_mold_from_wooden_pressure_plates.json
 83aca60c54ba55177c05ae43315c482c02719027 data/casting/recipe/molds/rod_mold_from_rods.json
+1814561ad17436cb072c968786e59e7c4dcee3c7 data/casting/recipe/molds/shard_mold_from_shards.json
 aac4cf97558ff9f4520e929e3cb3a993380a6436 data/casting/recipe/molds/wire_mold_from_wires.json
 8aae7194a8072e5b58d892cac94d870589d60088 data/casting/recipe/smelting/black_bricks_from_clay_block.json
 ef1a57303cf69c3b329cfdc203d9387456adfa9c data/casting/recipe/smelting/black_brick_from_clay.json

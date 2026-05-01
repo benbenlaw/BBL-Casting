@@ -1,8 +1,10 @@
-// 26.1.2	2026-04-12T10:10:07.4484807	Tags for minecraft:fluid mod id casting
+// 26.1.2	2026-05-01T11:00:03.8974309	Tags for minecraft:fluid mod id casting
 a0180619fbf98291dcb53dfaa0e4dac895afbffd data/c/tags/fluid/chilled_water.json
 8f34d0cccf14b17cf369f6b5df5c31cc84bae6be data/c/tags/fluid/experience.json
 4b5f9cfc42b372d1de1abebf0a981daf6a11a2fd data/c/tags/fluid/iced_water.json
+5c830c998875e467a8d1a5085b2469774801c060 data/c/tags/fluid/molten_allthemodium.json
 079289e049dd083bc8a5856acb4834e538937339 data/c/tags/fluid/molten_aluminum.json
+6ba2768a8dcd6bee9080dbe6d3149970eb7fd441 data/c/tags/fluid/molten_amethyst.json
 33df9821493518a0d78d65933bfffe9f84400311 data/c/tags/fluid/molten_black_brick.json
 5c78be8528f10368edd7e7a7c610a2b296e6f2f3 data/c/tags/fluid/molten_black_quartz.json
 b73c788ef020160dc67a2cc97b9058f98ed13317 data/c/tags/fluid/molten_blaze.json
@@ -35,6 +37,7 @@ f718834b77da343b6bb840f7e0f5913edd50c591 data/c/tags/fluid/molten_gold.json
 ae23d7480bd6fce08630ee0e547916a2871c1f8e data/c/tags/fluid/molten_lapis.json
 4c18ad5f95bda9fb4a260568e96da0dc5c614b27 data/c/tags/fluid/molten_lead.json
 89d751ff6a16f58e2d68c4a6fea2ffb513188616 data/c/tags/fluid/molten_lumium.json
+c99b663b43bab106bcadc8347986a1332203f8e5 data/c/tags/fluid/molten_monazite.json
 ca97872ebca04fd23287b15f6c1931b9b5fa1cef data/c/tags/fluid/molten_netherite.json
 3b511d2d3f675484648238e7e43a09955cdb0478 data/c/tags/fluid/molten_nickel.json
 7c0eaee74c25a99b255334c01ef31f611baa7809 data/c/tags/fluid/molten_obsidian.json
@@ -57,7 +60,12 @@ d092dab2136d15b61dfd435ab79c3d14e88d7b38 data/c/tags/fluid/molten_steel.json
 842fcaf2bbfe45e31bc5d8ff9bb3bd279a65fcf3 data/c/tags/fluid/molten_stone.json
 f7753ec64480619e126d5872ff1e698af15b8128 data/c/tags/fluid/molten_tin.json
 f23b9d7d411774a345fff3a8a3cc8a364f32e28a data/c/tags/fluid/molten_titanium.json
+8aadc29add1368f9f04f9638b9e5d72a79053616 data/c/tags/fluid/molten_topaz.json
+934b92b0007b05382d525c658f52f8393b2c1ba4 data/c/tags/fluid/molten_tungsten.json
+07be4088f386e99cdb251a132c44d3757e2625bb data/c/tags/fluid/molten_unobtainium.json
+ff196b4d9298b960d9c3d05c445e42496dc88476 data/c/tags/fluid/molten_uraninite.json
 ee4e0723a012f53a699240330954604c2189d2f4 data/c/tags/fluid/molten_uranium.json
+1cfff22d55364e642c1e66ec758b3ad697b7c9d1 data/c/tags/fluid/molten_vibranium.json
 ee44122d11104bcd370a1759f987ea17f3a39be3 data/c/tags/fluid/molten_vibrant_alloy.json
 7b3fb3c16d2ccb365f63438453e5c1262fa7e95d data/c/tags/fluid/molten_zinc.json
 2cfb571a0d0c5715ba95a27934d91af6e2320f1f data/c/tags/fluid/super_coolant.json

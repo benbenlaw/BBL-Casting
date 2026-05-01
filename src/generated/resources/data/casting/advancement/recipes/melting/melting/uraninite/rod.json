@@ -1,0 +1,41 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:rods/uraninite"
+      }
+    }
+  ],
+  "criteria": {
+    "has_rod": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:rods/uraninite"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "casting:melting/uraninite/rod"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_rod"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "casting:melting/uraninite/rod"
+    ]
+  },
+  "sends_telemetry_event": true
+}

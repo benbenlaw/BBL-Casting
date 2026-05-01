@@ -30,6 +30,14 @@ public record FluidData(String name, String stillTexture, String flowTexture, in
         fluidList.add(new FluidData("molten_fluix", "block/molten_still", "block/molten_flow", 0xFF262a53,
                 new FluidProcessingData(1000, 250, ProcessingType.GEMS4)));
 
+        // --- AllTheModium ---
+        fluidList.add(new FluidData("molten_allthemodium", "block/molten_still", "block/molten_flow", 0xFFFFDE26,
+                new FluidProcessingData(1000, 90, ProcessingType.INGOT9)));
+        fluidList.add(new FluidData("molten_vibranium", "block/molten_still", "block/molten_flow", 0xFF00FC15,
+                new FluidProcessingData(1000, 90, ProcessingType.INGOT9)));
+        fluidList.add(new FluidData("molten_unobtainium", "block/molten_still", "block/molten_flow", 0xFFEFB3DF,
+                new FluidProcessingData(1000, 90, ProcessingType.INGOT9)));
+
         // --- Vanilla ---
         fluidList.add(new FluidData("molten_iron", "block/molten_still", "block/molten_flow", 0xFFd5d5d5,
                 new FluidProcessingData(1000, 90, ProcessingType.INGOT9)));
@@ -41,6 +49,8 @@ public record FluidData(String name, String stillTexture, String flowTexture, in
                 new FluidProcessingData(1000, 90, ProcessingType.INGOT9)));
         fluidList.add(new FluidData("molten_debris", "block/molten_still", "block/molten_flow", 0xFF7d5f58,
                 new FluidProcessingData(1000, 90, ProcessingType.INGOT9)));
+        fluidList.add(new FluidData("molten_amethyst", "block/molten_still", "block/molten_flow", 0xFFB38EF3,
+                new FluidProcessingData(1000, 90, ProcessingType.CUSTOM)));
 
         fluidList.add(new FluidData("molten_diamond", "block/molten_still", "block/molten_flow", 0xFF9ff8e5,
                 new FluidProcessingData(1000, 90, ProcessingType.GEMS9)));
@@ -95,6 +105,12 @@ public record FluidData(String name, String stillTexture, String flowTexture, in
                 new FluidProcessingData(1000, 90, ProcessingType.GEMS9)));
         fluidList.add(new FluidData("molten_peridot", "block/molten_still", "block/molten_flow", 0xFFe5ef43,
                 new FluidProcessingData(1000, 90, ProcessingType.GEMS9)));
+        fluidList.add(new FluidData("molten_topaz", "block/molten_still", "block/molten_flow", 0xFFE0A048,
+                new FluidProcessingData(1000, 90, ProcessingType.GEMS9)));
+        fluidList.add(new FluidData("molten_monazite", "block/molten_still", "block/molten_flow", 0xFF9F3A98,
+                new FluidProcessingData(1000, 90, ProcessingType.GEMS9)));
+        fluidList.add(new FluidData("molten_uraninite", "block/molten_still", "block/molten_flow", 0xFF00FC15,
+                new FluidProcessingData(1000, 90, ProcessingType.GEMS9)));
 
         fluidList.add(new FluidData("molten_tin", "block/molten_still", "block/molten_flow", 0xFFdff1f8,
                 new FluidProcessingData(1000, 90, ProcessingType.INGOT9)));
@@ -119,6 +135,8 @@ public record FluidData(String name, String stillTexture, String flowTexture, in
         fluidList.add(new FluidData("molten_silicon", "block/molten_still", "block/molten_flow", 0xFF6c7273,
                 new FluidProcessingData(1000, 90, ProcessingType.INGOT9)));
         fluidList.add(new FluidData("molten_titanium", "block/molten_still", "block/molten_flow", 0xFFEAFFF9,
+                new FluidProcessingData(1000, 90, ProcessingType.INGOT9)));
+        fluidList.add(new FluidData("molten_tungsten", "block/molten_still", "block/molten_flow", 0xFF3D334F,
                 new FluidProcessingData(1000, 90, ProcessingType.INGOT9)));
 
         // --- Alloys ---

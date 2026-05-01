@@ -19,6 +19,7 @@ public class CastingItems {
     public static final DeferredItem<Item> DUST_MOLD = ITEMS.registerSimpleItem("dust_mold");
     public static final DeferredItem<Item> BALL_MOLD = ITEMS.registerSimpleItem("ball_mold");
     public static final DeferredItem<Item> WIRE_MOLD = ITEMS.registerSimpleItem("wire_mold");
+    public static final DeferredItem<Item> SHARD_MOLD = ITEMS.registerSimpleItem("shard_mold");
 
     public static final DeferredItem<Item> BLACK_BRICK = ITEMS.registerSimpleItem("black_brick");
 

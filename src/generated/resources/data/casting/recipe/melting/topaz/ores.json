@@ -1,0 +1,28 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:ores/topaz"
+      }
+    }
+  ],
+  "type": "casting:melting",
+  "durationModifier": 1.5,
+  "input": {
+    "count": 1,
+    "ingredient": "#c:ores/topaz"
+  },
+  "meltingTemp": 1000,
+  "output": [
+    {
+      "amount": 135,
+      "id": "casting:molten_topaz"
+    },
+    {
+      "amount": 10,
+      "id": "casting:molten_experience"
+    }
+  ]
+}

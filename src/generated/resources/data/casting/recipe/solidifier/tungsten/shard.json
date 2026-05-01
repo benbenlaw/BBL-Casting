@@ -1,0 +1,26 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "geore:geore_shards/tungsten"
+      }
+    }
+  ],
+  "type": "casting:solidifier",
+  "duration_modifier": 0.5,
+  "fluid": {
+    "amount": 90,
+    "ingredient": "#c:molten_tungsten"
+  },
+  "melting_temp": 1000,
+  "mold": {
+    "count": 1,
+    "ingredient": "casting:shard_mold"
+  },
+  "output": {
+    "count": 1,
+    "ingredient": "#geore:geore_shards/tungsten"
+  }
+}

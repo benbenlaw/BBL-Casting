@@ -1,0 +1,41 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:gears/topaz"
+      }
+    }
+  ],
+  "criteria": {
+    "has_gear": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:gears/topaz"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "casting:melting/topaz/gear"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_gear"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "casting:melting/topaz/gear"
+    ]
+  },
+  "sends_telemetry_event": true
+}

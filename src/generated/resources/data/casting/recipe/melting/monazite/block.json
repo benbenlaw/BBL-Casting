@@ -1,0 +1,24 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:storage_blocks/monazite"
+      }
+    }
+  ],
+  "type": "casting:melting",
+  "durationModifier": 2.5,
+  "input": {
+    "count": 1,
+    "ingredient": "#c:storage_blocks/monazite"
+  },
+  "meltingTemp": 1000,
+  "output": [
+    {
+      "amount": 810,
+      "id": "casting:molten_monazite"
+    }
+  ]
+}
