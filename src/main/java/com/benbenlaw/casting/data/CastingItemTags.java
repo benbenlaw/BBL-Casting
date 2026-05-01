@@ -63,6 +63,7 @@ public class CastingItemTags extends ItemTagsProvider {
                 .add(CastingItems.ROD_MOLD.asItem())
                 .add(CastingItems.BALL_MOLD.asItem())
                 .add(CastingItems.WIRE_MOLD.asItem())
+                .add(CastingItems.SHARD_MOLD.asItem())
         ;
 
         tag(CastingTags.Items.INGOT_MOLD).add(CastingItems.INGOT_MOLD.asItem());

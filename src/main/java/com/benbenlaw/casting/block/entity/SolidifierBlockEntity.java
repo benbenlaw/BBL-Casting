@@ -9,6 +9,7 @@ import com.benbenlaw.casting.item.util.FluidListComponent;
 import com.benbenlaw.casting.recipe.custom.MixingRecipe;
 import com.benbenlaw.casting.recipe.custom.SolidifierRecipe;
 import com.benbenlaw.casting.screen.SolidifierMenu;
+import com.benbenlaw.casting.util.CastingTags;
 import com.benbenlaw.core.block.entity.SyncableBlockEntity;
 import com.benbenlaw.core.block.entity.handler.fluid.FilterFluidHandler;
 import com.benbenlaw.core.block.entity.handler.fluid.InputFluidHandler;
@@ -180,13 +181,13 @@ public class SolidifierBlockEntity extends SyncableBlockEntity implements MenuPr
     }
 
     private boolean canFillBucket(ItemStack inputStack) {
-        if (!inputStack.is(net.minecraft.world.item.Items.BUCKET)) return false;
+        if (!inputStack.is(Items.BUCKET)) return false;
 
         FluidStack fluidInTank = FluidUtil.getStack(inputFluidHandler, 0);
         if (fluidInTank.getAmount() < 1000) return false;
 
         ItemStack fullBucket = new ItemStack(fluidInTank.getFluid().getBucket());
-        if (fullBucket.is(net.minecraft.world.item.Items.AIR)) return false;
+        if (fullBucket.is(Items.AIR)) return false;
 
         try (Transaction tx = Transaction.open(null)) {
             long inserted = outputHandler.insertInternalReturn(0, ItemResource.of(fullBucket), 1, tx);
@@ -222,6 +223,11 @@ public class SolidifierBlockEntity extends SyncableBlockEntity implements MenuPr
     private void executeSolidifying(SolidifierRecipe recipe) {
         try (Transaction tx = Transaction.open(null)) {
             FluidStack inTank = FluidUtil.getStack(inputFluidHandler, 0);
+
+            if (!inputHandler.getResource(0).is(CastingTags.Items.MOLDS)) {
+                inputHandler.extractInternal(0, ItemResource.of(ItemUtil.getStack(inputHandler, 0)), recipe.mold().count(), tx);
+            }
+
             inputFluidHandler.extractInternal(0, FluidResource.of(inTank), recipe.fluid().amount(), tx);
 
             ItemStack result = getStackFromSized(recipe.output());
