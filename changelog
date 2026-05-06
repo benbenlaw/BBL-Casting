@@ -10,6 +10,9 @@ multiblock blocks not saving contents when broken
 Use SizedFluidIngredient for recipes that use fluids (26.1)
 Modifiers should use a enchantment like feature to be completely data driven (26.1)
 
+2.3.11
+- Updated mixin for item damage to support more hurtAndBreak effects, should fix interactions with farmers delight
+
 2.3.10
 - Maybe fixed issue with config spam
 
