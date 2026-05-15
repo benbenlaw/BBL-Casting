@@ -159,6 +159,13 @@ public class CastingProcessingRecipeProvider extends RecipeProvider {
         simpleMeltingRecipe(List.of(getFluidStack("molten_black_brick", 250)), Items.CLAY_BALL,
                 "black_brick/clay_ball", ResourceType.STORAGE_BLOCKS, getTempFromFluid("molten_black_brick"));
 
+        //Amethyst
+        simpleSolidifierRecipe(Items.AMETHYST_SHARD, getFluidIngredient("molten_amethyst", 90),
+                CastingItems.SHARD_MOLD, "amethyst/shard", ResourceType.SHARDS, getTempFromFluid("molten_amethyst"));
+
+        simpleMeltingRecipe(List.of(getFluidStack("molten_amethyst", 90)), Items.AMETHYST_SHARD,
+                "amethyst/shard", ResourceType.SHARDS, getTempFromFluid("molten_amethyst"));
+
         //Alloys
         //Bronze
         alloyMixingRecipes("bronze", getFluidStack("molten_bronze", 360),
@@ -319,14 +326,14 @@ public class CastingProcessingRecipeProvider extends RecipeProvider {
                 "iced_water/blue_ice", ResourceType.STORAGE_BLOCKS, getTempFromFluid("iced_water"));
 
 
-        //Fuel - Cool
+        //Fuels - Heat
         FuelRecipeBuilder.fuelRecipesBuilder(new SizedFluidIngredient(FluidIngredient.of(Fluids.LAVA), 25), 1000).save(output, "lava");
         FuelRecipeBuilder.fuelRecipesBuilder(getFluidIngredient("molten_obsidian", 20), getTempFromFluid("molten_obsidian")).save(output, "obsidian");
         FuelRecipeBuilder.fuelRecipesBuilder(getFluidIngredient("molten_coal", 25), getTempFromFluid("molten_coal")).save(output, "coal");
         FuelRecipeBuilder.fuelRecipesBuilder(getFluidIngredient("molten_uranium", 15), getTempFromFluid("molten_uranium")).save(output, "uranium");
         FuelRecipeBuilder.fuelRecipesBuilder(getFluidIngredient("molten_blaze", 25), getTempFromFluid("molten_blaze")).save(output, "blaze");
 
-        //Fuels - Heat
+        //Fuels - Cool
         FuelRecipeBuilder.fuelRecipesBuilder(new SizedFluidIngredient(FluidIngredient.of(Fluids.WATER), 25), 600).save(output, "water");
         FuelRecipeBuilder.fuelRecipesBuilder(getFluidIngredient("chilled_water", 20), getTempFromFluid("chilled_water")).save(output, "chilled_water");
         FuelRecipeBuilder.fuelRecipesBuilder(getFluidIngredient("iced_water", 15), getTempFromFluid("iced_water")).save(output, "iced_water");

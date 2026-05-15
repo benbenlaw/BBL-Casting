@@ -1,0 +1,15 @@
+{
+  "type": "casting:melting",
+  "duration_modifier": 0.5,
+  "input": {
+    "count": 1,
+    "ingredient": "minecraft:amethyst_shard"
+  },
+  "melting_temp": 1000,
+  "output": [
+    {
+      "amount": 90,
+      "id": "casting:molten_amethyst"
+    }
+  ]
+}
