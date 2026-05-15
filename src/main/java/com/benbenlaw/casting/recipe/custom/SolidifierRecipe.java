@@ -29,7 +29,6 @@ public record SolidifierRecipe(SizedIngredient mold, SizedIngredient output, Siz
             ).apply(instance, SolidifierRecipe::new)
     );
 
-
     public static final StreamCodec<RegistryFriendlyByteBuf, SolidifierRecipe> STREAM_CODEC = StreamCodec.of(
             SolidifierRecipe::write, SolidifierRecipe::read);
 
