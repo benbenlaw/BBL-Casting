@@ -1,11 +1,11 @@
 {
   "type": "casting:melting",
-  "durationModifier": 2.5,
+  "duration_modifier": 2.5,
   "input": {
     "count": 1,
     "ingredient": "minecraft:ice"
   },
-  "meltingTemp": 200,
+  "melting_temp": 200,
   "output": [
     {
       "amount": 1000,

@@ -9,12 +9,12 @@
     }
   ],
   "type": "casting:melting",
-  "durationModifier": 2.5,
+  "duration_modifier": 2.5,
   "input": {
     "count": 1,
     "ingredient": "#c:storage_blocks/electrum"
   },
-  "meltingTemp": 1000,
+  "melting_temp": 1000,
   "output": [
     {
       "amount": 810,

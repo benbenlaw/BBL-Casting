@@ -1,11 +1,11 @@
 {
   "type": "casting:melting",
-  "durationModifier": 0.5,
+  "duration_modifier": 0.5,
   "input": {
     "count": 1,
     "ingredient": "minecraft:ender_pearl"
   },
-  "meltingTemp": 1000,
+  "melting_temp": 1000,
   "output": [
     {
       "amount": 250,

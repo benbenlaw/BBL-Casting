@@ -24,8 +24,8 @@ public record MeltingRecipe(SizedIngredient input, List<FluidStackTemplate> outp
             instance.group(
                     SizedIngredient.NESTED_CODEC.fieldOf("input").forGetter(MeltingRecipe::input),
                     FluidStackTemplate.CODEC.listOf().fieldOf("output").forGetter(MeltingRecipe::output),
-                    Codec.INT.fieldOf("meltingTemp").forGetter(MeltingRecipe::meltingTemp),
-                    Codec.DOUBLE.optionalFieldOf("durationModifier").forGetter(MeltingRecipe::durationModifier)
+                    Codec.INT.fieldOf("melting_temp").forGetter(MeltingRecipe::meltingTemp),
+                    Codec.DOUBLE.optionalFieldOf("duration_modifier").forGetter(MeltingRecipe::durationModifier)
             ).apply(instance, MeltingRecipe::new)
     );
 

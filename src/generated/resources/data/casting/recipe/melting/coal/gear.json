@@ -9,12 +9,12 @@
     }
   ],
   "type": "casting:melting",
-  "durationModifier": 1.2,
+  "duration_modifier": 1.2,
   "input": {
     "count": 1,
     "ingredient": "#c:gears/coal"
   },
-  "meltingTemp": 1200,
+  "melting_temp": 1200,
   "output": [
     {
       "amount": 320,

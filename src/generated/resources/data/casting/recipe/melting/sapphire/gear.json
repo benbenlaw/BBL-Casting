@@ -9,12 +9,12 @@
     }
   ],
   "type": "casting:melting",
-  "durationModifier": 1.2,
+  "duration_modifier": 1.2,
   "input": {
     "count": 1,
     "ingredient": "#c:gears/sapphire"
   },
-  "meltingTemp": 1000,
+  "melting_temp": 1000,
   "output": [
     {
       "amount": 360,

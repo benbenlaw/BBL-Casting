@@ -9,12 +9,12 @@
     }
   ],
   "type": "casting:melting",
-  "durationModifier": 0.5,
+  "duration_modifier": 0.5,
   "input": {
     "count": 1,
     "ingredient": "#geore:geore_shards/coal"
   },
-  "meltingTemp": 1200,
+  "melting_temp": 1200,
   "output": [
     {
       "amount": 80,

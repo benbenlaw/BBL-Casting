@@ -9,12 +9,12 @@
     }
   ],
   "type": "casting:melting",
-  "durationModifier": 1.5,
+  "duration_modifier": 1.5,
   "input": {
     "count": 1,
     "ingredient": "#c:ores/tungsten"
   },
-  "meltingTemp": 1000,
+  "melting_temp": 1000,
   "output": [
     {
       "amount": 135,

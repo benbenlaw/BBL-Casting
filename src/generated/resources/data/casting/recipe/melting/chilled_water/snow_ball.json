@@ -1,11 +1,11 @@
 {
   "type": "casting:melting",
-  "durationModifier": 0.5,
+  "duration_modifier": 0.5,
   "input": {
     "count": 1,
     "ingredient": "minecraft:snow"
   },
-  "meltingTemp": 400,
+  "melting_temp": 400,
   "output": [
     {
       "amount": 250,

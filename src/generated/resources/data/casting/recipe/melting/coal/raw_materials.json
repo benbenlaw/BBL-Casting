@@ -9,12 +9,12 @@
     }
   ],
   "type": "casting:melting",
-  "durationModifier": 1.25,
+  "duration_modifier": 1.25,
   "input": {
     "count": 1,
     "ingredient": "#c:raw_materials/coal"
   },
-  "meltingTemp": 1200,
+  "melting_temp": 1200,
   "output": [
     {
       "amount": 120,

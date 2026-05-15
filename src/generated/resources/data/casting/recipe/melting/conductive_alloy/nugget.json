@@ -9,12 +9,12 @@
     }
   ],
   "type": "casting:melting",
-  "durationModifier": 0.2,
+  "duration_modifier": 0.2,
   "input": {
     "count": 1,
     "ingredient": "#c:nuggets/conductive_alloy"
   },
-  "meltingTemp": 1000,
+  "melting_temp": 1000,
   "output": [
     {
       "amount": 10,
