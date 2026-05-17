@@ -73,6 +73,7 @@ import static com.benbenlaw.core.event.UnbreakableBlockReplaceEvent.blockInforma
 public class ToolEvents {
 
     public static final Map<UUID, Direction> lastHitDirectionMap = new HashMap<>();
+    public static FakePlayer fakePlayer = null;
 
     @SubscribeEvent
     public static void onLeftClickBlock(PlayerInteractEvent.LeftClickBlock event) {
@@ -711,7 +712,10 @@ public class ToolEvents {
     public static List<ItemStack> getMobLootDrops(Entity deadEntity, Player player, DamageSource damageSource, ItemStack stack,
                                                   LootTable lootTable, Level level) {
 
-        FakePlayer fakePlayer = FakePlayerUtil.createFakePlayer((ServerLevel) level, "FakePlayerForLooting");
+        if (fakePlayer == null) {
+            fakePlayer = FakePlayerUtil.createFakePlayer((ServerLevel) level, "FakePlayerForLooting");
+        }
+
         fakePlayer.setItemInHand(InteractionHand.MAIN_HAND, stack);
 
         LootParams.Builder lootParams = new LootParams.Builder((ServerLevel) level)
