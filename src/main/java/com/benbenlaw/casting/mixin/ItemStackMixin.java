@@ -39,7 +39,7 @@ public class ItemStackMixin {
             int lvl = (int) self.getOrDefault(UNBREAKING.dataComponent.get(), 0);
             float chance = lvl * 0.1f;
 
-            RandomSource random = entity.getRandom();
+            RandomSource random = level.getRandom();
 
             if (random.nextFloat() < chance) {
                 ci.cancel(); // fully prevents durability loss
