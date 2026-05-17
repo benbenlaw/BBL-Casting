@@ -6,7 +6,7 @@ modId="${mod_id}" #mandatory
 version="${mod_version}"
 displayName="${mod_name}" #mandatory
 authors="${mod_authors}" #optional
-logoFile= "../logo.png" #optional
+logoFile= "logo.png" #optional
 description='''${mod_description}'''
 
 [[dependencies."${mod_id}"]] #optional
