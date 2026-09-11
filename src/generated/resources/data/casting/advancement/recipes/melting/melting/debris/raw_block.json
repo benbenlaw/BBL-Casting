@@ -1,0 +1,41 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:storage_blocks/raw_debris"
+      }
+    }
+  ],
+  "criteria": {
+    "has_raw_block": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:storage_blocks/raw_debris"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "casting:melting/debris/raw_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_raw_block"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "casting:melting/debris/raw_block"
+    ]
+  },
+  "sends_telemetry_event": true
+}

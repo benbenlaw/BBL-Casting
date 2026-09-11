@@ -442,8 +442,9 @@ public class CastingProcessingRecipeProvider extends RecipeProvider {
         }
 
         int oreAmount = (int) (baseMb * 1.5);
-        generateOreMeltingRecipe(materialName, ResourceType.ORES, oreAmount, fluid, temp, "ores");
-        generateOreMeltingRecipe(materialName, ResourceType.RAW_MATERIALS, oreAmount, fluid, temp, "raw_materials");
+        generateOreMeltingRecipe(materialName, ResourceType.ORES, oreAmount, 10, fluid, temp, "ores");
+        generateOreMeltingRecipe(materialName, ResourceType.RAW_MATERIALS, oreAmount, 10, fluid, temp, "raw_materials");
+        generateOreMeltingRecipe(materialName, ResourceType.RAW_STORAGE_BLOCKS, oreAmount * 9, 90, fluid, temp, "raw_block");
     }
 
     private void processBoth(String mat, ResourceType res, int mb, int count, Item mold, Fluid f, int t) {
@@ -460,6 +461,7 @@ public class CastingProcessingRecipeProvider extends RecipeProvider {
 
         String typePath = switch (resourceType) {
             case STORAGE_BLOCKS -> "block";
+            case RAW_STORAGE_BLOCKS -> "raw_block";
             case DUSTS -> "dust";
             case GEMS -> "gem";
             case INGOTS -> "ingot";
@@ -504,18 +506,21 @@ public class CastingProcessingRecipeProvider extends RecipeProvider {
                         material + "/" + typePath);
     }
 
-    private void generateOreMeltingRecipe(String material, ResourceType resourceType, int fluidAmount, Fluid fluid, int temp, String idSuffix) {
+    private void generateOreMeltingRecipe(String material, ResourceType resourceType, int fluidAmount, int xp, Fluid fluid, int temp, String idSuffix) {
         TagKey<Item> tag = CommonTags.getItemTag(resourceType, material);
+
+        if (resourceType == ResourceType.RAW_STORAGE_BLOCKS) {
+            tag = TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath("c", "storage_blocks/raw_" + material));
+        }
 
         MeltingRecipeBuilder.meltingRecipesBuilder(
                         new SizedIngredient(Ingredient.of(tag(tag).getValues()), 1),
-                        List.of(new FluidStackTemplate(fluid, fluidAmount), getFluidStack("molten_experience", 10)),
+                        List.of(new FluidStackTemplate(fluid, fluidAmount), getFluidStack("molten_experience", xp)),
                         temp, Optional.of(getDurationModifier(resourceType)))
                 .unlockedBy("has_" + idSuffix, has(tag))
                 .save(output.withConditions(new NotCondition(new TagEmptyCondition<>(tag))),
                         material + "/" + idSuffix);
     }
-
     private void alloyMixingRecipes(String material, FluidStackTemplate outputFluid, List<SizedFluidIngredient> inputFluids) {
 
         NonNullList<SizedFluidIngredient> inputs = NonNullList.create();
