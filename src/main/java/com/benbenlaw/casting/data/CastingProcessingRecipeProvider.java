@@ -166,11 +166,14 @@ public class CastingProcessingRecipeProvider extends RecipeProvider {
 
 
         //Experience
-        simpleSolidifierRecipe(CastingItems.EXPERIENCE_BALL, getFluidIngredient("molten_experience", 1000),
+        simpleSolidifierRecipe(CastingItems.EXPERIENCE_BALL, getFluidIngredient("molten_experience", 250),
                 CastingItems.BALL_MOLD, "experience/ball", ResourceType.GEMS, getTempFromFluid("molten_experience"));
 
         simpleSolidifierRecipe(Items.EXPERIENCE_BOTTLE, getFluidIngredient("molten_experience", 1000),
                 Items.GLASS_BOTTLE, "experience/bottle", ResourceType.GEMS, getTempFromFluid("molten_experience"));
+
+        simpleMeltingRecipe(List.of(getFluidStack("molten_experience", 250)), CastingItems.EXPERIENCE_BALL,
+                "experience/ball", ResourceType.GEMS, getTempFromFluid("molten_experience"));
 
         //Black Bricks
         simpleSolidifierRecipe(CastingBlocks.BLACK_BRICKS.get(), getFluidIngredient("molten_black_brick", 1000),
