@@ -16,7 +16,7 @@
   "melting_temp": 1000,
   "output": [
     {
-      "amount": 250,
+      "amount": 90,
       "id": "casting:molten_silicon"
     }
   ]

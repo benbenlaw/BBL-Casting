@@ -1,4 +1,4 @@
-// 26.1.2	2026-09-12T13:46:07.1560823	casting Processing Recipes
+// 26.1.2	2026-09-14T10:02:57.2821345	casting Processing Recipes
 6cf7daa5e446d262d0b513ba376716ae43524819 data/casting/advancement/recipes/fuel/fuel/blaze.json
 22bc1b6595660b1d031fd489cab558ac3d264831 data/casting/advancement/recipes/fuel/fuel/blazing_lava.json
 519547486eb3fbbb51b3460ed5c7a9695e33e52f data/casting/advancement/recipes/fuel/fuel/chilled_water.json
@@ -2048,7 +2048,7 @@ ffb5bcbe802bfc58d74b453b452fb7f3d27b49fc data/casting/recipe/melting/silicon/raw
 e367973915d3514d9c8e0df42474e803c2591b54 data/casting/recipe/melting/silicon/raw_materials.json
 c031a1164f5cfdaf22c6afd194575f42e052afc6 data/casting/recipe/melting/silicon/rod.json
 df73a30971988e71b6d52a8e7c743e3de1d4d54a data/casting/recipe/melting/silicon/shard.json
-d628ae4e3f6e363938c1716f1b3958b03dac9b1d data/casting/recipe/melting/silicon/silicon.json
+b42027a1ce0c36d6d07c747f1206b2f64685e791 data/casting/recipe/melting/silicon/silicon.json
 f000f116df91fa4265fda7f4408055839a75a240 data/casting/recipe/melting/silicon/wire.json
 20f1c4c3a7facaa51d01af65a441325193d3f895 data/casting/recipe/melting/silver/block.json
 b2a7fb2ce35777a2984c4f57ddbfb929ddbee68a data/casting/recipe/melting/silver/dust.json
@@ -2707,7 +2707,7 @@ ba7c6a56b7b995218dcaba2e7dbfae697be0654e data/casting/recipe/solidifier/silicon/
 aea75f59713c44e6faa6a4c4205f64af1d645f73 data/casting/recipe/solidifier/silicon/plate.json
 23b2efafb1193b0473d872453c161725e9391b0e data/casting/recipe/solidifier/silicon/rod.json
 46e46ce5a77b0faf63e94effd876683680ff38ab data/casting/recipe/solidifier/silicon/shard.json
-30a6b0944c0fd0fe175d4819ef4f57b005b485a1 data/casting/recipe/solidifier/silicon/silicon.json
+81b7ae297f99c6c0eca7089282a58e1a0aee2f68 data/casting/recipe/solidifier/silicon/silicon.json
 51a4832e073563f5e621ca9a154c88bbc92c4380 data/casting/recipe/solidifier/silicon/wire.json
 af21f522721958e3c001053742216a5c067bd019 data/casting/recipe/solidifier/silver/block.json
 6de62da0e67305e6e31c045812a3b3151cf43a2d data/casting/recipe/solidifier/silver/dust.json

@@ -10,7 +10,7 @@
   ],
   "type": "casting:solidifier",
   "fluid": {
-    "amount": 250,
+    "amount": 90,
     "ingredient": "casting:molten_silicon"
   },
   "melting_temp": 1000,

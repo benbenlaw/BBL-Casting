@@ -155,11 +155,11 @@ public class CastingProcessingRecipeProvider extends RecipeProvider {
         //Silicon
         TagKey<Item> siliconTag = TagKey.create(Registries.ITEM, Identifier.parse("c:silicon"));
 
-        SolidifierRecipeBuilder.solidifierRecipesBuilder(SizedIngredient.of(CastingItems.BALL_MOLD.asItem(), 1), new SizedIngredient(tag(siliconTag), 1), getFluidIngredient("molten_silicon", 250),
+        SolidifierRecipeBuilder.solidifierRecipesBuilder(SizedIngredient.of(CastingItems.BALL_MOLD.asItem(), 1), new SizedIngredient(tag(siliconTag), 1), getFluidIngredient("molten_silicon", 90),
                 getTempFromFluid("molten_silicon"), Optional.empty()).save(output.withConditions(new NotCondition(new TagEmptyCondition<>(siliconTag))), "silicon/silicon");
 
         List<FluidStackTemplate> silicon = new ArrayList<>();
-        silicon.add(new FluidStackTemplate(BuiltInRegistries.FLUID.getValue(Casting.identifier("molten_silicon")), 250));
+        silicon.add(new FluidStackTemplate(BuiltInRegistries.FLUID.getValue(Casting.identifier("molten_silicon")), 90));
 
         MeltingRecipeBuilder.meltingRecipesBuilder(new SizedIngredient(tag(siliconTag), 1), silicon,
                 getTempFromFluid("molten_silicon"), Optional.empty()).save(output.withConditions(new NotCondition(new TagEmptyCondition<>(siliconTag))), "silicon/silicon");
