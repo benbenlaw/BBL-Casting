@@ -8,18 +8,24 @@ import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.builder.ITooltipBuilder;import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.gui.widgets.IRecipeExtrasBuilder;import mezz.jei.api.helpers.IGuiHelper;
+import mezz.jei.api.neoforge.NeoForgeTypes;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import mezz.jei.api.recipe.types.IRecipeType;import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.material.Fluid;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.Map;
 
 public class SolidifierRecipeCategory implements IRecipeCategory<SolidifierRecipe> {
@@ -83,7 +89,10 @@ public class SolidifierRecipeCategory implements IRecipeCategory<SolidifierRecip
 
         builder.addSlot(RecipeIngredientRole.INPUT, 2, 2).add(recipe.mold().ingredient());
 
-        builder.addSlot(RecipeIngredientRole.INPUT, 38, 2).add(recipe.fluid().ingredient().fluids().getFirst().value(), recipe.fluid().amount())
+        List<Holder<Fluid>> fluids = recipe.fluid().ingredient().fluids();
+        List<FluidStack> validFluids = fluids.stream().map(fluid -> new FluidStack(fluid.value(), recipe.fluid().amount())).toList();
+
+        builder.addSlot(RecipeIngredientRole.INPUT, 38, 2).addIngredients(NeoForgeTypes.FLUID_STACK, validFluids)
                 .addRichTooltipCallback((slot, tooltip) ->
                         tooltip.add(Component.literal(recipe.fluid().amount() + " mB").withStyle(ChatFormatting.GOLD)));
 

@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "casting:black_bricks",
+  "result": {
+    "id": "casting:dust_mold"
+  }
+}

@@ -166,10 +166,13 @@ public class CastingProcessingRecipeProvider extends RecipeProvider {
 
 
         //Experience
-        simpleSolidifierRecipe(CastingItems.EXPERIENCE_BALL, getFluidIngredient("molten_experience", 250),
+        TagKey<Fluid> experienceTag = TagKey.create(Registries.FLUID, Identifier.fromNamespaceAndPath("c", "experience"));
+        HolderSet<Fluid> experienceHolder = this.registries.lookupOrThrow(Registries.FLUID).getOrThrow(experienceTag);
+
+        simpleSolidifierRecipe(CastingItems.EXPERIENCE_BALL, getFluidTagIngredient(experienceHolder, 250),
                 CastingItems.BALL_MOLD, "experience/ball", ResourceType.GEMS, getTempFromFluid("molten_experience"));
 
-        simpleSolidifierRecipe(Items.EXPERIENCE_BOTTLE, getFluidIngredient("molten_experience", 1000),
+        simpleSolidifierRecipe(Items.EXPERIENCE_BOTTLE, getFluidTagIngredient(experienceHolder, 250),
                 Items.GLASS_BOTTLE, "experience/bottle", ResourceType.GEMS, getTempFromFluid("molten_experience"));
 
         simpleMeltingRecipe(List.of(getFluidStack("molten_experience", 250)), CastingItems.EXPERIENCE_BALL,

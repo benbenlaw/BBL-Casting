@@ -15,6 +15,7 @@ import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.gui.widgets.IRecipeExtrasBuilder;
 import mezz.jei.api.gui.widgets.IScrollGridWidget;
 import mezz.jei.api.helpers.IGuiHelper;
+import mezz.jei.api.neoforge.NeoForgeTypes;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.category.IRecipeCategory;
@@ -22,9 +23,12 @@ import mezz.jei.api.recipe.types.IRecipeType;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.material.Fluid;
+import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -103,7 +107,13 @@ public class MixingRecipeCategory implements IRecipeCategory<MixingRecipe> {
 
             final int finalIndex = i;
 
+
+            List<Holder<Fluid>> currentFluid = fluids.get(i).ingredient().fluids();
+            int finalI = i;
+            List<FluidStack> validFluids = currentFluid.stream().map(fluid -> new FluidStack(fluid.value(), recipe.fluids().get(finalI).amount())).toList();
+
             builder.addSlot(RecipeIngredientRole.INPUT, xPos, centerY)
+                    .addIngredients(NeoForgeTypes.FLUID_STACK, validFluids)
                     .add(fluids.get(i).ingredient().fluids().getFirst().value(), fluids.get(i).amount())
                     .addRichTooltipCallback((slot, tooltip) ->
                             tooltip.add(Component.literal(fluids.get(finalIndex).amount() + " mB")

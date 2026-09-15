@@ -3,7 +3,7 @@
   "duration_modifier": 0.5,
   "fluid": {
     "amount": 250,
-    "ingredient": "casting:molten_experience"
+    "ingredient": "#c:experience"
   },
   "melting_temp": 1000,
   "mold": {

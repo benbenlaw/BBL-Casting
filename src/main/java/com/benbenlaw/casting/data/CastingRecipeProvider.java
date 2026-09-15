@@ -76,6 +76,7 @@ public class CastingRecipeProvider extends RecipeProvider {
         stonecutterRecipe(CastingItems.BALL_MOLD.get());
         stonecutterRecipe(CastingItems.WIRE_MOLD.get());
         stonecutterRecipe(CastingItems.SHARD_MOLD.get());
+        stonecutterRecipe(CastingItems.DUST_MOLD.get());
 
         //Reset
         shapeless(RecipeCategory.MISC, CastingBlocks.CONTROLLER).requires(CastingBlocks.CONTROLLER).unlockedBy("has_controller", has(CastingBlocks.CONTROLLER)).save(output);

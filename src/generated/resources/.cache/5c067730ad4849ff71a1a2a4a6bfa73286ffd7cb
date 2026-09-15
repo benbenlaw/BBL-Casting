@@ -1,4 +1,4 @@
-// 26.1.2	2026-09-14T10:02:57.2821345	casting Processing Recipes
+// 26.1.2	2026-09-15T10:26:25.9497369	casting Processing Recipes
 6cf7daa5e446d262d0b513ba376716ae43524819 data/casting/advancement/recipes/fuel/fuel/blaze.json
 22bc1b6595660b1d031fd489cab558ac3d264831 data/casting/advancement/recipes/fuel/fuel/blazing_lava.json
 519547486eb3fbbb51b3460ed5c7a9695e33e52f data/casting/advancement/recipes/fuel/fuel/chilled_water.json
@@ -2445,8 +2445,8 @@ c8c019d84e99caa6d6a0f2fdb46ee96ff0e80769 data/casting/recipe/solidifier/energize
 77eee61aecb75caacbf26caafefb40a07691352b data/casting/recipe/solidifier/energized_steel/rod.json
 279417bbb1b4159ae9af7ee9abd9a82bc21fe38f data/casting/recipe/solidifier/energized_steel/shard.json
 3e880c02dc59f6e908d195399bb5a5de6ea16df0 data/casting/recipe/solidifier/energized_steel/wire.json
-ebb2a18cd940563d10e50357e2212cb9250d6745 data/casting/recipe/solidifier/experience/ball.json
-4c13271ba4738dc03b8d572bf73c37e782038d29 data/casting/recipe/solidifier/experience/bottle.json
+e6c4c910811398f35f30152fa6f920fd682eec3e data/casting/recipe/solidifier/experience/ball.json
+6167c859dfa202246bc7e62c92998f6fb301f1a3 data/casting/recipe/solidifier/experience/bottle.json
 efe6c71ab3d291c874356c7dc3dfd2edd49b0cb1 data/casting/recipe/solidifier/fluix/block.json
 a3c541c96c5042561720821a4ba38f2a2b1e081b data/casting/recipe/solidifier/fluix/dust.json
 007d19cb294dc346c39772bbc36ef11879da3a95 data/casting/recipe/solidifier/fluix/gear.json

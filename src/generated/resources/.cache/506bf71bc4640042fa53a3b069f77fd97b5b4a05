@@ -1,4 +1,4 @@
-// 26.1.2	2026-07-02T11:55:39.1267958	casting Recipes
+// 26.1.2	2026-09-15T10:26:25.9728125	casting Recipes
 550234ae914bc91a457f44d4b664b9021868fbcb data/casting/advancement/recipes/misc/controller.json
 36a28d0ef5f87a394c872d3c095247aad5bc598f data/casting/advancement/recipes/misc/crafting/black_bricks.json
 348be5fe5a0a9dbecaf340a4caa26afff421b94b data/casting/advancement/recipes/misc/crafting/black_brick_glass.json
@@ -24,6 +24,7 @@ e4c1878e226a879ad4b562624ebc3251d1921db6 data/casting/advancement/recipes/misc/m
 b9dd1f08dd1cce85688645d4539b905c00332eb5 data/casting/advancement/recipes/misc/molds/shard_mold_from_shards.json
 f56a5b11963f7069fd8437ef80a617de0f4bd822 data/casting/advancement/recipes/misc/molds/stonecutter/ball_mold.json
 8e849b9114bfc41f498d8ab0672138ef6b197813 data/casting/advancement/recipes/misc/molds/stonecutter/block_mold.json
+be05002720bed31f86500dbf071e3ba1a03b80f6 data/casting/advancement/recipes/misc/molds/stonecutter/dust_mold.json
 b3762afac0cc7a5b1ac4cbd2dd0cdd62c063f0e3 data/casting/advancement/recipes/misc/molds/stonecutter/gear_mold.json
 b7d92ed5a19d3479be1857fcb4c9ea5af02ca9b5 data/casting/advancement/recipes/misc/molds/stonecutter/gem_mold.json
 cc6fcf540a2993a33de6830fd6221c72062d7e52 data/casting/advancement/recipes/misc/molds/stonecutter/ingot_mold.json
@@ -62,6 +63,7 @@ aeb3f6c6df3de30ab19a11cb42d1080d8736591f data/casting/recipe/molds/ingot_mold_fr
 1814561ad17436cb072c968786e59e7c4dcee3c7 data/casting/recipe/molds/shard_mold_from_shards.json
 bbceb5577a0ff818807d4a7b7648b2e19bb904c7 data/casting/recipe/molds/stonecutter/ball_mold.json
 a3c905578cdcecf7e8cb514776934219a81b789f data/casting/recipe/molds/stonecutter/block_mold.json
+4c0f61705345f62b292105f4915dc4f30b5e0055 data/casting/recipe/molds/stonecutter/dust_mold.json
 9fa1d6f88814376c2a6fce163300d9263068c455 data/casting/recipe/molds/stonecutter/gear_mold.json
 c5a8ded98d215242d4ed20ef8c818f94235a6552 data/casting/recipe/molds/stonecutter/gem_mold.json
 524c0eb288f7aec1e0d891b45871566caf676efe data/casting/recipe/molds/stonecutter/ingot_mold.json
