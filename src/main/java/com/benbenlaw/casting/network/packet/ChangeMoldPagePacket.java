@@ -22,8 +22,6 @@ public record ChangeMoldPagePacket(BlockPos pos, int page) implements CustomPack
             }
 
         });
-
-
     };
 
     public static final StreamCodec<RegistryFriendlyByteBuf, ChangeMoldPagePacket> STREAM_CODEC = StreamCodec.composite(

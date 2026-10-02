@@ -19,6 +19,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.core.component.DataComponentMap;
+import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.MenuProvider;
@@ -27,6 +28,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
@@ -35,6 +37,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
+import net.neoforged.neoforge.common.crafting.DataComponentIngredient;
 import net.neoforged.neoforge.common.crafting.SizedIngredient;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.transfer.fluid.FluidResource;
@@ -377,9 +380,13 @@ public class SolidifierBlockEntity extends SyncableBlockEntity implements MenuPr
     }
 
     private ItemStack getStackFromSized(SizedIngredient sizedIngredient) {
+        DataComponentPatch components = sizedIngredient.ingredient().getCustomIngredient() instanceof DataComponentIngredient componentIngredient
+                ? componentIngredient.components()
+                : DataComponentPatch.EMPTY;
+
         return sizedIngredient.ingredient().items()
                 .findFirst()
-                .map(holder -> new ItemStack(holder.value(), sizedIngredient.count()))
+                .map(holder -> new ItemStackTemplate(holder, sizedIngredient.count(), components).create())
                 .orElse(ItemStack.EMPTY);
     }
 
