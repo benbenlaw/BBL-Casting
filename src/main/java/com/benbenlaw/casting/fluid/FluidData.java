@@ -37,7 +37,7 @@ public record FluidData(String name, String stillTexture, String flowTexture, in
                 new FluidProcessingData(1000, 90, ProcessingType.INGOT9)));
 
         // Vanilla
-        fluidList.add(new FluidData("molten_iron", "block/molten_still", "block/molten_flow", 0xFFd5d5d5,
+        fluidList.add(new FluidData("molten_iron", "block/molten_still", "block/molten_flow", 0xFFD8AF93,
                 new FluidProcessingData(1000, 90, ProcessingType.INGOT9)));
         fluidList.add(new FluidData("molten_gold", "block/molten_still", "block/molten_flow", 0xFFfaf25e,
                 new FluidProcessingData(1000, 90, ProcessingType.INGOT9)));
