@@ -10,6 +10,11 @@ multiblock blocks not saving contents when broken
 Use SizedFluidIngredient for recipes that use fluids (26.1)
 Modifiers should use a enchantment like feature to be completely data driven (26.1)
 
+2.3.14
+- Fixed a bug with breaking Oritech machine blocks, with casting modifiers
+- Fixed some tool modifiers taking extra durability
+- Fixed breaking blocks with silk touch giving XP
+
 2.3.13
 - Fixed mixin using entity random not level random
 
