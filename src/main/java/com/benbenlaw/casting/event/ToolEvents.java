@@ -35,6 +35,7 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
 import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
@@ -51,6 +52,7 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.util.FakePlayer;
@@ -109,7 +111,7 @@ public class ToolEvents {
         }
     }
 
-    @SubscribeEvent
+    @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void onBlockBreak(BlockEvent.BreakEvent event) {
         Player player = event.getPlayer();
         Direction face = lastHitDirectionMap.getOrDefault(player.getUUID(), Direction.DOWN);
@@ -158,6 +160,7 @@ public class ToolEvents {
                 List<BlockPos> excavationPlane = getExcavationPlane(pos, face, excavationLevel);
 
                 // Break the original block first (once)
+                event.setCanceled(true);
                 breakBlockWithCasting(level, player, pos, tool, isSilkTouch, isFortune, isAutoSmelt);
 
                 for (BlockPos targetPos : excavationPlane) {
@@ -173,7 +176,9 @@ public class ToolEvents {
                 }
                 return;
             }
-            // Other casting overrides
+
+            // Casting breaks the block itself, so cancel vanilla's removal, which would otherwise run playerWillDestroy a second time and damage the tool again.
+            event.setCanceled(true);
             breakBlockWithCasting(level, player, pos, tool, isSilkTouch, isFortune, isAutoSmelt);
         }
     }
@@ -185,13 +190,6 @@ public class ToolEvents {
         ItemStack fakeItemStack = tool.copy();
         List<ItemStack> drops = new ArrayList<>();
 
-        int blockExperience = 0;
-        if (state.getBlock() instanceof DropExperienceBlock experienceBlock) {
-            blockExperience = experienceBlock.getExpDrop(state, level, pos, blockEntity, player, tool);
-        }
-
-        // Requires Experience to be dropped
-
         // Silk Touch
         if (isSilkTouch && isToggleableModifierActive(tool)) {
             fakeItemStack.enchant(toHolder(level, Enchantments.SILK_TOUCH), 1);
@@ -200,6 +198,12 @@ public class ToolEvents {
             int fortuneLevel = (int) tool.getComponents().getOrDefault(FORTUNE.dataComponent.get(), 0);
             fakeItemStack.enchant(toHolder(level, Enchantments.FORTUNE), fortuneLevel);
             drops = getLootDrops(state, blockEntity, pos, player, fakeItemStack, level);
+        }
+
+        int blockExperience = 0;
+        if (state.getBlock() instanceof DropExperienceBlock experienceBlock) {
+            blockExperience = EnchantmentHelper.processBlockExperience((ServerLevel) level, fakeItemStack,
+                    experienceBlock.getExpDrop(state, level, pos, blockEntity, player, fakeItemStack));
         }
 
         if (drops.isEmpty()) {
@@ -246,9 +250,8 @@ public class ToolEvents {
             level.setBlock(pos, state.setValue(RESTING, true), Block.UPDATE_ALL);
             level.scheduleTick(pos, unbreakableResourceBlock, 20);
         } else {
-            level.setBlock(pos, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL);
-            level.destroyBlock(pos, true, player);
-
+            state.getBlock().playerWillDestroy(level, pos, state, player);
+            state.onDestroyedByPlayer(level, pos, player, true, level.getFluidState(pos));
         }
 
         //Drop Experience
