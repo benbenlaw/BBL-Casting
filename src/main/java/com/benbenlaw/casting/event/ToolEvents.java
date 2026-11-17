@@ -35,13 +35,11 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
 import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.DropExperienceBlock;
 import net.minecraft.world.level.block.WallTorchBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -55,6 +53,8 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.minecraft.world.level.GameRules;
+import net.neoforged.neoforge.common.CommonHooks;
 import net.neoforged.neoforge.common.util.FakePlayer;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
@@ -111,8 +111,70 @@ public class ToolEvents {
         }
     }
 
-    @SubscribeEvent(priority = EventPriority.LOWEST)
+    // Track if another mod is trying to break in an area, and cancel ours if so
+    private static int breakDepth = 0;
+    private static BlockPos outerBreakPos = null;
+    private static boolean areaBreak = false;
+
+    @SubscribeEvent(priority = EventPriority.HIGHEST, receiveCanceled = true)
+    public static void onBlockBreakStart(BlockEvent.BreakEvent event) {
+        if (breakDepth++ == 0) {
+            outerBreakPos = event.getPos();
+            areaBreak = false;
+        }
+    }
+
+    @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
     public static void onBlockBreak(BlockEvent.BreakEvent event) {
+        boolean nested = breakDepth > 1;
+        if (nested && !event.getPos().equals(outerBreakPos)) {
+            areaBreak = true;
+        }
+        try {
+            if (!event.isCanceled()) {
+                // Nested breaks are single blocks inside another mod's break. Excavation waits for the outer event.
+                handleBlockBreak(event, !nested);
+            } else if (!nested && !areaBreak) {
+                excavateAfterWrappedBreak(event);
+            }
+        } finally {
+            breakDepth = Math.max(0, breakDepth - 1);
+        }
+    }
+
+    private static void excavateAfterWrappedBreak(BlockEvent.BreakEvent event) {
+        Player player = event.getPlayer();
+        Level level = player.level();
+        ItemStack tool = player.getMainHandItem();
+        BlockState state = event.getState();
+        if (level.isClientSide() || !tool.has(EXCAVATION.dataComponent.get()) || !isToggleableModifierActive(tool)) return;
+        if (!level.getBlockState(event.getPos()).isAir()) return;
+        if (!tool.isCorrectToolForDrops(state) && state.requiresCorrectToolForDrops()) return;
+        excavatePlane(level, player, event.getPos(), tool);
+    }
+
+    // Breaks the excavation plane around pos, not pos itself.
+    private static void excavatePlane(Level level, Player player, BlockPos pos, ItemStack tool) {
+        boolean isSilkTouch = tool.has(SILK_TOUCH.dataComponent.get());
+        boolean isFortune = tool.has(FORTUNE.dataComponent.get());
+        boolean isAutoSmelt = tool.has(AUTO_SMELT.dataComponent.get());
+        int excavationLevel = (int) tool.getComponents().getOrDefault(EXCAVATION.dataComponent.get(), 0);
+        Direction face = lastHitDirectionMap.getOrDefault(player.getUUID(), Direction.DOWN);
+
+        for (BlockPos targetPos : getExcavationPlane(pos, face, excavationLevel)) {
+            if (targetPos.equals(pos)) continue; // Skip original block
+
+            if (!level.isLoaded(targetPos)) continue;
+
+            BlockState targetState = level.getBlockState(targetPos);
+            if (!targetState.isAir() && targetState.getDestroySpeed(level, targetPos) >= 0 && tool.isCorrectToolForDrops(targetState))
+            {
+                breakBlockWithCasting(level, player, targetPos, tool, isSilkTouch, isFortune, isAutoSmelt);
+            }
+        }
+    }
+
+    private static void handleBlockBreak(BlockEvent.BreakEvent event, boolean allowExcavation) {
         Player player = event.getPlayer();
         Direction face = lastHitDirectionMap.getOrDefault(player.getUUID(), Direction.DOWN);
         Level level = player.level();
@@ -154,26 +216,11 @@ public class ToolEvents {
                 return;
             }
 
-            if (isExcavation && isToggleableModifierActive(tool)) {
-                int excavationLevel = (int) tool.getComponents().getOrDefault(EXCAVATION.dataComponent.get(), 0);
-
-                List<BlockPos> excavationPlane = getExcavationPlane(pos, face, excavationLevel);
-
+            if (isExcavation && isToggleableModifierActive(tool) && allowExcavation) {
                 // Break the original block first (once)
                 event.setCanceled(true);
                 breakBlockWithCasting(level, player, pos, tool, isSilkTouch, isFortune, isAutoSmelt);
-
-                for (BlockPos targetPos : excavationPlane) {
-                    if (targetPos.equals(pos)) continue; // Skip original block
-
-                    if (!level.isLoaded(targetPos)) continue;
-
-                    BlockState targetState = level.getBlockState(targetPos);
-                    if (!targetState.isAir() && targetState.getDestroySpeed(level, targetPos) >= 0 && tool.isCorrectToolForDrops(targetState))
-                    {
-                        breakBlockWithCasting(level, player, targetPos, tool, isSilkTouch, isFortune, isAutoSmelt);
-                    }
-                }
+                excavatePlane(level, player, pos, tool);
                 return;
             }
 
@@ -200,12 +247,6 @@ public class ToolEvents {
             drops = getLootDrops(state, blockEntity, pos, player, fakeItemStack, level);
         }
 
-        int blockExperience = 0;
-        if (state.getBlock() instanceof DropExperienceBlock experienceBlock) {
-            blockExperience = EnchantmentHelper.processBlockExperience((ServerLevel) level, fakeItemStack,
-                    experienceBlock.getExpDrop(state, level, pos, blockEntity, player, fakeItemStack));
-        }
-
         if (drops.isEmpty()) {
             drops = getLootDrops(state, blockEntity, pos, player, fakeItemStack, level);
         }
@@ -229,21 +270,20 @@ public class ToolEvents {
         }
 
         //Deal with drops
-        for (ItemStack drop : drops) {
-
-            //Insert into player inventory only if mining, if full drop as normal
-            if (hasMagnetArmor(player) && hasMiningItem(tool)) {
-                boolean canAddItem = player.addItem(drop.copy());
-                if (!canAddItem) {
-                    Block.popResource(level, pos, drop);
-                }
-            } else {
-                Block.popResource(level, pos, drop);
-            }
-        }
-
         if (drops.isEmpty() || drops.getFirst().is(Items.AIR)) {
             state.getBlock().playerDestroy(level, player, pos, state, blockEntity, tool);
+        } else {
+            boolean magnet = hasMagnetArmor(player) && hasMiningItem(tool);
+            List<ItemEntity> itemEntities = new ArrayList<>();
+            for (ItemStack drop : drops) {
+                if (drop.isEmpty() || !level.getGameRules().getBoolean(GameRules.RULE_DOBLOCKDROPS)) continue;
+                if (magnet && player.addItem(drop.copy())) continue;
+                ItemEntity itemEntity = new ItemEntity(level, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, drop);
+                itemEntity.setDefaultPickUpDelay();
+                itemEntities.add(itemEntity);
+            }
+            // Fires BlockDropsEvent, then spawns the items and XP.
+            CommonHooks.handleBlockDrops((ServerLevel) level, pos, state, blockEntity, itemEntities, player, fakeItemStack);
         }
 
         if (state.getBlock() instanceof UnbreakableResourceBlock unbreakableResourceBlock) {
@@ -252,12 +292,6 @@ public class ToolEvents {
         } else {
             state.getBlock().playerWillDestroy(level, pos, state, player);
             state.onDestroyedByPlayer(level, pos, player, true, level.getFluidState(pos));
-        }
-
-        //Drop Experience
-        if (blockExperience > 0) {
-            ExperienceOrb experienceOrb = new ExperienceOrb(level, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, blockExperience);
-            level.addFreshEntity(experienceOrb);
         }
 
         //Damage Tool
