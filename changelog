@@ -10,6 +10,10 @@ multiblock blocks not saving contents when broken
 Use SizedFluidIngredient for recipes that use fluids (26.1)
 Modifiers should use a enchantment like feature to be completely data driven (26.1)
 
+2.3.16
+- Fixed a dupe bug when breaking certain blocks
+- Completely removed Molten Copper Alloy
+
 2.3.15
 - Made the Fortune and Silk Touch modifier route through vanilla, to not prevent other mod's break events not firing
 - Made the Excavation modifier not work if another mod is also trying to break in an area

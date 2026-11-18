@@ -1,4 +1,4 @@
-// 1.21.1	2025-10-28T09:03:51.6886863	casting Item Models
+// 1.21.1	2026-11-18T13:30:45.477277	casting Item Models
 16d488df5ec4d34b0d1a8441c17055093e1ec2cf assets/casting/models/item/auto_smelt.json
 410556918b1bcbb156949e41fe7a5776f1169578 assets/casting/models/item/ball_mold.json
 513a81cc9506bd65488ff6334a7957d4fd88398f assets/casting/models/item/beheading.json
@@ -35,7 +35,6 @@ c59590c96a74e308f8c5d3eb26d58c5546c3efef assets/casting/models/item/molten_black
 c642db7386524086e4c8ba3682f34a9f4c24f895 assets/casting/models/item/molten_coal_bucket.json
 afb2a850a78a28641c12606f9c183459acf22164 assets/casting/models/item/molten_conductive_alloy_bucket.json
 cc8058ef1271acaff194beb4ef0098c391ae1ce8 assets/casting/models/item/molten_constantan_bucket.json
-1686499d0c302e1bd0ba0ed193265437e5b90430 assets/casting/models/item/molten_copper_alloy_bucket.json
 7ce68bc47fd0a737cb4f70d9cb7eb39beaa4daba assets/casting/models/item/molten_copper_bucket.json
 b25c3f2503e63dec7453876209a3d03370fc4822 assets/casting/models/item/molten_dark_steel_bucket.json
 443a045a2eaf3cb83510d2325462794610f94ecb assets/casting/models/item/molten_debris_bucket.json

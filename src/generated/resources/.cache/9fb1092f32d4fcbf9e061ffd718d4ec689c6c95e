@@ -1,4 +1,4 @@
-// 1.21.1	2026-01-26T11:02:21.408284	Recipes
+// 1.21.1	2026-11-18T13:30:45.4852774	Recipes
 42fdfe43393bd9fb28c7e3a8f0c5fd360dd62d58 data/casting/advancement/recipes/coolant/coolant/chilled_water.json
 5a2942e64c0e7619cf00e75f3297e458f9e2d354 data/casting/advancement/recipes/coolant/coolant/iced_water.json
 3e0ddb196cbfc477f0f8acf37cda3036f7f77692 data/casting/advancement/recipes/coolant/coolant/molten_diamond.json
@@ -101,18 +101,6 @@ fcd802859c89a8e3ade6cc376700bc24817c812a data/casting/advancement/recipes/meltin
 c56a7da958c88faf7528612b42ffdb98464bb3c1 data/casting/advancement/recipes/melting/melting/copper/from_rod.json
 e60b077f3f4af3896dd8921e6a422ef53d494090 data/casting/advancement/recipes/melting/melting/copper/from_storage_block.json
 c6017a84697c1146fbafd2d39142a1461a322faf data/casting/advancement/recipes/melting/melting/copper/from_wire.json
-e777c09e1a475c167ef76d8319a3133e931ab7b4 data/casting/advancement/recipes/melting/melting/copper_alloy/from_dust.json
-8ade73af2539c6be414649a68ba81bf6e52b1a56 data/casting/advancement/recipes/melting/melting/copper_alloy/from_gear.json
-6975551d8aadedf456cd1a38103f29d3a4172185 data/casting/advancement/recipes/melting/melting/copper_alloy/from_gem.json
-1b28f3d82384885ad93c33892bc4de27cc7174ec data/casting/advancement/recipes/melting/melting/copper_alloy/from_ingot.json
-6692151a291bf7241831a98115d136383bba755a data/casting/advancement/recipes/melting/melting/copper_alloy/from_nugget.json
-02eef1b3cd7fd945916dfb67ffcc6871b3c51cc7 data/casting/advancement/recipes/melting/melting/copper_alloy/from_ore.json
-4c6b9dcee5fd131c5c95be44d0a5996376cee00b data/casting/advancement/recipes/melting/melting/copper_alloy/from_plate.json
-353ea551e2d73ef5c3706e37005806ba2182ba78 data/casting/advancement/recipes/melting/melting/copper_alloy/from_raw_material.json
-575e8904358df9ce29a6fa378bce130f54dee3ad data/casting/advancement/recipes/melting/melting/copper_alloy/from_raw_storage_block.json
-fee928b222fb173adeb4ecdef9d039bb793d28d2 data/casting/advancement/recipes/melting/melting/copper_alloy/from_rod.json
-f84c89bb93654c2ecfe6e2a8d3304e0db8f0a33b data/casting/advancement/recipes/melting/melting/copper_alloy/from_storage_block.json
-9be6d92375c64639a26e25244e7c47ee747de7ee data/casting/advancement/recipes/melting/melting/copper_alloy/from_wire.json
 254924a3389847275aa5124a1fb560c9cefeb198 data/casting/advancement/recipes/melting/melting/dark_steel/from_dust.json
 a6bb6b758951398f235e4308e55308e89138a126 data/casting/advancement/recipes/melting/melting/dark_steel/from_gear.json
 8dc104eb7ba763d3658a75479f4214066214eddc data/casting/advancement/recipes/melting/melting/dark_steel/from_gem.json
@@ -561,7 +549,6 @@ caf7f2192e31ef3620cc2f9b36ef59df5b0bc9a5 data/casting/advancement/recipes/misc/w
 89c0f577e56538c2f4ceb9c063d8745dfb2534a0 data/casting/advancement/recipes/mixer/mixer/bronze.json
 069cdf7e762c00024e01ddd91c021e26521f27d6 data/casting/advancement/recipes/mixer/mixer/conductive_alloy.json
 263982816d826e6a90b6785a7b43c1cd6708fd7a data/casting/advancement/recipes/mixer/mixer/constantan.json
-574f87617f6f2cda7a556cb3a16851fdb7a00903 data/casting/advancement/recipes/mixer/mixer/copper_alloy.json
 64e6f213974053824f84096b855b3e7e7a6bda97 data/casting/advancement/recipes/mixer/mixer/dark_steel.json
 e3750976165e82c3db5fb9e81ea4fc32b0cb01db data/casting/advancement/recipes/mixer/mixer/electrum.json
 bb3cde2bbf04d407da127009883aacf680026092 data/casting/advancement/recipes/mixer/mixer/enderium.json
@@ -648,15 +635,6 @@ c21d3889cce496742c10720aec49b51a0f8912a4 data/casting/advancement/recipes/solidi
 f381290298c23d1d8e9123888b01caa8de592439 data/casting/advancement/recipes/solidifier/solidifier/copper/rod.json
 a5f8d2fc7df8b679518db545f75f1fca9931b2c2 data/casting/advancement/recipes/solidifier/solidifier/copper/storage_block.json
 f54f9f534b608d141d9f74709b685be1c223c816 data/casting/advancement/recipes/solidifier/solidifier/copper/wire.json
-4d7c8c00f1eca96410713e4bcd497cbe5f42512b data/casting/advancement/recipes/solidifier/solidifier/copper_alloy/dust.json
-8b2fad3abdcee9a599a2c9b745ea253380cee274 data/casting/advancement/recipes/solidifier/solidifier/copper_alloy/gear.json
-ae14e8ed9ee4960c78365820de04cd3b6a28fe27 data/casting/advancement/recipes/solidifier/solidifier/copper_alloy/gem.json
-5a95af3e776a5b4848ff4ae1b7c1572b16ad135a data/casting/advancement/recipes/solidifier/solidifier/copper_alloy/ingot.json
-61e362ebb66cbc94d9a728d8daf33c44160c4b1d data/casting/advancement/recipes/solidifier/solidifier/copper_alloy/nugget.json
-5b06dfa81c653881ffc7fa930f30ec4cd24a9b52 data/casting/advancement/recipes/solidifier/solidifier/copper_alloy/plate.json
-896b1ff1807b423e37b77c94c4eb7fb556437b21 data/casting/advancement/recipes/solidifier/solidifier/copper_alloy/rod.json
-403b9771b58b239196265f3796ea7797df0a17c1 data/casting/advancement/recipes/solidifier/solidifier/copper_alloy/storage_block.json
-f4e8ffb808c6c45ced034e3fd9e3ea09d35360ee data/casting/advancement/recipes/solidifier/solidifier/copper_alloy/wire.json
 3bb541b2e6d606a7cf5ca8b3d2e55c39c0e11499 data/casting/advancement/recipes/solidifier/solidifier/dark_steel/dust.json
 2fd0effe4187f40d43740f7d8d34eb32fdb33fb0 data/casting/advancement/recipes/solidifier/solidifier/dark_steel/gear.json
 af29b6484a13e6632d18d40013cbba3bed92b2f7 data/casting/advancement/recipes/solidifier/solidifier/dark_steel/gem.json
@@ -1148,18 +1126,6 @@ caea908e22003169d56a38948c4594ab2582fe36 data/casting/recipe/melting/copper/from
 b51fce53a7a57fd6a266f2509fa67524e4750076 data/casting/recipe/melting/copper/from_rod.json
 1978600bff16e6eb049e73401dee8b18ec3bc9a4 data/casting/recipe/melting/copper/from_storage_block.json
 fdf52e688956e1df7c0e74e4dce688ceff8b6b85 data/casting/recipe/melting/copper/from_wire.json
-9938c76b547cada28d593a6cbfef7e3a4b28ab9f data/casting/recipe/melting/copper_alloy/from_dust.json
-c459bc42e6070d56f4b13c29ee7ba92c8fba7e7e data/casting/recipe/melting/copper_alloy/from_gear.json
-885a1e201dcfd4b874d46bb4592b6390460e3fb8 data/casting/recipe/melting/copper_alloy/from_gem.json
-b9cd361de1f234a826b5a8b4517a470109827b27 data/casting/recipe/melting/copper_alloy/from_ingot.json
-994918200bb33896dd1178ebff7ee819ba0e50ba data/casting/recipe/melting/copper_alloy/from_nugget.json
-915f389be74a30cd6567796fd2950f75bf89495b data/casting/recipe/melting/copper_alloy/from_ore.json
-5778753da6390c92f8e6ca1c08f698d8ae272aa5 data/casting/recipe/melting/copper_alloy/from_plate.json
-f8f711384554c5efbc9007d57efcdb9f21192769 data/casting/recipe/melting/copper_alloy/from_raw_material.json
-ad467531a5de403deb408f2931bbab303be7d56b data/casting/recipe/melting/copper_alloy/from_raw_storage_block.json
-41044e01e3564292a70cfc255ff17a5002674546 data/casting/recipe/melting/copper_alloy/from_rod.json
-cd987ae5098112a187f8624023a43c0e7a7464aa data/casting/recipe/melting/copper_alloy/from_storage_block.json
-8b19bfec3cc6eb73f269176d8acfe26294c810b8 data/casting/recipe/melting/copper_alloy/from_wire.json
 86b57b7a76095b897e6f9cb09f0cf6470ab261c8 data/casting/recipe/melting/dark_steel/from_dust.json
 6b69630ff2f26a963613ef72b71fce1fba5de2a6 data/casting/recipe/melting/dark_steel/from_gear.json
 73faad014ca8f7841870fd7121e2ca6f274ae105 data/casting/recipe/melting/dark_steel/from_gem.json
@@ -1576,7 +1542,6 @@ ed085ec51a265d05eaee9713d2e7b577a92301b9 data/casting/recipe/melting/zinc/from_w
 e32adfd1412b14a5ccce82239c38fc81410586e6 data/casting/recipe/mixer/bronze.json
 e17b608418a8895b555478c0834c63ef9ec5813c data/casting/recipe/mixer/conductive_alloy.json
 357fc30caf0aafae6b2c3ae879a6df2a84b78665 data/casting/recipe/mixer/constantan.json
-276802ec77b6c215b3bc5a95ec29e05bd7b3c348 data/casting/recipe/mixer/copper_alloy.json
 7c0a41a98e8bd79445e592235f48abf946fc1103 data/casting/recipe/mixer/dark_steel.json
 9aaddb5afc5636d490e07a341bb6d323c3eff106 data/casting/recipe/mixer/electrum.json
 a8fb9ab69707202d8a27626dab5d2eb634b94cbb data/casting/recipe/mixer/enderium.json
@@ -1672,15 +1637,6 @@ cf8692a029f7f3b0d718dcea046ea0e1a35abe7f data/casting/recipe/solidifier/copper/p
 72e1e81f6b8cfbac9f37742445ee87157df58fe8 data/casting/recipe/solidifier/copper/rod.json
 14ff26a95a4936c80f1344601c15e03db96832bb data/casting/recipe/solidifier/copper/storage_block.json
 eb870fc786b838bfd345e9c4cccb1418331f5c0a data/casting/recipe/solidifier/copper/wire.json
-0dc4a88ad3294ea4f53f9dd8f7c095bbbdfb83b0 data/casting/recipe/solidifier/copper_alloy/dust.json
-e1f3d455109389a50172846f6f8b97838b791c64 data/casting/recipe/solidifier/copper_alloy/gear.json
-a6729a6bdf902d0ea730b90c44e52ff5a2be8ad4 data/casting/recipe/solidifier/copper_alloy/gem.json
-e2ab60afc215ad3a5beef2830bc5984af7558263 data/casting/recipe/solidifier/copper_alloy/ingot.json
-ade44d08b1587f1999005ecf5cae911d35039cb7 data/casting/recipe/solidifier/copper_alloy/nugget.json
-4cdd57bfc10cfdd947e8d7d36e5d5f5d8a897f74 data/casting/recipe/solidifier/copper_alloy/plate.json
-5fe9bbcf8e8e3cedd0c77308857d2916dabe97b3 data/casting/recipe/solidifier/copper_alloy/rod.json
-48d7908fc9c8d0ee016e452f4408859972f5a6b8 data/casting/recipe/solidifier/copper_alloy/storage_block.json
-d6701d532c008e167faf76a69313358e564cefd7 data/casting/recipe/solidifier/copper_alloy/wire.json
 5a3dd5a4b22c7a0bb4450ba1d193e40ed483288d data/casting/recipe/solidifier/dark_steel/dust.json
 e5502d508403f689327b096bb5f1853aa0d2b912 data/casting/recipe/solidifier/dark_steel/gear.json
 1e1e6e6c12671323d735c7952e4a8e595ab6e4e1 data/casting/recipe/solidifier/dark_steel/gem.json
