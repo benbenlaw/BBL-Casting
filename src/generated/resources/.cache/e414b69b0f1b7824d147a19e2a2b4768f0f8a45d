@@ -1,4 +1,4 @@
-// 1.21.1	2025-10-28T09:03:51.7091117	casting Block States
+// 1.21.1	2026-11-18T13:30:45.5092854	casting Block States
 2aa30e731299e20bfaeb5903cc0ebf7ed84c6ab3 assets/casting/blockstates/black_bricks.json
 b350b2f7bb3df5e34993e7791e783a609025c622 assets/casting/blockstates/black_brick_glass.json
 00b59f80b2429da68323b4afd6eb72c565bfb9f9 assets/casting/blockstates/chilled_water.json
@@ -19,7 +19,6 @@ f8192366046d45d9d10bb0ed8c7ee0487650f293 assets/casting/blockstates/molten_black
 b30d2b80a02a41a288df21ce75ebb99f79dbf8da assets/casting/blockstates/molten_conductive_alloy.json
 4247669baf8d7d81dc1efd50241ab475851a4f5d assets/casting/blockstates/molten_constantan.json
 cd8f438527b01d3e4e268c3c6d908f318f8e01d4 assets/casting/blockstates/molten_copper.json
-574e472d23bc2b2879b61d65cdd1d9c0040ab953 assets/casting/blockstates/molten_copper_alloy.json
 9969acb0e4d26a9d6d5e958567d88347c3ad2a40 assets/casting/blockstates/molten_dark_steel.json
 897eda18f60e312f93d4be730564192ae393f9e2 assets/casting/blockstates/molten_debris.json
 84b9ee429c3dc1931051008e413e04c2ca35012d assets/casting/blockstates/molten_diamond.json
@@ -99,7 +98,6 @@ d1e2e3ccd08dfa938ca28820596b8ef07c8dfa23 assets/casting/models/block/mixer_whisk
 22d25e08ae10e3c0bab5742c985376b9fda409d1 assets/casting/models/block/molten_conductive_alloy.json
 22d25e08ae10e3c0bab5742c985376b9fda409d1 assets/casting/models/block/molten_constantan.json
 22d25e08ae10e3c0bab5742c985376b9fda409d1 assets/casting/models/block/molten_copper.json
-22d25e08ae10e3c0bab5742c985376b9fda409d1 assets/casting/models/block/molten_copper_alloy.json
 22d25e08ae10e3c0bab5742c985376b9fda409d1 assets/casting/models/block/molten_dark_steel.json
 22d25e08ae10e3c0bab5742c985376b9fda409d1 assets/casting/models/block/molten_debris.json
 22d25e08ae10e3c0bab5742c985376b9fda409d1 assets/casting/models/block/molten_diamond.json

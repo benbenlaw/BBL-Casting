@@ -1,4 +1,4 @@
-// 1.21.1	2025-12-04T11:01:28.6813548	Tags for minecraft:fluid mod id casting
+// 1.21.1	2026-11-18T13:30:45.4822767	Tags for minecraft:fluid mod id casting
 a0180619fbf98291dcb53dfaa0e4dac895afbffd data/c/tags/fluid/chilled_water.json
 8f34d0cccf14b17cf369f6b5df5c31cc84bae6be data/c/tags/fluid/experience.json
 4b5f9cfc42b372d1de1abebf0a981daf6a11a2fd data/c/tags/fluid/iced_water.json
@@ -14,7 +14,6 @@ fd659f563713579cd6e73de4c0034a0631fbffc0 data/c/tags/fluid/molten_coal.json
 6759aceb117cb7c8b207a3cfb9131567c063c412 data/c/tags/fluid/molten_conductive_alloy.json
 f1a50847956408d69225b1188c53c3df7d520365 data/c/tags/fluid/molten_constantan.json
 ee961dd0146077d737f7da432ea7c1732f850f17 data/c/tags/fluid/molten_copper.json
-bffaa9def520b1aae026937c2a5eb21e44e45d4b data/c/tags/fluid/molten_copper_alloy.json
 abc3b9fd6a9378d295b90486b79a91f0c7df6835 data/c/tags/fluid/molten_dark_steel.json
 2dd2c520036d1a21af392c335dbda5f627f190be data/c/tags/fluid/molten_debris.json
 b070020620dd8b1511af7104646afcbee73f3c0e data/c/tags/fluid/molten_diamond.json

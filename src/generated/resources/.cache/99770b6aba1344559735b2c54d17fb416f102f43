@@ -1,4 +1,4 @@
-// 1.21.1	2025-10-28T09:03:51.7091117	Tags for minecraft:item mod id casting
+// 1.21.1	2026-11-18T13:30:45.5082861	Tags for minecraft:item mod id casting
 30fc97067c3b88099596b818f5fabb187f3560a9 data/casting/tags/item/can_be_disabled_with_shift.json
 b76591f05df85ab0dd45021e91311711f10beab7 data/casting/tags/item/can_be_toggled_with_keybind.json
 8ea9e44acecf92c95dca0fa3a81436e41f918c0b data/casting/tags/item/can_be_toggled_with_shift.json
@@ -12,7 +12,7 @@ e4e683d100add4a3edd7733d5bebad68beb29508 data/casting/tags/item/melting_produces
 da92033666b77dcdcd2ecfd54b5fcf76989db3a0 data/casting/tags/item/molds.json
 523cf825e8643e793dc1a64cd6939e6cdd4adc88 data/c/tags/item/ball_items.json
 38236b67cf98b68238695adf5a39edf921a1998c data/c/tags/item/bricks.json
-0339134632f39172b39e88115c66edf74d4a8495 data/c/tags/item/buckets.json
+1bf920954c5b851b3cab8a8bc73184f464fdf40b data/c/tags/item/buckets.json
 b5b443005446a7c462821af2bd14b03a5178a666 data/c/tags/item/molds/ball.json
 c5b03813e61f7b4ffd00ab3a09b1def2f4e7c5e3 data/c/tags/item/molds/block.json
 046ccfb1e090314dacdeaa4b1e6894cc1a20ebfa data/c/tags/item/molds/dust.json

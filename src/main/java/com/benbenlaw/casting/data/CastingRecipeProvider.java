@@ -291,7 +291,8 @@ public class CastingRecipeProvider extends RecipeProvider {
         // Common Melting and Solidifier Recipes
         for (String resource : ResourceNames.getAllResourceNames()) {
             // Ignore coal as it has its own melting values
-            if (!resource.equals("coal") && !resource.equals("quartz")) {
+            // Skip resources bblcore lists, but Casting has no molten fluid for (e.g. copper_alloy, removed in 2.3.7)
+            if (!resource.equals("coal") && !resource.equals("quartz") && FLUIDS_MAP.containsKey("molten_" + resource)) {
                 createCommonMeltingRecipes(resource, consumer);
                 createCommonSolidifierRecipes(resource, consumer);
             }
@@ -589,10 +590,6 @@ public class CastingRecipeProvider extends RecipeProvider {
         createSimpleMixingRecipe(fluidList(
                         getFluidStack("molten_copper", 90), getFluidStack("molten_iron", 90)),
                 getFluidStack("molten_conductive_alloy", 90), "conductive_alloy", consumer);
-
-        createSimpleMixingRecipe(fluidList(
-                        getFluidStack("molten_silicon", 500), getFluidStack("molten_copper", 90)),
-                getFluidStack("molten_copper_alloy", 90), "copper_alloy", consumer);
 
         createSimpleMixingRecipe(fluidList(
                         getFluidStack("molten_gold", 90), getFluidStack("molten_silver", 90)),

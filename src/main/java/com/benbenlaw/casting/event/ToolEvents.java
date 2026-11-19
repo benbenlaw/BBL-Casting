@@ -291,7 +291,7 @@ public class ToolEvents {
             level.scheduleTick(pos, unbreakableResourceBlock, 20);
         } else {
             state.getBlock().playerWillDestroy(level, pos, state, player);
-            state.onDestroyedByPlayer(level, pos, player, true, level.getFluidState(pos));
+            state.onDestroyedByPlayer(level, pos, player, false, level.getFluidState(pos));
         }
 
         //Damage Tool
